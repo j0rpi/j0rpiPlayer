@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("j0rpiPlayer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c90c05d6350de10eb59a94f4f38a4482761e8af")]
 [assembly: System.Reflection.AssemblyProductAttribute("j0rpiPlayer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("j0rpiPlayer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
