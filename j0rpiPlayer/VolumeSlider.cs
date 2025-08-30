@@ -54,11 +54,14 @@ namespace NAudio.Gui
         /// </summary>
         private void InitializeComponent()
         {
+            SuspendLayout();
             // 
-            // VolumeSlider
+            // VolumeSlider2
             // 
-            this.Name = "VolumeSlider";
-            this.Size = new System.Drawing.Size(96, 16);
+            Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Name = "VolumeSlider2";
+            Size = new Size(96, 16);
+            ResumeLayout(false);
 
         }
         #endregion
@@ -72,23 +75,23 @@ namespace NAudio.Gui
             format.LineAlignment = StringAlignment.Center;
             format.Alignment = StringAlignment.Center;
 
-            pe.Graphics.DrawRectangle(Pens.Black, 0, 0, this.Width - 1, this.Height - 1);
+            using (Pen borderPen = new Pen(Color.FromArgb(255, 50, 50, 50)))
+            {
+                pe.Graphics.DrawRectangle(borderPen, 0, 0, this.Width - 1, this.Height - 1);
+            }
 
             // Calculate the percentage (0.0 to 1.0)
             float percent = Volume;
 
             // Calculate the width of the fill bar based on the percentage
-            pe.Graphics.FillRectangle(Brushes.LightGreen, 1, 1, (int)((this.Width - 2) * percent), this.Height - 2);
+            pe.Graphics.FillRectangle(Brushes.Purple, 1, 1, (int)((this.Width - 2) * percent), this.Height - 2);
 
             // Format the text to display percentage
             string percentValue = String.Format("{0:F0}%", percent * 100);
 
             // Draw the percentage text
             pe.Graphics.DrawString(percentValue, this.Font,
-                Brushes.Black, this.ClientRectangle, format);
-
-            // Calling the base class OnPaint
-            //base.OnPaint(pe);
+                Brushes.White, this.ClientRectangle, format);
         }
 
         /// <summary>

@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
+using TagLib;
 
 namespace NAudio.Gui
 {
@@ -61,39 +62,68 @@ namespace NAudio.Gui
 			this.Size = new System.Drawing.Size(104, 16);
 
 		}
-		#endregion
+        #endregion
 
         /// <summary>
         /// <see cref="Control.OnPaint"/>
-        /// </summary>
-		protected override void OnPaint(PaintEventArgs pe)
-		{
-			StringFormat format = new StringFormat();
-			format.LineAlignment = StringAlignment.Center;
-			format.Alignment = StringAlignment.Center;
-			string panValue;
-			if(pan == 0.0)
-			{
-				pe.Graphics.FillRectangle(Brushes.Orange,(this.Width/2) - 1  ,1,3,this.Height-2);
-				panValue = "center";
-			}
-			else if(pan > 0)
-			{
-				pe.Graphics.FillRectangle(Brushes.Orange,(this.Width/2),1,(int) ((this.Width/2) * pan),this.Height-2);
-				panValue = String.Format("{0:F0}% right",pan*100);
-			}
-			else
-			{
-				pe.Graphics.FillRectangle(Brushes.Orange,(int)((this.Width/2) * (pan+1)),1,(int) ((this.Width/2) * (0-pan)),this.Height-2);
-				panValue = String.Format("{0:F0}% left",pan*-100);
-			}
-			pe.Graphics.DrawRectangle(Pens.Black,0,0,this.Width-1,this.Height-1);
+        protected override void OnPaint(PaintEventArgs pe)
+        {
+            pe.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 
-			pe.Graphics.DrawString(panValue,this.Font,
-				Brushes.Black,this.ClientRectangle,format);
-			// Calling the base class OnPaint
-			//base.OnPaint(pe);
-		}
+            StringFormat format = new StringFormat
+            {
+                LineAlignment = StringAlignment.Center,
+                Alignment = StringAlignment.Center
+            };
+
+            string panValue;
+
+			// Ugly fix for the impossibility of setting pan value to 0	
+			if(pan > -0.02f && pan < 0.02f)
+			{
+                //pan = 0.0f;
+            }
+
+            // Draw pan rectangles FIRST (so they are behind)
+            if (pan == 0.0)
+            {
+              
+                panValue = "Center";
+            }
+            else if (pan > 0)
+            {
+                pe.Graphics.FillRectangle(Brushes.Purple,
+                    (this.Width / 2), 1,
+                    (int)((this.Width / 2) * pan), this.Height - 2);
+                panValue = string.Format("{0:F0}% Right", pan * 100);
+            }
+            else
+            {
+                pe.Graphics.FillRectangle(Brushes.Purple,
+                    (int)((this.Width / 2) * (pan + 1)), 1,
+                    (int)((this.Width / 2) * (0 - pan)), this.Height - 2);
+                panValue = string.Format("{0:F0}% Left", pan * -100);
+            }
+
+            // Then draw the background image ON TOP
+            int imgHeight = (int)(this.Height * 0.8);
+            int imgY = (this.Height - imgHeight) / 2;
+            pe.Graphics.DrawImage(global::j0rpiPlayer.Properties.Resources.panbars3,
+                new Rectangle(0, 11, this.Width, 12));
+
+            // Border
+            using (Pen borderPen = new Pen(Color.FromArgb(255, 50, 50, 50)))
+            {
+                pe.Graphics.DrawRectangle(borderPen, 0, 0, this.Width - 1, this.Height - 1);
+            }
+
+            // Text
+            using (Brush textBrush = new SolidBrush(Color.White))
+            {
+                pe.Graphics.DrawString(panValue, this.Font, textBrush, this.ClientRectangle, format);
+            }
+        }
+
 
         /// <summary>
         /// <see cref="Control.OnMouseMove"/>

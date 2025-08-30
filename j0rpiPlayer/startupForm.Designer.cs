@@ -50,9 +50,9 @@
             checkBox1.AutoSize = true;
             checkBox1.Location = new Point(12, 136);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(210, 19);
+            checkBox1.Size = new Size(174, 19);
             checkBox1.TabIndex = 1;
-            checkBox1.Text = "I agree to the terms and conditions";
+            checkBox1.Text = "Alright, don't nag me again.";
             checkBox1.UseVisualStyleBackColor = true;
             checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 

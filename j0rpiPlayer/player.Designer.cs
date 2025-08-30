@@ -38,7 +38,6 @@
             panel1 = new Panel();
             lblElapsed = new Label();
             pictureBox2 = new PictureBox();
-            label7 = new Label();
             panelVisualizer = new Panel();
             panel2 = new Panel();
             label2 = new Label();
@@ -48,8 +47,6 @@
             lblTotal = new Label();
             groupBox1 = new GroupBox();
             linkLabel2 = new LinkLabel();
-            lblMediaAdd = new Label();
-            label8 = new Label();
             txtFreq = new Label();
             checkBox1 = new CheckBox();
             txtBitrate = new Label();
@@ -57,13 +54,19 @@
             pictureBox1 = new PictureBox();
             label3 = new Label();
             label1 = new Label();
+            label10 = new Label();
             panelVolume = new Panel();
             label5 = new Label();
+            label9 = new Label();
             txtAlbum = new Label();
+            volumeMeter2 = new NAudio.Gui.VolumeMeter();
+            volumeMeter1 = new NAudio.Gui.VolumeMeter();
             panelProgress = new Panel();
             label4 = new Label();
             txtTitle = new Label();
             txtArtist = new Label();
+            lblMediaAdd = new Label();
+            label8 = new Label();
             lblBitrate = new Label();
             panel3 = new Panel();
             panel4 = new Panel();
@@ -80,13 +83,14 @@
             aevionProgressBar1 = new Aevion_r2.AevionProgressBar();
             aevionCheckBox1 = new Aevion_r2.AevionCheckBox();
             aevionCheckBox2 = new Aevion_r2.AevionCheckBox();
-            volumeMeter1 = new NAudio.Gui.VolumeMeter();
-            volumeMeter2 = new NAudio.Gui.VolumeMeter();
-            label9 = new Label();
-            label10 = new Label();
             panSlider1 = new NAudio.Gui.PanSlider2();
-            label11 = new Label();
             listView1 = new ListView();
+            label12 = new Label();
+            btnSearch = new Button();
+            txtSearch = new TextBox();
+            spotifySearchPanel = new Panel();
+            button1 = new Button();
+            label7 = new Label();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -98,6 +102,7 @@
             panelProgress.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
+            spotifySearchPanel.SuspendLayout();
             SuspendLayout();
             // 
             // trackBar1
@@ -113,7 +118,6 @@
             // 
             btnPlay.BackgroundImageLayout = ImageLayout.Stretch;
             btnPlay.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
-            btnPlay.FlatAppearance.BorderSize = 2;
             btnPlay.FlatStyle = FlatStyle.Flat;
             btnPlay.Font = new Font("Font 90 Icons", 14.25F);
             btnPlay.ForeColor = Color.White;
@@ -124,12 +128,12 @@
             btnPlay.TabIndex = 3;
             btnPlay.Text = "D";
             btnPlay.UseVisualStyleBackColor = true;
+            btnPlay.Click += btnPlay_Click;
             // 
             // btnStop
             // 
             btnStop.BackgroundImageLayout = ImageLayout.None;
             btnStop.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
-            btnStop.FlatAppearance.BorderSize = 2;
             btnStop.FlatStyle = FlatStyle.Flat;
             btnStop.Font = new Font("Font 90 Icons", 14.25F);
             btnStop.ForeColor = Color.White;
@@ -146,7 +150,6 @@
             btnPrev.AccessibleDescription = "btnPrev";
             btnPrev.BackgroundImageLayout = ImageLayout.Stretch;
             btnPrev.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
-            btnPrev.FlatAppearance.BorderSize = 2;
             btnPrev.FlatStyle = FlatStyle.Flat;
             btnPrev.Font = new Font("Font 90 Icons", 14.25F);
             btnPrev.ForeColor = Color.White;
@@ -163,7 +166,6 @@
             btnNext.AccessibleDescription = "btnNext";
             btnNext.BackgroundImageLayout = ImageLayout.Stretch;
             btnNext.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
-            btnNext.FlatAppearance.BorderSize = 2;
             btnNext.FlatStyle = FlatStyle.Flat;
             btnNext.Font = new Font("Font 90 Icons", 14.25F);
             btnNext.ForeColor = Color.White;
@@ -180,7 +182,6 @@
             panel1.BackColor = Color.Black;
             panel1.Controls.Add(lblElapsed);
             panel1.Controls.Add(pictureBox2);
-            panel1.Controls.Add(label7);
             panel1.Controls.Add(panelVisualizer);
             panel1.ForeColor = Color.DimGray;
             panel1.Location = new Point(13, 11);
@@ -195,7 +196,7 @@
             lblElapsed.FlatStyle = FlatStyle.Flat;
             lblElapsed.Font = new Font("DS-Digital", 30F, FontStyle.Italic, GraphicsUnit.Point, 0);
             lblElapsed.ForeColor = Color.White;
-            lblElapsed.Location = new Point(60, 5);
+            lblElapsed.Location = new Point(60, 4);
             lblElapsed.Name = "lblElapsed";
             lblElapsed.Size = new Size(106, 40);
             lblElapsed.TabIndex = 0;
@@ -210,18 +211,6 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 22;
             pictureBox2.TabStop = false;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.BackColor = Color.Black;
-            label7.Font = new Font("DS-Digital", 30F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            label7.ForeColor = Color.DimGray;
-            label7.Location = new Point(60, 5);
-            label7.Name = "label7";
-            label7.Size = new Size(106, 40);
-            label7.TabIndex = 23;
-            label7.Text = "00:00";
             // 
             // panelVisualizer
             // 
@@ -255,7 +244,6 @@
             // 
             btnPause.BackgroundImageLayout = ImageLayout.Stretch;
             btnPause.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
-            btnPause.FlatAppearance.BorderSize = 2;
             btnPause.FlatStyle = FlatStyle.Flat;
             btnPause.Font = new Font("Font 90 Icons", 14.25F);
             btnPause.ForeColor = Color.White;
@@ -271,7 +259,6 @@
             // btnLoadFolder
             // 
             btnLoadFolder.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
-            btnLoadFolder.FlatAppearance.BorderSize = 2;
             btnLoadFolder.FlatStyle = FlatStyle.Flat;
             btnLoadFolder.Font = new Font("Font 90 Icons", 14.25F);
             btnLoadFolder.ForeColor = Color.White;
@@ -299,8 +286,6 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(linkLabel2);
-            groupBox1.Controls.Add(lblMediaAdd);
-            groupBox1.Controls.Add(label8);
             groupBox1.Controls.Add(txtFreq);
             groupBox1.Controls.Add(checkBox1);
             groupBox1.Controls.Add(txtBitrate);
@@ -308,8 +293,12 @@
             groupBox1.Controls.Add(pictureBox1);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label1);
+            groupBox1.Controls.Add(label10);
             groupBox1.Controls.Add(panelVolume);
+            groupBox1.Controls.Add(label9);
             groupBox1.Controls.Add(txtAlbum);
+            groupBox1.Controls.Add(volumeMeter2);
+            groupBox1.Controls.Add(volumeMeter1);
             groupBox1.Controls.Add(panelProgress);
             groupBox1.Controls.Add(lblTotal);
             groupBox1.Controls.Add(txtTitle);
@@ -336,30 +325,6 @@
             linkLabel2.Text = "invalidate listview";
             linkLabel2.VisitedLinkColor = Color.White;
             linkLabel2.LinkClicked += linkLabel2_LinkClicked;
-            // 
-            // lblMediaAdd
-            // 
-            lblMediaAdd.AutoSize = true;
-            lblMediaAdd.BackColor = Color.FromArgb(60, 60, 60);
-            lblMediaAdd.FlatStyle = FlatStyle.Flat;
-            lblMediaAdd.Font = new Font("Font 90 Icons", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblMediaAdd.ForeColor = Color.White;
-            lblMediaAdd.Location = new Point(14, 80);
-            lblMediaAdd.Name = "lblMediaAdd";
-            lblMediaAdd.Size = new Size(70, 50);
-            lblMediaAdd.TabIndex = 25;
-            lblMediaAdd.Text = ";";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.BackColor = Color.FromArgb(60, 60, 60);
-            label8.ForeColor = Color.White;
-            label8.Location = new Point(14, 148);
-            label8.Name = "label8";
-            label8.Size = new Size(70, 15);
-            label8.TabIndex = 24;
-            label8.Text = "add media";
             // 
             // txtFreq
             // 
@@ -432,6 +397,18 @@
             label1.TabIndex = 19;
             label1.Text = "debug tools - for those with ballz";
             // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.BackColor = Color.Transparent;
+            label10.Font = new Font("Consolas", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label10.ForeColor = Color.White;
+            label10.Location = new Point(280, 157);
+            label10.Name = "label10";
+            label10.Size = new Size(14, 14);
+            label10.TabIndex = 33;
+            label10.Text = "R";
+            // 
             // panelVolume
             // 
             panelVolume.Controls.Add(label5);
@@ -450,6 +427,18 @@
             label5.TabIndex = 0;
             label5.Text = "playback latency: 0ms    decode latency: 0ms";
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.BackColor = Color.Transparent;
+            label9.Font = new Font("Consolas", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label9.ForeColor = Color.White;
+            label9.Location = new Point(261, 157);
+            label9.Name = "label9";
+            label9.Size = new Size(14, 14);
+            label9.TabIndex = 32;
+            label9.Text = "L";
+            // 
             // txtAlbum
             // 
             txtAlbum.AutoSize = true;
@@ -458,6 +447,28 @@
             txtAlbum.Size = new Size(63, 15);
             txtAlbum.TabIndex = 2;
             txtAlbum.Text = "txtAlbum";
+            // 
+            // volumeMeter2
+            // 
+            volumeMeter2.Amplitude = 0F;
+            volumeMeter2.Location = new Point(281, 122);
+            volumeMeter2.MaxDb = 18F;
+            volumeMeter2.MinDb = -60F;
+            volumeMeter2.Name = "volumeMeter2";
+            volumeMeter2.Size = new Size(13, 32);
+            volumeMeter2.TabIndex = 31;
+            volumeMeter2.Text = "volumeMeter2";
+            // 
+            // volumeMeter1
+            // 
+            volumeMeter1.Amplitude = 0F;
+            volumeMeter1.Location = new Point(262, 122);
+            volumeMeter1.MaxDb = 18F;
+            volumeMeter1.MinDb = -60F;
+            volumeMeter1.Name = "volumeMeter1";
+            volumeMeter1.Size = new Size(13, 32);
+            volumeMeter1.TabIndex = 30;
+            volumeMeter1.Text = "L";
             // 
             // panelProgress
             // 
@@ -494,6 +505,30 @@
             txtArtist.Size = new Size(70, 15);
             txtArtist.TabIndex = 0;
             txtArtist.Text = "txtArtist";
+            // 
+            // lblMediaAdd
+            // 
+            lblMediaAdd.AutoSize = true;
+            lblMediaAdd.BackColor = Color.FromArgb(60, 60, 60);
+            lblMediaAdd.FlatStyle = FlatStyle.Flat;
+            lblMediaAdd.Font = new Font("Font 90 Icons", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMediaAdd.ForeColor = Color.White;
+            lblMediaAdd.Location = new Point(207, 260);
+            lblMediaAdd.Name = "lblMediaAdd";
+            lblMediaAdd.Size = new Size(70, 50);
+            lblMediaAdd.TabIndex = 25;
+            lblMediaAdd.Text = ";";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.BackColor = Color.FromArgb(60, 60, 60);
+            label8.ForeColor = Color.White;
+            label8.Location = new Point(207, 328);
+            label8.Name = "label8";
+            label8.Size = new Size(70, 14);
+            label8.TabIndex = 24;
+            label8.Text = "add media";
             // 
             // lblBitrate
             // 
@@ -549,7 +584,6 @@
             // btnEject
             // 
             btnEject.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
-            btnEject.FlatAppearance.BorderSize = 2;
             btnEject.FlatStyle = FlatStyle.Flat;
             btnEject.Font = new Font("Font 90 Icons", 14.25F);
             btnEject.ForeColor = Color.White;
@@ -565,7 +599,6 @@
             // btnStream
             // 
             btnStream.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
-            btnStream.FlatAppearance.BorderSize = 2;
             btnStream.FlatStyle = FlatStyle.Flat;
             btnStream.Font = new Font("Font 90 Icons", 14.25F);
             btnStream.ForeColor = Color.White;
@@ -582,7 +615,6 @@
             // btnSettings
             // 
             btnSettings.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
-            btnSettings.FlatAppearance.BorderSize = 2;
             btnSettings.FlatStyle = FlatStyle.Flat;
             btnSettings.Font = new Font("Font 90 Icons", 14.25F);
             btnSettings.ForeColor = Color.White;
@@ -623,16 +655,19 @@
             // 
             // volumeSlider1
             // 
-            volumeSlider1.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            volumeSlider1.Location = new Point(343, 87);
+            volumeSlider1.BackColor = Color.FromArgb(64, 0, 64);
+            volumeSlider1.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            volumeSlider1.ForeColor = Color.White;
+            volumeSlider1.Location = new Point(362, 91);
             volumeSlider1.Name = "volumeSlider1";
             volumeSlider1.Padding = new Padding(0, 2, 0, 0);
-            volumeSlider1.Size = new Size(130, 32);
+            volumeSlider1.Size = new Size(108, 24);
             volumeSlider1.TabIndex = 26;
             volumeSlider1.Volume = 0F;
             // 
             // aevionProgressBar1
             // 
+            aevionProgressBar1.BackColor = Color.FromArgb(64, 0, 64);
             aevionProgressBar1.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             aevionProgressBar1.ForeColor = Color.White;
             aevionProgressBar1.Location = new Point(13, 66);
@@ -666,71 +701,15 @@
             aevionCheckBox2.TabIndex = 29;
             aevionCheckBox2.Text = "repeat";
             // 
-            // volumeMeter1
-            // 
-            volumeMeter1.Amplitude = 0F;
-            volumeMeter1.Location = new Point(204, 87);
-            volumeMeter1.MaxDb = 18F;
-            volumeMeter1.MinDb = -60F;
-            volumeMeter1.Name = "volumeMeter1";
-            volumeMeter1.Size = new Size(13, 32);
-            volumeMeter1.TabIndex = 30;
-            volumeMeter1.Text = "L";
-            // 
-            // volumeMeter2
-            // 
-            volumeMeter2.Amplitude = 0F;
-            volumeMeter2.Location = new Point(223, 87);
-            volumeMeter2.MaxDb = 18F;
-            volumeMeter2.MinDb = -60F;
-            volumeMeter2.Name = "volumeMeter2";
-            volumeMeter2.Size = new Size(13, 32);
-            volumeMeter2.TabIndex = 31;
-            volumeMeter2.Text = "volumeMeter2";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.BackColor = Color.Transparent;
-            label9.Font = new Font("Consolas", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.ForeColor = Color.White;
-            label9.Location = new Point(203, 122);
-            label9.Name = "label9";
-            label9.Size = new Size(14, 14);
-            label9.TabIndex = 32;
-            label9.Text = "L";
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.BackColor = Color.Transparent;
-            label10.Font = new Font("Consolas", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label10.ForeColor = Color.White;
-            label10.Location = new Point(222, 122);
-            label10.Name = "label10";
-            label10.Size = new Size(14, 14);
-            label10.TabIndex = 33;
-            label10.Text = "R";
-            // 
             // panSlider1
             // 
-            panSlider1.Location = new Point(247, 95);
+            panSlider1.BackColor = Color.FromArgb(64, 0, 64);
+            panSlider1.ForeColor = Color.White;
+            panSlider1.Location = new Point(215, 91);
             panSlider1.Name = "panSlider1";
             panSlider1.Pan = 0F;
-            panSlider1.Size = new Size(90, 16);
+            panSlider1.Size = new Size(108, 24);
             panSlider1.TabIndex = 34;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.BackColor = Color.Transparent;
-            label11.Font = new Font("Consolas", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.ForeColor = Color.White;
-            label11.Location = new Point(279, 122);
-            label11.Name = "label11";
-            label11.Size = new Size(28, 14);
-            label11.TabIndex = 35;
-            label11.Text = "Pan";
             // 
             // listView1
             // 
@@ -748,6 +727,86 @@
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
             listView1.DrawColumnHeader += listView1_DrawColumnHeader;
+            listView1.MouseDoubleClick += listView1_MouseDoubleClick_1;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.BackColor = Color.Transparent;
+            label12.Font = new Font("Font 90 Icons", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label12.ForeColor = Color.White;
+            label12.Location = new Point(335, 93);
+            label12.Name = "label12";
+            label12.Size = new Size(28, 20);
+            label12.TabIndex = 36;
+            label12.Text = "Z";
+            label12.Click += label12_Click;
+            // 
+            // btnSearch
+            // 
+            btnSearch.BackgroundImage = Properties.Resources.Spotify_Primary_Logo_RGB_White1;
+            btnSearch.BackgroundImageLayout = ImageLayout.Stretch;
+            btnSearch.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
+            btnSearch.FlatStyle = FlatStyle.Flat;
+            btnSearch.Font = new Font("Font 90 Icons", 14.25F);
+            btnSearch.ForeColor = Color.LawnGreen;
+            btnSearch.ImageAlign = ContentAlignment.MiddleLeft;
+            btnSearch.Location = new Point(324, 474);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Padding = new Padding(2);
+            btnSearch.Size = new Size(32, 32);
+            btnSearch.TabIndex = 37;
+            btnSearch.TextAlign = ContentAlignment.BottomCenter;
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // txtSearch
+            // 
+            txtSearch.BackColor = Color.Black;
+            txtSearch.BorderStyle = BorderStyle.FixedSingle;
+            txtSearch.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSearch.ForeColor = Color.White;
+            txtSearch.Location = new Point(6, 35);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(194, 23);
+            txtSearch.TabIndex = 38;
+            // 
+            // spotifySearchPanel
+            // 
+            spotifySearchPanel.BorderStyle = BorderStyle.FixedSingle;
+            spotifySearchPanel.Controls.Add(button1);
+            spotifySearchPanel.Controls.Add(label7);
+            spotifySearchPanel.Controls.Add(txtSearch);
+            spotifySearchPanel.Location = new Point(156, 388);
+            spotifySearchPanel.Name = "spotifySearchPanel";
+            spotifySearchPanel.Size = new Size(238, 68);
+            spotifySearchPanel.TabIndex = 39;
+            // 
+            // button1
+            // 
+            button1.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Font 90 Icons", 14.25F);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(203, 30);
+            button1.Name = "button1";
+            button1.Padding = new Padding(2, 0, 0, 0);
+            button1.Size = new Size(29, 31);
+            button1.TabIndex = 40;
+            button1.Text = "g";
+            button1.TextAlign = ContentAlignment.BottomCenter;
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.ForeColor = Color.White;
+            label7.Location = new Point(6, 12);
+            label7.Name = "label7";
+            label7.Size = new Size(105, 14);
+            label7.TabIndex = 34;
+            label7.Text = "Spotify Search";
             // 
             // player
             // 
@@ -755,13 +814,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(485, 805);
+            Controls.Add(spotifySearchPanel);
+            Controls.Add(btnSearch);
+            Controls.Add(lblMediaAdd);
+            Controls.Add(label8);
+            Controls.Add(label12);
             Controls.Add(listView1);
-            Controls.Add(label11);
             Controls.Add(panSlider1);
-            Controls.Add(label10);
-            Controls.Add(label9);
-            Controls.Add(volumeMeter2);
-            Controls.Add(volumeMeter1);
             Controls.Add(aevionCheckBox2);
             Controls.Add(aevionCheckBox1);
             Controls.Add(aevionProgressBar1);
@@ -807,6 +866,8 @@
             panel3.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
+            spotifySearchPanel.ResumeLayout(false);
+            spotifySearchPanel.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -819,7 +880,6 @@
         private Button btnPrev;
         private Button btnNext;
         private Panel panel1;
-        private Label lblElapsed;
         private Panel panel2;
         private Label label2;
         private Button btnPause;
@@ -853,7 +913,6 @@
         private Label txtBitrate;
         private Label txtFreq;
         private System.Windows.Forms.Timer timer1;
-        private Label label7;
         private LinkLabel linkLabel2;
         private System.Windows.Forms.Timer scrollingTitle;
         private System.Windows.Forms.Timer waitScroll;
@@ -866,9 +925,15 @@
         private Label label9;
         private Label label10;
         private NAudio.Gui.PanSlider2 panSlider1;
-        private Label label11;
         private Label label8;
         private Label lblMediaAdd;
         private ListView listView1;
+        private Label label12;
+        private Label lblElapsed;
+        private Button btnSearch;
+        private TextBox txtSearch;
+        private Panel spotifySearchPanel;
+        private Label label7;
+        private Button button1;
     }
 }

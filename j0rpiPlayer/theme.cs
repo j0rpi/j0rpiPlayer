@@ -515,10 +515,10 @@ namespace Aevion_r2
         {
             base.OnPaint(e);
             var g = e.Graphics;
-            var l = new LinearGradientBrush(new Point(0, 0), new Point(Width + Value + 50, Height), Color.FromArgb(60,60,60), Color.FromArgb(60, 60, 60));
+            var l = new LinearGradientBrush(new Point(0, 0), new Point(Width + Value + 50, Height), Color.Purple, Color.Purple);
 
             g.SmoothingMode = SmoothingMode.HighQuality;
-            g.Clear(Color.Black);
+            g.Clear(Color.FromArgb(64, 0, 64));
 
             g.FillRectangle(l, new Rectangle(0, 0, (int)(Helper.ValueToPercentage(Value, Maximum, Minimum) * Width), Height));
 

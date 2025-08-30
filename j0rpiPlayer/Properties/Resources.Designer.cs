@@ -161,6 +161,66 @@ namespace j0rpiPlayer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] font_a {
+            get {
+                object obj = ResourceManager.GetObject("font_a", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] font_b {
+            get {
+                object obj = ResourceManager.GetObject("font_b", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] font_c {
+            get {
+                object obj = ResourceManager.GetObject("font_c", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] font_d {
+            get {
+                object obj = ResourceManager.GetObject("font_d", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] font_e {
+            get {
+                object obj = ResourceManager.GetObject("font_e", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] font_f {
+            get {
+                object obj = ResourceManager.GetObject("font_f", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap nodisc {
@@ -183,6 +243,36 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap panbars {
+            get {
+                object obj = ResourceManager.GetObject("panbars", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap panbars2 {
+            get {
+                object obj = ResourceManager.GetObject("panbars2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap panbars3 {
+            get {
+                object obj = ResourceManager.GetObject("panbars3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap PikPng_com_gorditas_png_3315155 {
             get {
                 object obj = ResourceManager.GetObject("PikPng.com_gorditas-png_3315155", resourceCulture);
@@ -196,6 +286,26 @@ namespace j0rpiPlayer.Properties {
         internal static System.Drawing.Bitmap ply {
             get {
                 object obj = ResourceManager.GetObject("ply", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Spotify_Primary_Logo_RGB_White {
+            get {
+                object obj = ResourceManager.GetObject("Spotify_Primary_Logo_RGB_White", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Spotify_Primary_Logo_RGB_White1 {
+            get {
+                object obj = ResourceManager.GetObject("Spotify_Primary_Logo_RGB_White1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

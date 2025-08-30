@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "j0rpiPlayer": {
+      "commandName": "Project",
+      "commandLineArgs": "/unsafe"
+    }
+  }
+}
