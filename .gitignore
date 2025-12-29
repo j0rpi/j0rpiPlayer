@@ -101,3 +101,7 @@ j0rpiPlayer/obj/Release/net8.0-windows/TempPE/PanSlider.Designer.cs.dll
 j0rpiPlayer/obj/Release/net8.0-windows/TempPE/Properties.Resources.Designer.cs.dll
 j0rpiPlayer/obj/Release/net8.0-windows/TempPE/VolumeSlider.Designer.cs.dll
 j0rpiPlayer/CustomVScrollBar.cs
+/j0rpiPlayer/bin
+/j0rpiPlayer/obj/Debug
+/.vs/ProjectEvaluation
+/.vs

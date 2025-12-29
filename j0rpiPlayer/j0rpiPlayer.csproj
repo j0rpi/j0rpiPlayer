@@ -26,7 +26,6 @@
     <None Remove="Resources\DS-DIGII.TTF" />
     <None Remove="Resources\DS-DIGIT.TTF" />
     <None Remove="Resources\Font 90 Icons.ttf" />
-    <None Remove="wwwroot\index.html" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,17 +41,15 @@
     <EmbeddedResource Include="Resources\DS-DIGII.TTF" />
     <EmbeddedResource Include="Resources\DS-DIGIT.TTF" />
     <EmbeddedResource Include="Resources\Font 90 Icons.ttf" />
-    <EmbeddedResource Include="wwwroot\index.html" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DiscordRichPresence" Version="1.6.1.70" />
     <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="NAudio.Core" Version="2.2.1" />
     <PackageReference Include="NAudio.Extras" Version="2.2.1" />
     <PackageReference Include="Silk.NET.OpenGL" Version="2.22.0" />
     <PackageReference Include="Silk.NET.Windowing" Version="2.22.0" />
-    <PackageReference Include="SpotifyAPI.Web" Version="7.2.1" />
-    <PackageReference Include="SpotifyAPI.Web.Auth" Version="7.2.1" />
     <PackageReference Include="TagLibSharp" Version="2.3.0" />
   </ItemGroup>
 

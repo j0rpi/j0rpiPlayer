@@ -9,11 +9,13 @@
 //
 //    File: player.cs
 //    Purpose: Main Player
-//    Last Updated: 2025-08-30
+//    Last Updated: 2025-12-29
 //
 //
 
 using j0rpiPlayer.Properties;
+using DiscordRPC;
+using DiscordRPC.Logging;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using System;
@@ -31,8 +33,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TagLib;
 using TagLib.Mpeg;
-using SpotifyAPI.Web;
-using SpotifyAPI.Web.Auth;
 using static j0rpiPlayer.player;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Security.Cryptography.X509Certificates;
@@ -60,16 +60,13 @@ namespace j0rpiPlayer
         private AudioFileReader audioFileReader;
         private float previousVolume = 1.0f;
         private WaveOutEvent waveOut;
-        private SpotifyClient spotify;
-        private EmbedIOAuthServer _server;
-        private string clientId = "4eff2b0c284342e183dfe3dc215bbc1f";
-        private string clientSecret = "4c452b953e274e3c8d808b444169fbcc";
-
+        public static DiscordRpcClient client;
+        
 
         public enum PlayerMode
         {
             Local,
-            Spotify
+            Web
         }
 
         private PlayerMode currentMode = PlayerMode.Local;
@@ -79,9 +76,15 @@ namespace j0rpiPlayer
         {
             InitializeComponent();
 
+            
         }
         private void player_Load(object sender, EventArgs e)
         {
+            // Discord RPC
+            client = new DiscordRpcClient("1455005364050464950");
+            client.Initialize();
+
+            // This is a mess.
             listView1.Visible = false;
             aevionProgressBar1.Text = "00:00 / 00:00";
             label2.AutoSize = true;
@@ -101,6 +104,8 @@ namespace j0rpiPlayer
             label6.Text = "made with ❤️ by j0rpi";
             progressTimer = new System.Windows.Forms.Timer();
             progressTimer.Interval = 1;
+
+            // Events
             progressTimer.Tick += ProgressTimer_Tick;
             listView1.MouseDoubleClick += listView1_MouseDoubleClick;
             listView1.DrawColumnHeader += listView1_DrawColumnHeader;
@@ -115,7 +120,6 @@ namespace j0rpiPlayer
             listView1.Columns.Add("", 50, HorizontalAlignment.Left);
             listView1.FullRowSelect = true;
             lblMediaAdd.Cursor = Cursors.Hand;
-
             volumeSlider1.VolumeChanged += volumeSlider1_VolumeChanged;
             panSlider1.Scroll += panSlider1_Scroll;
 
@@ -174,77 +178,17 @@ namespace j0rpiPlayer
 
             if (System.IO.File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "settings.ini")))
             {
-
                 IniFile ini = new IniFile();
-                if (ini.GetValue("spotify", "authorized") == "0")
-
-                {
-                    InitSpotifyAuth();
-                }
-
                 string folderPath = ini.GetValue("settings", "lastfolder");
                 lblMediaAdd.Visible = false;
                 label8.Visible = false;
                 LoadFolder(folderPath);
             }
 
+            
 
 
-        }
 
-        private async Task InitSpotify()
-        {
-            var config = SpotifyClientConfig.CreateDefault();
-            var request = new ClientCredentialsRequest(clientId, clientSecret);
-            var response = await new OAuthClient(config).RequestToken(request);
-
-            spotify = new SpotifyClient(config.WithToken(response.AccessToken));
-            currentMode = PlayerMode.Spotify;
-
-            IniFile ini = new IniFile();
-            if (ini.GetValue("spotify", "authorized") == "0")
-            {
-                ini.SetValue("spotify", "authorized", "1");
-            }
-        }
-
-        private async Task SearchSpotify(string query)
-        {
-            var search = await spotify.Search.Item(
-                new SearchRequest(SearchRequest.Types.Track, query));
-
-            listView1.Items.Clear();
-            foreach (var track in search.Tracks.Items)
-            {
-                var item = new ListViewItem((listView1.Items.Count + 1).ToString());
-                item.SubItems.Add(track.Artists[0].Name + " - " + track.Name);
-                item.SubItems.Add(TimeSpan.FromMilliseconds(track.DurationMs).ToString(@"mm\:ss"));
-                item.Tag = track;
-                listView1.Items.Add(item);
-            }
-        }
-
-        private async Task PlaySpotifyTrack(FullTrack track)
-        {
-            var devices = await spotify.Player.GetAvailableDevices();
-            var activeDevice = devices.Devices.FirstOrDefault();
-
-            if (activeDevice == null)
-            {
-                MessageBox.Show("No active Spotify device found. Open Spotify on Desktop or Mobile and try again.");
-                return;
-            }
-
-            var request = new PlayerResumePlaybackRequest
-            {
-                DeviceId = activeDevice.Id,   // 👈 this is the magic
-                Uris = new List<string> { track.Uri }
-            };
-
-            await spotify.Player.ResumePlayback(request);
-
-            //lblTitle.Text = $"{track.Artists[0].Name} - {track.Name}";
-            //lblDuration.Text = TimeSpan.FromMilliseconds(track.DurationMs).ToString(@"mm\:ss");
         }
         private async void LoadFolder(string folderPath)
         {
@@ -262,6 +206,7 @@ namespace j0rpiPlayer
                 ini.SetValue("settings", "lastfolder", folderPath);
                 ini.Save();
             }
+
 
             var files = await Task.Run(() =>
                         Directory.GetFiles(folderPath, "*.mp3", SearchOption.AllDirectories)
@@ -319,7 +264,7 @@ namespace j0rpiPlayer
                 currentTrackIndex = listView1.SelectedItems[0].Index;
                 PlayTrack(mp3Files[currentTrackIndex]);
             }
-            else if (currentMode == PlayerMode.Spotify)
+            else if (currentMode == PlayerMode.Web)
             {
                 
             }
@@ -377,6 +322,20 @@ namespace j0rpiPlayer
             pictureBox1.Image = tagFile.Tag.Pictures.Length > 0 ? System.Drawing.Image.FromStream(new MemoryStream(tagFile.Tag.Pictures[0].Data.Data)) : Resources.nodisc;
             pictureBox2.Image = tagFile.Tag.Pictures.Length > 0 ? System.Drawing.Image.FromStream(new MemoryStream(tagFile.Tag.Pictures[0].Data.Data)) : Resources.nodiscsmall;
 
+            // Discord
+            client.SetPresence(new RichPresence()
+            {
+                Details = tagFile.Tag.FirstPerformer ?? "Unknown",
+                State = tagFile.Tag.Title ?? "Unknown",
+                Assets = new Assets()
+                {
+                    LargeImageKey = "jpicon3", // Must match keys uploaded to Discord Portal
+                    LargeImageText = "j0rpiPlayer",
+                    SmallImageKey = "jpicon3"
+                },
+                Timestamps = Timestamps.Now // Shows "00:01 elapsed"
+            });
+
 
             if (tagFile.Properties.AudioChannels == 2)
             {
@@ -394,6 +353,7 @@ namespace j0rpiPlayer
             progressTimer.Start();
             listView1.Invalidate();
             currentPlayingIndex = listView1.SelectedIndices[0];
+
         }
         private void PlayInternetTrack(string filePath)
         {
@@ -749,110 +709,6 @@ namespace j0rpiPlayer
                 listView1.TopItem = listView1.Items[e.NewValue];
             }
         }
-
-        private async Task InitSpotifyAuth()
-        {
-
-            IniFile ini = new IniFile();
-            if (ini.GetValue("spotify", "authorized") == "0")
-            {
-                ini.SetValue("spotify", "authorized", "1");
-                ini.Save();
-            }
-
-            var clientId = "4eff2b0c284342e183dfe3dc215bbc1f";
-            var clientSecret = "4c452b953e274e3c8d808b444169fbcc";
-            var redirectUri = "http://127.0.0.1:5000/callback";
-
-            // Start a local server to catch Spotify callback
-            _server = new EmbedIOAuthServer(new Uri(redirectUri), 5000);
-            await _server.Start();
-
-            _server.AuthorizationCodeReceived += async (sender, response) =>
-            {
-                await _server.Stop();
-
-                var config = SpotifyClientConfig.CreateDefault();
-                var oauth = new OAuthClient(config);
-
-                // Exchange code for access + refresh token
-                var tokenResponse = await oauth.RequestToken(
-                    new AuthorizationCodeTokenRequest(
-                        clientId,
-                        clientSecret,
-                        response.Code,
-                        new Uri(redirectUri)
-                    )
-                );
-
-                spotify = new SpotifyClient(tokenResponse.AccessToken);
-
-                // Optional: store refresh token for next launch
-                // ini.SetValue("spotify", "refresh_token", tokenResponse.RefreshToken);
-
-                MessageBox.Show("Spotify login successful!");
-            };
-
-            // Ask user to login
-            var loginRequest = new LoginRequest(
-                new Uri(redirectUri),
-                clientId,
-                LoginRequest.ResponseType.Code
-            )
-            {
-                Scope = new[]
-                {
-            Scopes.UserReadPlaybackState,
-            Scopes.UserModifyPlaybackState,
-            Scopes.UserReadCurrentlyPlaying
-        }
-            };
-
-            var uri = loginRequest.ToUri();
-            Process.Start(new ProcessStartInfo(uri.ToString()) { UseShellExecute = true });
-        }
-        private async Task UpdateSpotifyPlayback()
-        {
-            var playback = await spotify.Player.GetCurrentPlayback();
-            if (playback?.Item is FullTrack track)
-            {
-                txtTitle.Text = $"{track.Artists[0].Name} - {track.Name}";
-                aevionProgressBar1.Text = TimeSpan.FromMilliseconds(track.DurationMs).ToString(@"mm\:ss");
-                aevionProgressBar1.Maximum = (int)track.DurationMs;
-                aevionProgressBar1.Value = (int)playback.ProgressMs;
-            }
-        }
-
-        private async void btnSearch_Click(object sender, EventArgs e)
-        {
-            if (spotifySearchPanel.Visible == true)
-            {
-                spotifySearchPanel.Visible = false;
-            }
-            else
-            {
-                spotifySearchPanel.Visible = true;
-            }
-        }
-
-        private async void button1_Click(object sender, EventArgs e)
-        {
-            currentMode = PlayerMode.Spotify;
-
-            listView1.Items.Clear();
-            try
-            {
-                if (spotify == null)
-                    await InitSpotify();
-
-                await SearchSpotify(txtSearch.Text);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Spotify Error");
-            }
-        }
-
         private void label12_Click(object sender, EventArgs e)
         {
             if (label12.Text == "Z")
@@ -878,15 +734,13 @@ namespace j0rpiPlayer
                     currentTrackIndex = listView1.SelectedItems[0].Index;
                     PlayTrack(mp3Files[currentTrackIndex]);
                 }
-                else if(currentMode == PlayerMode.Spotify)
+                else if(currentMode == PlayerMode.Web)
                 {
-                var track = (FullTrack)listView1.SelectedItems[0].Tag;
-                PlaySpotifyTrack(track);
+                // Do playback of webcontent - however the web implementation needs alot of work ..
                 }
                     
             }
         }
-
         private void btnPlay_Click(object sender, EventArgs e)
         {
 

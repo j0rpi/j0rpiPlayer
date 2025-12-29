@@ -46,7 +46,6 @@
             openFileDialog1 = new OpenFileDialog();
             lblTotal = new Label();
             groupBox1 = new GroupBox();
-            linkLabel2 = new LinkLabel();
             txtFreq = new Label();
             checkBox1 = new CheckBox();
             txtBitrate = new Label();
@@ -86,10 +85,6 @@
             panSlider1 = new NAudio.Gui.PanSlider2();
             listView1 = new ListView();
             label12 = new Label();
-            btnSearch = new Button();
-            txtSearch = new TextBox();
-            spotifySearchPanel = new Panel();
-            button1 = new Button();
             label7 = new Label();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             panel1.SuspendLayout();
@@ -102,7 +97,6 @@
             panelProgress.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
-            spotifySearchPanel.SuspendLayout();
             SuspendLayout();
             // 
             // trackBar1
@@ -285,7 +279,7 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(linkLabel2);
+            groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(txtFreq);
             groupBox1.Controls.Add(checkBox1);
             groupBox1.Controls.Add(txtBitrate);
@@ -311,20 +305,6 @@
             groupBox1.Size = new Size(460, 244);
             groupBox1.TabIndex = 12;
             groupBox1.TabStop = false;
-            // 
-            // linkLabel2
-            // 
-            linkLabel2.AutoSize = true;
-            linkLabel2.ForeColor = Color.White;
-            linkLabel2.LinkColor = Color.White;
-            linkLabel2.Location = new Point(302, 130);
-            linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(140, 15);
-            linkLabel2.TabIndex = 24;
-            linkLabel2.TabStop = true;
-            linkLabel2.Text = "invalidate listview";
-            linkLabel2.VisitedLinkColor = Color.White;
-            linkLabel2.LinkClicked += linkLabel2_LinkClicked;
             // 
             // txtFreq
             // 
@@ -742,71 +722,14 @@
             label12.Text = "Z";
             label12.Click += label12_Click;
             // 
-            // btnSearch
-            // 
-            btnSearch.BackgroundImage = Properties.Resources.Spotify_Primary_Logo_RGB_White1;
-            btnSearch.BackgroundImageLayout = ImageLayout.Stretch;
-            btnSearch.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
-            btnSearch.FlatStyle = FlatStyle.Flat;
-            btnSearch.Font = new Font("Font 90 Icons", 14.25F);
-            btnSearch.ForeColor = Color.LawnGreen;
-            btnSearch.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSearch.Location = new Point(324, 474);
-            btnSearch.Name = "btnSearch";
-            btnSearch.Padding = new Padding(2);
-            btnSearch.Size = new Size(32, 32);
-            btnSearch.TabIndex = 37;
-            btnSearch.TextAlign = ContentAlignment.BottomCenter;
-            btnSearch.UseVisualStyleBackColor = true;
-            btnSearch.Click += btnSearch_Click;
-            // 
-            // txtSearch
-            // 
-            txtSearch.BackColor = Color.Black;
-            txtSearch.BorderStyle = BorderStyle.FixedSingle;
-            txtSearch.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtSearch.ForeColor = Color.White;
-            txtSearch.Location = new Point(6, 35);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(194, 23);
-            txtSearch.TabIndex = 38;
-            // 
-            // spotifySearchPanel
-            // 
-            spotifySearchPanel.BorderStyle = BorderStyle.FixedSingle;
-            spotifySearchPanel.Controls.Add(button1);
-            spotifySearchPanel.Controls.Add(label7);
-            spotifySearchPanel.Controls.Add(txtSearch);
-            spotifySearchPanel.Location = new Point(156, 388);
-            spotifySearchPanel.Name = "spotifySearchPanel";
-            spotifySearchPanel.Size = new Size(238, 68);
-            spotifySearchPanel.TabIndex = 39;
-            // 
-            // button1
-            // 
-            button1.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Font 90 Icons", 14.25F);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(203, 30);
-            button1.Name = "button1";
-            button1.Padding = new Padding(2, 0, 0, 0);
-            button1.Size = new Size(29, 31);
-            button1.TabIndex = 40;
-            button1.Text = "g";
-            button1.TextAlign = ContentAlignment.BottomCenter;
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.ForeColor = Color.White;
-            label7.Location = new Point(6, 12);
+            label7.Location = new Point(304, 122);
             label7.Name = "label7";
-            label7.Size = new Size(105, 14);
-            label7.TabIndex = 34;
-            label7.Text = "Spotify Search";
+            label7.Size = new Size(140, 15);
+            label7.TabIndex = 1;
+            label7.Text = "DRPC: Not Connected";
             // 
             // player
             // 
@@ -814,8 +737,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(485, 805);
-            Controls.Add(spotifySearchPanel);
-            Controls.Add(btnSearch);
             Controls.Add(lblMediaAdd);
             Controls.Add(label8);
             Controls.Add(label12);
@@ -866,8 +787,6 @@
             panel3.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
-            spotifySearchPanel.ResumeLayout(false);
-            spotifySearchPanel.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -913,7 +832,6 @@
         private Label txtBitrate;
         private Label txtFreq;
         private System.Windows.Forms.Timer timer1;
-        private LinkLabel linkLabel2;
         private System.Windows.Forms.Timer scrollingTitle;
         private System.Windows.Forms.Timer waitScroll;
         private NAudio.Gui.VolumeSlider2 volumeSlider1;
@@ -930,10 +848,6 @@
         private ListView listView1;
         private Label label12;
         private Label lblElapsed;
-        private Button btnSearch;
-        private TextBox txtSearch;
-        private Panel spotifySearchPanel;
         private Label label7;
-        private Button button1;
     }
 }
