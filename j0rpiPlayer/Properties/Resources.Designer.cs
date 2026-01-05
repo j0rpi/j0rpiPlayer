@@ -153,6 +153,26 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap discord_white_icon {
+            get {
+                object obj = ResourceManager.GetObject("discord-white-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap discord_white_icon1 {
+            get {
+                object obj = ResourceManager.GetObject("discord-white-icon1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap displaytest {
             get {
                 object obj = ResourceManager.GetObject("displaytest", resourceCulture);
@@ -223,6 +243,16 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap instruments {
+            get {
+                object obj = ResourceManager.GetObject("instruments", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap nodisc {
             get {
                 object obj = ResourceManager.GetObject("nodisc", resourceCulture);
@@ -286,6 +316,16 @@ namespace j0rpiPlayer.Properties {
         internal static System.Drawing.Bitmap ply {
             get {
                 object obj = ResourceManager.GetObject("ply", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tracker {
+            get {
+                object obj = ResourceManager.GetObject("tracker", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

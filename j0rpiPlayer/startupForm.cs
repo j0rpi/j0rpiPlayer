@@ -29,5 +29,10 @@ namespace j0rpiPlayer
             Form player = new Form();
             player.Show();
         }
+
+        private void startupForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -9,15 +9,16 @@
 //
 //    File: player.cs
 //    Purpose: Main Player
-//    Last Updated: 2025-12-29
+//    Last Updated: 2026-01-05
 //
 //
 
-using j0rpiPlayer.Properties;
 using DiscordRPC;
 using DiscordRPC.Logging;
+using j0rpiPlayer.Properties;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
+using ManagedBass;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,7 +28,9 @@ using System.Drawing;
 using System.Formats.Tar;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,10 +38,6 @@ using TagLib;
 using TagLib.Mpeg;
 using static j0rpiPlayer.player;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Security.Cryptography.X509Certificates;
-using System.Reflection;
-
-
 
 namespace j0rpiPlayer
 {
@@ -57,16 +56,28 @@ namespace j0rpiPlayer
         private MeteringSampleProvider meter;
         private PanningSampleProvider panningProvider;
         private VolumeSampleProvider volProvider;
-        private AudioFileReader audioFileReader;
-        private float previousVolume = 1.0f;
         private WaveOutEvent waveOut;
+        private AudioFileReader audioFileReader;
+        private int bassStream = 0;
+        private bool isPaused = false;
+        private TimeSpan totalTime = TimeSpan.Zero;
+        private TimeSpan currentTime = TimeSpan.Zero;
+        private float previousVolume = 1.0f;
         public static DiscordRpcClient client;
-        
+        private int bassMusic = 0;
+        private bool isBassPlaying = false;
+
+        private static readonly HashSet<string> TrackerExtensions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            ".mod", ".xm", ".it", ".s3m", ".mtm", ".umx", ".mo3"
+        };
+
 
         public enum PlayerMode
         {
             Local,
-            Web
+            Web,
+            BassTracker
         }
 
         private PlayerMode currentMode = PlayerMode.Local;
@@ -75,8 +86,11 @@ namespace j0rpiPlayer
         public player()
         {
             InitializeComponent();
-
-            
+            if (!Bass.Init())
+            {
+                 MessageBox.Show("BASS failed to initialize.", "Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void player_Load(object sender, EventArgs e)
         {
@@ -90,20 +104,22 @@ namespace j0rpiPlayer
             label2.AutoSize = true;
             scrollingTitle.Interval = 1500;
             scrollingTitle.Start();
-            txtArtist.Text = "Artist:   N/A";
-            txtTitle.Text = "Title:   N/A";
-            txtAlbum.Text = "Album:     N/A";
-            lblTotal.Text = "Duration:  N/A";
-            txtBitrate.Text = "Bitrate:   N/A";
-            txtFreq.Text = "Frequency: N/A";
-            pictureBox1.Image = Resources.nodisc;
             pictureBox2.Image = Resources.nodiscsmall;
             this.DoubleBuffered = true;
             timer1.Enabled = true;
             timer1.Interval = 16;
-            label6.Text = "made with ❤️ by j0rpi";
             progressTimer = new System.Windows.Forms.Timer();
             progressTimer.Interval = 1;
+
+            // ListView stuff
+            listView1.View = View.Details;
+            listView1.OwnerDraw = true;
+            listView1.Scrollable = true;
+            listView1.Columns.Add("#", 30, HorizontalAlignment.Left);
+            listView1.Columns.Add("", 375, HorizontalAlignment.Left);
+            listView1.Columns.Add("", 50, HorizontalAlignment.Left);
+            listView1.FullRowSelect = true;
+            lblMediaAdd.Cursor = Cursors.Hand;
 
             // Events
             progressTimer.Tick += ProgressTimer_Tick;
@@ -112,14 +128,6 @@ namespace j0rpiPlayer
             listView1.DrawItem += listView1_DrawItem;
             listView1.MouseMove += listView1_MouseMove;
             listView1.MouseLeave += listView1_MouseLeave;
-            listView1.View = View.Details;
-            listView1.OwnerDraw = true;
-            listView1.Scrollable = true;
-            listView1.Columns.Add("#", 30, HorizontalAlignment.Left);
-            listView1.Columns.Add("", 360, HorizontalAlignment.Left);
-            listView1.Columns.Add("", 50, HorizontalAlignment.Left);
-            listView1.FullRowSelect = true;
-            lblMediaAdd.Cursor = Cursors.Hand;
             volumeSlider1.VolumeChanged += volumeSlider1_VolumeChanged;
             panSlider1.Scroll += panSlider1_Scroll;
 
@@ -160,13 +168,6 @@ namespace j0rpiPlayer
                     this.Text = "j0rpiPlayer :: no files loaded ...";
                     Stop();
 
-                    txtArtist.Text = "Artist:   N/A";
-                    txtTitle.Text = "Title:   N/A";
-                    txtAlbum.Text = "Album:     N/A";
-                    lblTotal.Text = "Duration:  N/A";
-                    txtBitrate.Text = "Bitrate:   N/A";
-                    txtFreq.Text = "Frequency: N/A";
-                    pictureBox1.Image = Resources.nodisc;
                     pictureBox2.Image = Resources.nodiscsmall;
 
                     label2.Text = "no track currently playing ...";
@@ -184,22 +185,67 @@ namespace j0rpiPlayer
                 label8.Visible = false;
                 LoadFolder(folderPath);
             }
+        }
+        private string GetTrackerDuration(string filePath)
+        {
+            int handle = Bass.MusicLoad(
+                filePath,
+                0,
+                0,
+                BassFlags.Prescan | BassFlags.Decode,
+                0
+            );
 
-            
+            if (handle == 0)
+                return "--:--";
+
+            long lengthBytes = Bass.ChannelGetLength(handle, PositionFlags.Bytes);
+            double seconds = Bass.ChannelBytes2Seconds(handle, lengthBytes);
+
+            Bass.MusicFree(handle);
+
+            return TimeSpan
+                .FromSeconds(seconds)
+                .ToString(@"mm\:ss");
+        }
 
 
+        private async void setSkin(string skinPath)
+        {
+            IniFile ini = new IniFile();
+            if (System.IO.File.Exists(skinPath + "/skin.ini") == true)
+            {
+                // Main Colors
+                string playerBG = ini.GetValue("theme", "playerBG");
+                string playerFontColor = ini.GetValue("theme", "playerFontColor");
+                string playerFontFamily = ini.GetValue("theme", "playerFontFamily");
+                string playerFontSize = ini.GetValue("theme", "playerFontSize");
+                string playerBarForegroundColor = ini.GetValue("theme", "playerBarForegroundColor");
+                string playerBarBackgroundColor = ini.GetValue("theme", "playerBarBoregroundColor");
+                string PlayerbarDisplayBG = ini.GetValue("theme", "playerDisplayBG");
+                string PlayerbarDisplayFontColor = ini.GetValue("theme", "PlayerbarDisplayFontColor");
 
+                // Buttons
+                string buttonBG = ini.GetValue("theme", "buttonBG");
+                string buttonFontColor = ini.GetValue("theme", "buttonFontColor");
+                string buttonBorderColor = ini.GetValue("theme", "buttonButtonBorderColor");
+
+                // Playlist
+                string playlistBG = ini.GetValue("theme", "playlistBG");
+                string playlistCollumnColor = ini.GetValue("theme", "playlistCollumnColor");
+                string playlistTrackFirstRow = ini.GetValue("theme", "playlistTrackFirstRow");
+                string playlistTrackSecondRow = ini.GetValue("theme", "playlistTrackSecondRow");
+                string playlistTrackPlaying = ini.GetValue("theme", "playlistTrackPlaying");
+            }
         }
         private async void LoadFolder(string folderPath)
         {
+
             IniFile ini = new IniFile();
             listView1.Items.Clear();
-            listView1.BeginUpdate();
             lblMediaAdd.Visible = false;
             label8.Visible = false;
-            int index = 1;
             this.Text = "j0rpiPlayer :: loading tracks...";
-
 
             if (System.IO.File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "settings.ini")))
             {
@@ -207,68 +253,105 @@ namespace j0rpiPlayer
                 ini.Save();
             }
 
-
-            var files = await Task.Run(() =>
-                        Directory.GetFiles(folderPath, "*.mp3", SearchOption.AllDirectories)
-                    );
-
-            await Task.Run(() =>
+            try
             {
-                foreach (var file in files)
+                var items = await Task.Run(() =>
                 {
-                    try
-                    {
-                        var tagFile = TagLib.File.Create(file);
-                        var item = new ListViewItem(index.ToString());
+                    var list = new List<ListViewItem>();
+                    int index = 1;
 
-                        item.SubItems.Add((tagFile.Tag.FirstPerformer ?? "Unknown") + " - " + (tagFile.Tag.Title ?? Path.GetFileNameWithoutExtension(file)));
-                        item.SubItems.Add(tagFile.Properties.Duration.ToString(@"mm\:ss"));
-                        item.Tag = file;
-
-                        int rowIndex = index;
-                        index++;
-
-                        listView1.BeginInvoke(new Action(() =>
+                    var files = Directory.GetFiles(folderPath, "*.*", SearchOption.AllDirectories)
+                        .Where(f =>
                         {
-                            listView1.Items.Add(item);
-                            if (rowIndex % 50 == 0)
-                                this.Text = $"j0rpiPlayer :: loading tracks... {rowIndex}/{files.Length}";
-                        }));
-                    }
-                    catch
+                            string ext = Path.GetExtension(f);
+                            return ext.Equals(".mp3", StringComparison.OrdinalIgnoreCase)
+                                   || TrackerExtensions.Contains(ext);
+                        });
+
+                    foreach (var file in files)
                     {
-                        MessageBox.Show("There was a problem loading files from selected directory." + Environment.NewLine + "Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        lblMediaAdd.Visible = true;
-                        label8.Visible = true;
+                        try
+                        {
+                            string ext = Path.GetExtension(file);
+                            string title;
+                            string duration = "--:--";
+
+                            if (TrackerExtensions.Contains(ext))
+                            {
+                                title = Path.GetFileNameWithoutExtension(file);
+                                duration = GetTrackerDuration(file);
+                            }
+                            else
+                            {
+                                var tag = TagLib.File.Create(file);
+                                title =
+                                    (tag.Tag.FirstPerformer ?? "Unknown") +
+                                    " - " +
+                                    (tag.Tag.Title ?? Path.GetFileNameWithoutExtension(file));
+                                duration = tag.Properties.Duration.ToString(@"mm\:ss");
+                            }
+
+                            var item = new ListViewItem(index.ToString());
+                            item.SubItems.Add(title);
+                            item.SubItems.Add(duration);
+                            item.Tag = file;
+
+                            list.Add(item);
+                            index++;
+                        }
+                        catch
+                        {
+                            // skip bad file, do not abort
+                        }
                     }
-                }
 
-            });
-            this.BeginInvoke(new Action(() =>
-            {
-                this.Text = $"j0rpiPlayer :: {listView1.Items.Count} tracks loaded";
+                    return list;
+                });
+
+                // 🔑 UI THREAD ONLY BELOW
+                listView1.BeginUpdate();
+                listView1.Items.AddRange(items.ToArray());
+                listView1.EndUpdate();
+
+                this.Text = $"j0rpiPlayer :: {items.Count} tracks loaded";
                 listView1.Visible = true;
-            }));
-
-            mp3Files = files;
-            listView1.EndUpdate();
-            ini.Save();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Load error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblMediaAdd.Visible = true;
+                label8.Visible = true;
+            }
         }
+
+
 
 
 
         private async void PlaySelected()
         {
-            if (currentMode == PlayerMode.Local)
+            if (listView1.SelectedItems.Count == 0)
+                return;
+
+            string filePath = listView1.SelectedItems[0].Tag as string;
+            if (string.IsNullOrEmpty(filePath))
+                return;
+
+            string ext = Path.GetExtension(filePath);
+
+            Stop(); 
+
+            if (TrackerExtensions.Contains(ext))
             {
-                currentTrackIndex = listView1.SelectedItems[0].Index;
-                PlayTrack(mp3Files[currentTrackIndex]);
+                PlayTrackerFile(filePath);
             }
-            else if (currentMode == PlayerMode.Web)
+            else
             {
-                
+                PlayTrack(filePath);
             }
         }
+
 
 
         private void PlayTrack(string filePath)
@@ -295,45 +378,30 @@ namespace j0rpiPlayer
             }
 
             meter = new MeteringSampleProvider(currentProvider);
-            meter.StreamVolume += OnStreamVolume;
-
             waveOut = new WaveOutEvent();
             waveOut.Init(meter);
             waveOut.Play();
             waveOut.PlaybackStopped += WaveOut_PlaybackStopped;
-
             var duration = audioFileReader.TotalTime;
             trackBar1.Maximum = (int)duration.TotalSeconds;
             trackBar1.Value = 0;
-
             lblElapsed.Text = "00:00";
-            lblTotal.Text = duration.ToString(@"mm\:ss");
             var tagFile = TagLib.File.Create(filePath);
-
             label2.Text = (tagFile.Tag.FirstPerformer ?? "Unknown") + " - " + (tagFile.Tag.Title ?? "Unknown");
             lblBitrate.Text = tagFile.Properties.AudioBitrate + " kbps";
-
-            txtArtist.Text = "Artist:    " + (tagFile.Tag.FirstPerformer ?? "Unknown");
-            txtTitle.Text = "Title:     " + (tagFile.Tag.Title ?? "Unknown");
-            txtAlbum.Text = "Album:     " + (tagFile.Tag.Album ?? "Unknown") + " (" + (tagFile.Tag.Year > 0 ? tagFile.Tag.Year.ToString() : "Unknown Year") + ")";
-            lblTotal.Text = "Duration:  " + tagFile.Properties.Duration.ToString(@"mm\:ss");
-            txtBitrate.Text = "Bitrate:   " + tagFile.Properties.AudioBitrate + " kbps";
-            txtFreq.Text = "Frequency: " + tagFile.Properties.AudioSampleRate + " Hz";
-            pictureBox1.Image = tagFile.Tag.Pictures.Length > 0 ? System.Drawing.Image.FromStream(new MemoryStream(tagFile.Tag.Pictures[0].Data.Data)) : Resources.nodisc;
             pictureBox2.Image = tagFile.Tag.Pictures.Length > 0 ? System.Drawing.Image.FromStream(new MemoryStream(tagFile.Tag.Pictures[0].Data.Data)) : Resources.nodiscsmall;
 
-            // Discord
             client.SetPresence(new RichPresence()
             {
                 Details = tagFile.Tag.FirstPerformer ?? "Unknown",
                 State = tagFile.Tag.Title ?? "Unknown",
                 Assets = new Assets()
                 {
-                    LargeImageKey = "jpicon3", // Must match keys uploaded to Discord Portal
+                    LargeImageKey = "jpicon3",
                     LargeImageText = "j0rpiPlayer",
                     SmallImageKey = "jpicon3"
                 },
-                Timestamps = Timestamps.Now // Shows "00:01 elapsed"
+                Timestamps = Timestamps.Now
             });
 
 
@@ -355,6 +423,62 @@ namespace j0rpiPlayer
             currentPlayingIndex = listView1.SelectedIndices[0];
 
         }
+
+        private void PlayTrackerFile(string filePath)
+        {
+            Stop();
+            progressTimer.Start();
+
+            if (bassMusic != 0)
+            {
+                Bass.ChannelStop(bassMusic);
+                Bass.MusicFree(bassMusic);
+                bassMusic = 0;
+            }
+
+            bassMusic = Bass.MusicLoad(
+                filePath,
+                0,
+                0,
+                BassFlags.Loop | BassFlags.MusicRamp | BassFlags.Prescan | BassFlags.Float,
+                0
+            );
+
+            if (bassMusic == 0)
+            {
+                MessageBox.Show("Failed to load tracker: " + Bass.LastError);
+                return;
+            }
+
+            // Volume from your slider
+            Bass.ChannelSetAttribute(bassMusic, ChannelAttribute.Volume, volumeSlider1.Volume);
+
+            Bass.ChannelPlay(bassMusic);
+
+            // UI updates
+            label2.Text = Path.GetFileName(filePath);
+            lblElapsed.Text = "00:00";
+            lblBitrate.Text = "N/A";
+            lblChannels.Text = "N/A";
+            pictureBox2.Image = Resources.nodiscsmall;
+
+            client.SetPresence(new RichPresence()
+            {
+                Details = "Tracker Module",
+                State = Path.GetFileName(filePath),
+                Assets = new Assets()
+                {
+                    LargeImageKey = "jpicon3",
+                    LargeImageText = "j0rpiPlayer",
+                    SmallImageKey = "jpicon3"
+                },
+                Timestamps = Timestamps.Now
+            });
+
+            isBassPlaying = true;
+            currentPlayingIndex = listView1.SelectedIndices[0];
+        }
+
         private void PlayInternetTrack(string filePath)
         {
 
@@ -363,49 +487,53 @@ namespace j0rpiPlayer
             audioFileReader = new AudioFileReader(filePath);
             volProvider = new VolumeSampleProvider(audioFileReader);
             meter = new MeteringSampleProvider(volProvider);
-            meter.StreamVolume += OnStreamVolume;
 
             waveOut = new WaveOutEvent();
             waveOut.Init(meter);
             waveOut.Play();
             waveOut.PlaybackStopped += WaveOut_PlaybackStopped;
-            var duration = audioFileReader.TotalTime;
-            trackBar1.Maximum = (int)
-
-            duration.TotalSeconds;
-            trackBar1.Value = 0;
 
             label2.Text = "internet stream: " + filePath;
-            txtArtist.Text = "Artist:   N/A";
-            txtTitle.Text = "Title:   N/A";
-            txtAlbum.Text = "Album:     N/A";
-            lblTotal.Text = "Duration:  N/A (internet stream)";
-            txtBitrate.Text = "Bitrate:   N/A";
-            txtFreq.Text = "Frequency: N/A";
+            lblElapsed.Text = "Web";
+            aevionProgressBar1.Text = "Internet Radio";
 
-            pictureBox1.Image = Resources.nodisc;
             pictureBox2.Image = Resources.nodiscsmall;
 
-            progressTimer.Start();
+            //progressTimer.Start();
             listView1.Invalidate();
 
-        }
-        private void OnStreamVolume(object sender, StreamVolumeEventArgs e)
-        {
-            leftLevel = e.MaxSampleValues[0];
-            rightLevel = e.MaxSampleValues[1];
-            volumeMeter1.ForeColor = Color.White;
-            volumeMeter1.Amplitude = e.MaxSampleValues[0];
-            volumeMeter2.Amplitude = e.MaxSampleValues[1];
+            client.SetPresence(new RichPresence()
+            {
+                Details = "Internet Stream",
+                State = filePath.ToString(),
+                Assets = new Assets()
+                {
+                    LargeImageKey = "jpicon3",
+                    LargeImageText = "j0rpiPlayer",
+                    SmallImageKey = "jpicon3"
+                },
+                Timestamps = Timestamps.Now
+            });
+
         }
         private void Stop()
         {
             progressTimer.Stop();
+
+            // NAudio
             waveOut?.Stop();
             waveOut?.Dispose();
             audioFileReader?.Dispose();
             waveOut = null;
             audioFileReader = null;
+
+            if (bassMusic != 0)
+            {
+                Bass.ChannelStop(bassMusic);
+                Bass.MusicFree(bassMusic);
+                bassMusic = 0;
+            }
+
             trackBar1.Value = 0;
             lblElapsed.Text = "00:00";
         }
@@ -416,9 +544,16 @@ namespace j0rpiPlayer
             {
                 volProvider.Volume = volumeSlider1.Volume;
             }
-        }
 
-        // Update pan handler
+            if (isBassPlaying && bassMusic != 0)
+            {
+                Bass.ChannelSetAttribute(
+                    bassMusic,
+                    ChannelAttribute.Volume,
+                    volumeSlider1.Volume
+                );
+            }
+        }
         private void panSlider1_Scroll(object sender, EventArgs e)
         {
             if (panningProvider != null)
@@ -428,7 +563,7 @@ namespace j0rpiPlayer
         }
         private void WaveOut_PlaybackStopped(object sender, StoppedEventArgs e)
         {
-            if (audioFileReader != null && waveOut.PlaybackState == PlaybackState.Stopped)
+            if (audioFileReader != null && waveOut.PlaybackState == NAudio.Wave.PlaybackState.Stopped)
             {
                 this.BeginInvoke(new Action(() => NextTrack()));
             }
@@ -436,19 +571,79 @@ namespace j0rpiPlayer
 
         private void ProgressTimer_Tick(object sender, EventArgs e)
         {
-            if (audioFileReader != null && waveOut.PlaybackState == PlaybackState.Playing)
+            TimeSpan currentTime = TimeSpan.Zero;
+            TimeSpan totalTime = TimeSpan.Zero;
+            bool isPlaying = false;
+            bool isTracker = false;
+
+            // NAudio playback
+            if (audioFileReader != null && waveOut.PlaybackState == NAudio.Wave.PlaybackState.Playing)
             {
-                var current = audioFileReader.CurrentTime;
-                trackBar1.Value = Math.Min((int)current.TotalSeconds, trackBar1.Maximum);
-                lblElapsed.Text = current.ToString(@"mm\:ss");
-                aevionProgressBar1.Text = lblElapsed.Text + " / " + audioFileReader.TotalTime.ToString(@"mm\:ss");
-                aevionProgressBar1.Maximum = (int)audioFileReader.TotalTime.TotalSeconds;
-                aevionProgressBar1.Value = Math.Min((int)current.TotalSeconds, trackBar1.Maximum);
+                currentTime = audioFileReader.CurrentTime;
+                totalTime = audioFileReader.TotalTime;
                 panningProvider.Pan = panSlider1.Pan;
+                isPlaying = true;
+            }
+            else if (bassStream != 0 && ManagedBass.Bass.ChannelIsActive(bassStream) == ManagedBass.PlaybackState.Playing)
+            {
+                long pos = ManagedBass.Bass.ChannelGetPosition(bassStream);
+                long len = ManagedBass.Bass.ChannelGetLength(bassStream);
+
+                double currentSeconds = ManagedBass.Bass.ChannelBytes2Seconds(bassStream, pos);
+                double totalSeconds = ManagedBass.Bass.ChannelBytes2Seconds(bassStream, len);
+                if (totalSeconds <= 0) totalSeconds = 1;
+
+                currentTime = TimeSpan.FromSeconds(currentSeconds);
+                totalTime = TimeSpan.FromSeconds(totalSeconds);
+                isPlaying = true;
+            }
+            else if (bassMusic != 0 &&
+                     ManagedBass.Bass.ChannelIsActive(bassMusic) == ManagedBass.PlaybackState.Playing)
+            {
+                long pos = ManagedBass.Bass.ChannelGetPosition(bassMusic);
+                long len = ManagedBass.Bass.ChannelGetLength(bassMusic);
+
+                double currentSeconds = ManagedBass.Bass.ChannelBytes2Seconds(bassMusic, pos);
+                double totalSeconds = ManagedBass.Bass.ChannelBytes2Seconds(bassMusic, len);
+
+                if (totalSeconds <= 0) totalSeconds = 1; 
+
+                currentTime = TimeSpan.FromSeconds(currentSeconds);
+                totalTime = TimeSpan.FromSeconds(totalSeconds);
+                isPlaying = true;
+                isTracker = true; 
             }
 
-            //UpdateSpotifyPlayback();
+            if (!isPlaying)
+                return; 
+            double fraction = totalTime.TotalSeconds > 0
+                ? currentTime.TotalSeconds / totalTime.TotalSeconds
+                : 0;
+
+            if (isTracker)
+            {
+                fraction %= 1.0;
+            }
+
+            trackBar1.Maximum = Math.Max((int)totalTime.TotalSeconds, 1);
+            trackBar1.Value = Math.Min((int)(fraction * trackBar1.Maximum), trackBar1.Maximum);
+
+            aevionProgressBar1.Maximum = Math.Max((int)totalTime.TotalSeconds, 1);
+            aevionProgressBar1.Value = Math.Min((int)(fraction * aevionProgressBar1.Maximum), aevionProgressBar1.Maximum);
+
+            double percent = fraction * 100;
+
+            lblElapsed.Text = currentTime.ToString(@"mm\:ss");
+            aevionProgressBar1.Text = $"{lblElapsed.Text} / {totalTime.ToString(@"mm\:ss")} ({percent:0.0}%)";
         }
+
+
+
+
+
+
+
+
 
         private void trackBarProgress_Scroll(object sender, EventArgs e)
         {
@@ -481,56 +676,10 @@ namespace j0rpiPlayer
             {
                 string filePath = (string)listView1.SelectedItems[0].Tag;
                 var tagFile = TagLib.File.Create(filePath);
-
                 label2.Text = tagFile.Tag.Title ?? "";
-                txtArtist.Text = tagFile.Tag.FirstPerformer ?? "";
-                txtAlbum.Text = tagFile.Tag.Album ?? "";
             }
         }
 
-        private void SaveTagsFromUI()
-        {
-            if (listView1.SelectedItems.Count > 0)
-            {
-                string filePath = (string)listView1.SelectedItems[0].Tag;
-                var tagFile = TagLib.File.Create(filePath);
-
-                tagFile.Tag.Title = txtTitle.Text;
-                tagFile.Tag.Performers = new[] { txtArtist.Text };
-                tagFile.Tag.Album = txtAlbum.Text;
-                tagFile.Save();
-
-                listView1.SelectedItems[0].SubItems[0].Text = txtTitle.Text;
-                listView1.SelectedItems[0].SubItems[1].Text = txtArtist.Text;
-                listView1.SelectedItems[0].SubItems[2].Text = txtAlbum.Text;
-            }
-        }
-        private float leftLevel, rightLevel;
-
-        private void panelVisualizer_Paint_1(object sender, PaintEventArgs e)
-        {
-            var g = e.Graphics;
-            g.Clear(Color.Black);
-
-            int barWidth = 5;
-            int barHeightLeft = (int)(leftLevel * panelVisualizer.Height);
-            int barHeightRight = (int)(rightLevel * panelVisualizer.Height);
-
-            g.FillRectangle(Brushes.Green, 0, 48 - barHeightLeft, barWidth, barHeightLeft);
-            g.FillRectangle(Brushes.Blue, 5, panelVisualizer.Height - barHeightRight, barWidth, barHeightRight);
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-            {
-                panelVisualizer.Visible = false;
-            }
-            else
-            {
-                panelVisualizer.Visible = true;
-            }
-        }
 
         private void listView1_DrawItem(object sender, DrawListViewItemEventArgs e)
         {
@@ -570,7 +719,6 @@ namespace j0rpiPlayer
 
             e.DrawDefault = false;
         }
-
         private void listView1_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
             using (var backBrush = new SolidBrush(Color.FromArgb(50, 50, 50)))
@@ -594,9 +742,6 @@ namespace j0rpiPlayer
                 flags
             );
         }
-
-
-
         private void listView1_MouseMove(object sender, MouseEventArgs e)
         {
             ListViewItem item = listView1.GetItemAt(e.X, e.Y);
@@ -619,46 +764,9 @@ namespace j0rpiPlayer
             }
         }
 
-        private void panelProgress_Paint(object sender, PaintEventArgs e)
-        {
-            float progress = (float)trackBar1.Value / trackBar1.Maximum;
-            e.Graphics.FillRectangle(Brushes.DimGray, 0, 0, panelProgress.Width, panelProgress.Height);
-            e.Graphics.FillRectangle(Brushes.LimeGreen, 0, 0, (int)(panelProgress.Width * progress), panelProgress.Height);
-            e.Graphics.DrawRectangle(Pens.Black, 0, 0, panelProgress.Width - 1, panelProgress.Height - 1);
-        }
-
-        private void panelVolume_Paint(object sender, PaintEventArgs e)
-        {
-            float volume = (float)volumeSlider1.Volume;
-            e.Graphics.FillRectangle(Brushes.DimGray, 0, 0, panelVolume.Width, panelVolume.Height);
-            e.Graphics.FillRectangle(Brushes.Orange, 0, 0, (int)(panelVolume.Width * volume), panelVolume.Height);
-            e.Graphics.DrawRectangle(Pens.Black, 0, 0, panelVolume.Width - 1, panelVolume.Height - 1);
-        }
-
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             PlaySelected();
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-            if (groupBox1.Height == 244)
-            {
-                groupBox1.Height = 53;
-                label3.Visible = false;
-            }
-            else
-            {
-                groupBox1.Height = 244;
-                label3.Visible = true;
-            }
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            panelProgress.Invalidate();
-            panelVolume.Invalidate();
-            panelVisualizer.Invalidate();
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -668,7 +776,16 @@ namespace j0rpiPlayer
 
         private void btnStream_Click(object sender, EventArgs e)
         {
-            PlayInternetTrack("http://s2.cdnradio.ru/ru-mp3-128");
+            if (webRadioPanel.Visible == true)
+            {
+                webRadioPanel.Visible = false;
+                webRadioPanel2.Visible = false;
+            }
+            else
+            {
+                webRadioPanel.Visible = true;
+                webRadioPanel2.Visible = true;
+            }
         }
 
         private void scrollingTitle_Tick(object sender, EventArgs e)
@@ -693,14 +810,43 @@ namespace j0rpiPlayer
 
         private void aevionProgressBar1_MouseClick(object sender, MouseEventArgs e)
         {
+            double fraction = (double)e.X / aevionProgressBar1.Width;
+
+            // NAudio
             if (audioFileReader != null && audioFileReader.TotalTime.TotalSeconds > 0)
             {
-                double fraction = (double)e.X / aevionProgressBar1.Width;
                 double newTimeInSeconds = audioFileReader.TotalTime.TotalSeconds * fraction;
-
                 audioFileReader.CurrentTime = TimeSpan.FromSeconds(newTimeInSeconds);
             }
+            // ManagedBass standard stream
+            else if (bassStream != 0)
+            {
+                long len = ManagedBass.Bass.ChannelGetLength(bassStream);
+                double totalSeconds = ManagedBass.Bass.ChannelBytes2Seconds(bassStream, len);
+
+                if (totalSeconds > 0)
+                {
+                    double newTimeInSeconds = totalSeconds * fraction;
+                    long newPos = ManagedBass.Bass.ChannelSeconds2Bytes(bassStream, newTimeInSeconds);
+                    ManagedBass.Bass.ChannelSetPosition(bassStream, newPos);
+                }
+            }
+            // Tracker module (MOD/XM/IT/S3M)
+            else if (bassMusic != 0)
+            {
+                long len = ManagedBass.Bass.ChannelGetLength(bassMusic);
+                double totalSeconds = ManagedBass.Bass.ChannelBytes2Seconds(bassMusic, len);
+
+                if (totalSeconds <= 0) totalSeconds = 1; // fallback if unknown
+
+                double newTimeInSeconds = totalSeconds * fraction;
+                long newPos = ManagedBass.Bass.ChannelSeconds2Bytes(bassMusic, newTimeInSeconds);
+                ManagedBass.Bass.ChannelSetPosition(bassMusic, newPos);
+            }
         }
+
+
+
 
         private void vScrollBar1_Scroll_1(object sender, ScrollEventArgs e)
         {
@@ -727,23 +873,63 @@ namespace j0rpiPlayer
 
         private void listView1_MouseDoubleClick_1(object sender, MouseEventArgs e)
         {
-            if (listView1.SelectedItems.Count > 0)
-            {
-                if(currentMode == PlayerMode.Local)
-                {
-                    currentTrackIndex = listView1.SelectedItems[0].Index;
-                    PlayTrack(mp3Files[currentTrackIndex]);
-                }
-                else if(currentMode == PlayerMode.Web)
-                {
-                // Do playback of webcontent - however the web implementation needs alot of work ..
-                }
-                    
-            }
+            PlaySelected();
         }
         private void btnPlay_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            Form settings = new settings();
+            settings.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PlayInternetTrack(webURL.Text);
+            volProvider.Volume = volumeSlider1.Volume;
+            webRadioPanel.Visible = false;
+        }
+
+        private void discordButton_Click(object sender, EventArgs e)
+        {
+            Process discordJoin = new Process();
+
+            try
+            {
+                discordJoin.StartInfo.UseShellExecute = true;
+                discordJoin.StartInfo.FileName = "https://discord.com/invite/rwJ8KteJBt";
+                discordJoin.Start();
+            }
+            catch
+            {
+                // It is highly unlikely the user does not have a browser installed
+                // unless the user is a caveman living under a rock
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (trackerPanel1.Visible == true)
+            {
+                trackerPanel1.Visible = false;
+                trackerPanel2.Visible = false;
+            }
+            else
+            {
+                trackerPanel1.Visible = true;
+                trackerPanel2.Visible = true;
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            PlayTrackerFile(@"E:\mods\class11.mod");
+            progressTimer.Start();
+        }
+
+       
     }
 }

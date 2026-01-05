@@ -30,7 +30,6 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(player));
-            trackBar1 = new TrackBar();
             btnPlay = new Button();
             btnStop = new Button();
             btnPrev = new Button();
@@ -44,37 +43,15 @@
             btnPause = new Button();
             btnLoadFolder = new Button();
             openFileDialog1 = new OpenFileDialog();
-            lblTotal = new Label();
-            groupBox1 = new GroupBox();
-            txtFreq = new Label();
-            checkBox1 = new CheckBox();
-            txtBitrate = new Label();
-            pictureBox3 = new PictureBox();
-            pictureBox1 = new PictureBox();
-            label3 = new Label();
-            label1 = new Label();
-            label10 = new Label();
-            panelVolume = new Panel();
-            label5 = new Label();
-            label9 = new Label();
-            txtAlbum = new Label();
-            volumeMeter2 = new NAudio.Gui.VolumeMeter();
-            volumeMeter1 = new NAudio.Gui.VolumeMeter();
-            panelProgress = new Panel();
-            label4 = new Label();
-            txtTitle = new Label();
-            txtArtist = new Label();
             lblMediaAdd = new Label();
             label8 = new Label();
             lblBitrate = new Label();
             panel3 = new Panel();
             panel4 = new Panel();
             lblChannels = new Label();
-            label6 = new Label();
             btnEject = new Button();
             btnStream = new Button();
             btnSettings = new Button();
-            linkLabel1 = new LinkLabel();
             timer1 = new System.Windows.Forms.Timer(components);
             scrollingTitle = new System.Windows.Forms.Timer(components);
             waitScroll = new System.Windows.Forms.Timer(components);
@@ -85,33 +62,42 @@
             panSlider1 = new NAudio.Gui.PanSlider2();
             listView1 = new ListView();
             label12 = new Label();
-            label7 = new Label();
-            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
+            webRadioPanel = new Panel();
+            button1 = new Button();
+            webURL = new TextBox();
+            discordButton = new Button();
+            trackerPanel1 = new Panel();
+            button3 = new Button();
+            button2 = new Button();
+            aevionLabel4 = new Aevion_r2.AevionLabel();
+            aevionLabel3 = new Aevion_r2.AevionLabel();
+            comboBox2 = new ComboBox();
+            aevionLabel2 = new Aevion_r2.AevionLabel();
+            comboBox1 = new ComboBox();
+            textBox1 = new TextBox();
+            trackerPanel2 = new Panel();
+            aevionLabel1 = new Aevion_r2.AevionLabel();
+            button4 = new Button();
+            webRadioPanel2 = new Panel();
+            aevionLabel5 = new Aevion_r2.AevionLabel();
+            button5 = new Button();
+            trackBar1 = new TrackBar();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel2.SuspendLayout();
-            groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            panelVolume.SuspendLayout();
-            panelProgress.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
+            webRadioPanel.SuspendLayout();
+            trackerPanel1.SuspendLayout();
+            trackerPanel2.SuspendLayout();
+            webRadioPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
-            // 
-            // trackBar1
-            // 
-            trackBar1.Location = new Point(-1, -9);
-            trackBar1.Name = "trackBar1";
-            trackBar1.Size = new Size(469, 45);
-            trackBar1.TabIndex = 0;
-            trackBar1.TickStyle = TickStyle.None;
-            trackBar1.Visible = false;
             // 
             // btnPlay
             // 
             btnPlay.BackgroundImageLayout = ImageLayout.Stretch;
-            btnPlay.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
+            btnPlay.FlatAppearance.BorderColor = Color.DimGray;
             btnPlay.FlatStyle = FlatStyle.Flat;
             btnPlay.Font = new Font("Font 90 Icons", 14.25F);
             btnPlay.ForeColor = Color.White;
@@ -127,7 +113,7 @@
             // btnStop
             // 
             btnStop.BackgroundImageLayout = ImageLayout.None;
-            btnStop.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
+            btnStop.FlatAppearance.BorderColor = Color.DimGray;
             btnStop.FlatStyle = FlatStyle.Flat;
             btnStop.Font = new Font("Font 90 Icons", 14.25F);
             btnStop.ForeColor = Color.White;
@@ -143,7 +129,7 @@
             // 
             btnPrev.AccessibleDescription = "btnPrev";
             btnPrev.BackgroundImageLayout = ImageLayout.Stretch;
-            btnPrev.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
+            btnPrev.FlatAppearance.BorderColor = Color.DimGray;
             btnPrev.FlatStyle = FlatStyle.Flat;
             btnPrev.Font = new Font("Font 90 Icons", 14.25F);
             btnPrev.ForeColor = Color.White;
@@ -159,7 +145,7 @@
             // 
             btnNext.AccessibleDescription = "btnNext";
             btnNext.BackgroundImageLayout = ImageLayout.Stretch;
-            btnNext.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
+            btnNext.FlatAppearance.BorderColor = Color.DimGray;
             btnNext.FlatStyle = FlatStyle.Flat;
             btnNext.Font = new Font("Font 90 Icons", 14.25F);
             btnNext.ForeColor = Color.White;
@@ -212,7 +198,6 @@
             panelVisualizer.Name = "panelVisualizer";
             panelVisualizer.Size = new Size(10, 48);
             panelVisualizer.TabIndex = 16;
-            panelVisualizer.Paint += panelVisualizer_Paint_1;
             // 
             // panel2
             // 
@@ -237,7 +222,7 @@
             // btnPause
             // 
             btnPause.BackgroundImageLayout = ImageLayout.Stretch;
-            btnPause.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
+            btnPause.FlatAppearance.BorderColor = Color.DimGray;
             btnPause.FlatStyle = FlatStyle.Flat;
             btnPause.Font = new Font("Font 90 Icons", 14.25F);
             btnPause.ForeColor = Color.White;
@@ -252,7 +237,7 @@
             // 
             // btnLoadFolder
             // 
-            btnLoadFolder.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
+            btnLoadFolder.FlatAppearance.BorderColor = Color.DimGray;
             btnLoadFolder.FlatStyle = FlatStyle.Flat;
             btnLoadFolder.Font = new Font("Font 90 Icons", 14.25F);
             btnLoadFolder.ForeColor = Color.White;
@@ -268,228 +253,10 @@
             // 
             openFileDialog1.FileName = "openFileDialog1";
             // 
-            // lblTotal
-            // 
-            lblTotal.AutoSize = true;
-            lblTotal.Location = new Point(106, 115);
-            lblTotal.Name = "lblTotal";
-            lblTotal.Size = new Size(63, 15);
-            lblTotal.TabIndex = 11;
-            lblTotal.Text = "lblTotal";
-            // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(label7);
-            groupBox1.Controls.Add(txtFreq);
-            groupBox1.Controls.Add(checkBox1);
-            groupBox1.Controls.Add(txtBitrate);
-            groupBox1.Controls.Add(pictureBox3);
-            groupBox1.Controls.Add(pictureBox1);
-            groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(label10);
-            groupBox1.Controls.Add(panelVolume);
-            groupBox1.Controls.Add(label9);
-            groupBox1.Controls.Add(txtAlbum);
-            groupBox1.Controls.Add(volumeMeter2);
-            groupBox1.Controls.Add(volumeMeter1);
-            groupBox1.Controls.Add(panelProgress);
-            groupBox1.Controls.Add(lblTotal);
-            groupBox1.Controls.Add(txtTitle);
-            groupBox1.Controls.Add(txtArtist);
-            groupBox1.Controls.Add(trackBar1);
-            groupBox1.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            groupBox1.ForeColor = Color.White;
-            groupBox1.Location = new Point(13, 521);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(460, 244);
-            groupBox1.TabIndex = 12;
-            groupBox1.TabStop = false;
-            // 
-            // txtFreq
-            // 
-            txtFreq.AutoSize = true;
-            txtFreq.Location = new Point(106, 145);
-            txtFreq.Name = "txtFreq";
-            txtFreq.Size = new Size(56, 15);
-            txtFreq.TabIndex = 24;
-            txtFreq.Text = "txtFreq";
-            // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox1.ForeColor = Color.White;
-            checkBox1.Location = new Point(304, 148);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(138, 19);
-            checkBox1.TabIndex = 16;
-            checkBox1.Text = "disable vu meter";
-            checkBox1.UseVisualStyleBackColor = true;
-            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
-            // 
-            // txtBitrate
-            // 
-            txtBitrate.AutoSize = true;
-            txtBitrate.Location = new Point(106, 130);
-            txtBitrate.Name = "txtBitrate";
-            txtBitrate.Size = new Size(77, 15);
-            txtBitrate.TabIndex = 23;
-            txtBitrate.Text = "txtBitrate";
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Image = Properties.Resources.PikPng_com_gorditas_png_3315155;
-            pictureBox3.Location = new Point(430, 25);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(12, 12);
-            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox3.TabIndex = 22;
-            pictureBox3.TabStop = false;
-            pictureBox3.Click += pictureBox3_Click;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.nodisc;
-            pictureBox1.Location = new Point(9, 72);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(91, 91);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 21;
-            pictureBox1.TabStop = false;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(6, 42);
-            label3.Name = "label3";
-            label3.Size = new Size(448, 15);
-            label3.TabIndex = 20;
-            label3.Text = "_______________________________________________________________";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(9, 24);
-            label1.Name = "label1";
-            label1.Size = new Size(245, 15);
-            label1.TabIndex = 19;
-            label1.Text = "debug tools - for those with ballz";
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.BackColor = Color.Transparent;
-            label10.Font = new Font("Consolas", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label10.ForeColor = Color.White;
-            label10.Location = new Point(280, 157);
-            label10.Name = "label10";
-            label10.Size = new Size(14, 14);
-            label10.TabIndex = 33;
-            label10.Text = "R";
-            // 
-            // panelVolume
-            // 
-            panelVolume.Controls.Add(label5);
-            panelVolume.Location = new Point(6, 207);
-            panelVolume.Name = "panelVolume";
-            panelVolume.Size = new Size(448, 25);
-            panelVolume.TabIndex = 18;
-            panelVolume.Paint += panelVolume_Paint;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(8, 5);
-            label5.Name = "label5";
-            label5.Size = new Size(315, 15);
-            label5.TabIndex = 0;
-            label5.Text = "playback latency: 0ms    decode latency: 0ms";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.BackColor = Color.Transparent;
-            label9.Font = new Font("Consolas", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.ForeColor = Color.White;
-            label9.Location = new Point(261, 157);
-            label9.Name = "label9";
-            label9.Size = new Size(14, 14);
-            label9.TabIndex = 32;
-            label9.Text = "L";
-            // 
-            // txtAlbum
-            // 
-            txtAlbum.AutoSize = true;
-            txtAlbum.Location = new Point(106, 101);
-            txtAlbum.Name = "txtAlbum";
-            txtAlbum.Size = new Size(63, 15);
-            txtAlbum.TabIndex = 2;
-            txtAlbum.Text = "txtAlbum";
-            // 
-            // volumeMeter2
-            // 
-            volumeMeter2.Amplitude = 0F;
-            volumeMeter2.Location = new Point(281, 122);
-            volumeMeter2.MaxDb = 18F;
-            volumeMeter2.MinDb = -60F;
-            volumeMeter2.Name = "volumeMeter2";
-            volumeMeter2.Size = new Size(13, 32);
-            volumeMeter2.TabIndex = 31;
-            volumeMeter2.Text = "volumeMeter2";
-            // 
-            // volumeMeter1
-            // 
-            volumeMeter1.Amplitude = 0F;
-            volumeMeter1.Location = new Point(262, 122);
-            volumeMeter1.MaxDb = 18F;
-            volumeMeter1.MinDb = -60F;
-            volumeMeter1.Name = "volumeMeter1";
-            volumeMeter1.Size = new Size(13, 32);
-            volumeMeter1.TabIndex = 30;
-            volumeMeter1.Text = "L";
-            // 
-            // panelProgress
-            // 
-            panelProgress.Controls.Add(label4);
-            panelProgress.Location = new Point(6, 176);
-            panelProgress.Name = "panelProgress";
-            panelProgress.Size = new Size(448, 25);
-            panelProgress.TabIndex = 17;
-            panelProgress.Paint += panelProgress_Paint;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(8, 5);
-            label4.Name = "label4";
-            label4.Size = new Size(112, 15);
-            label4.TabIndex = 0;
-            label4.Text = "cpu usage: < 1%";
-            // 
-            // txtTitle
-            // 
-            txtTitle.AutoSize = true;
-            txtTitle.Location = new Point(106, 87);
-            txtTitle.Name = "txtTitle";
-            txtTitle.Size = new Size(63, 15);
-            txtTitle.TabIndex = 1;
-            txtTitle.Text = "txtTitle";
-            // 
-            // txtArtist
-            // 
-            txtArtist.AutoSize = true;
-            txtArtist.Location = new Point(106, 73);
-            txtArtist.Name = "txtArtist";
-            txtArtist.Size = new Size(70, 15);
-            txtArtist.TabIndex = 0;
-            txtArtist.Text = "txtArtist";
-            // 
             // lblMediaAdd
             // 
             lblMediaAdd.AutoSize = true;
-            lblMediaAdd.BackColor = Color.FromArgb(60, 60, 60);
+            lblMediaAdd.BackColor = Color.Transparent;
             lblMediaAdd.FlatStyle = FlatStyle.Flat;
             lblMediaAdd.Font = new Font("Font 90 Icons", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblMediaAdd.ForeColor = Color.White;
@@ -502,7 +269,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.BackColor = Color.FromArgb(60, 60, 60);
+            label8.BackColor = Color.Transparent;
             label8.ForeColor = Color.White;
             label8.Location = new Point(207, 328);
             label8.Name = "label8";
@@ -551,19 +318,9 @@
             lblChannels.TabIndex = 13;
             lblChannels.Text = "N/A";
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.ForeColor = Color.White;
-            label6.Location = new Point(166, 768);
-            label6.Name = "label6";
-            label6.Size = new Size(152, 14);
-            label6.TabIndex = 17;
-            label6.Text = "made with ❤️ by j0rpi";
-            // 
             // btnEject
             // 
-            btnEject.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
+            btnEject.FlatAppearance.BorderColor = Color.DimGray;
             btnEject.FlatStyle = FlatStyle.Flat;
             btnEject.Font = new Font("Font 90 Icons", 14.25F);
             btnEject.ForeColor = Color.White;
@@ -578,7 +335,7 @@
             // 
             // btnStream
             // 
-            btnStream.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
+            btnStream.FlatAppearance.BorderColor = Color.DimGray;
             btnStream.FlatStyle = FlatStyle.Flat;
             btnStream.Font = new Font("Font 90 Icons", 14.25F);
             btnStream.ForeColor = Color.White;
@@ -594,7 +351,7 @@
             // 
             // btnSettings
             // 
-            btnSettings.FlatAppearance.BorderColor = Color.FromArgb(50, 50, 50);
+            btnSettings.FlatAppearance.BorderColor = Color.DimGray;
             btnSettings.FlatStyle = FlatStyle.Flat;
             btnSettings.Font = new Font("Font 90 Icons", 14.25F);
             btnSettings.ForeColor = Color.White;
@@ -606,23 +363,7 @@
             btnSettings.Text = "w";
             btnSettings.TextAlign = ContentAlignment.BottomCenter;
             btnSettings.UseVisualStyleBackColor = true;
-            // 
-            // linkLabel1
-            // 
-            linkLabel1.AutoSize = true;
-            linkLabel1.LinkColor = Color.White;
-            linkLabel1.Location = new Point(156, 782);
-            linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(175, 14);
-            linkLabel1.TabIndex = 23;
-            linkLabel1.TabStop = true;
-            linkLabel1.Text = "https://github.com/j0rpi";
-            linkLabel1.VisitedLinkColor = Color.White;
-            // 
-            // timer1
-            // 
-            timer1.Interval = 16;
-            timer1.Tick += timer1_Tick;
+            btnSettings.Click += btnSettings_Click;
             // 
             // scrollingTitle
             // 
@@ -722,21 +463,276 @@
             label12.Text = "Z";
             label12.Click += label12_Click;
             // 
-            // label7
+            // webRadioPanel
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(304, 122);
-            label7.Name = "label7";
-            label7.Size = new Size(140, 15);
-            label7.TabIndex = 1;
-            label7.Text = "DRPC: Not Connected";
+            webRadioPanel.BorderStyle = BorderStyle.FixedSingle;
+            webRadioPanel.Controls.Add(button1);
+            webRadioPanel.Controls.Add(webURL);
+            webRadioPanel.Location = new Point(89, 408);
+            webRadioPanel.Name = "webRadioPanel";
+            webRadioPanel.Size = new Size(305, 50);
+            webRadioPanel.TabIndex = 37;
+            webRadioPanel.Visible = false;
+            // 
+            // button1
+            // 
+            button1.FlatAppearance.BorderColor = Color.DimGray;
+            button1.FlatAppearance.MouseDownBackColor = Color.Black;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(231, 7);
+            button1.Name = "button1";
+            button1.Size = new Size(64, 35);
+            button1.TabIndex = 1;
+            button1.Text = "Open";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // webURL
+            // 
+            webURL.BackColor = Color.FromArgb(64, 64, 64);
+            webURL.BorderStyle = BorderStyle.FixedSingle;
+            webURL.ForeColor = Color.White;
+            webURL.Location = new Point(9, 13);
+            webURL.Name = "webURL";
+            webURL.PlaceholderText = "Stream URL ...";
+            webURL.Size = new Size(215, 22);
+            webURL.TabIndex = 0;
+            // 
+            // discordButton
+            // 
+            discordButton.BackgroundImage = Properties.Resources.discord_white_icon1;
+            discordButton.BackgroundImageLayout = ImageLayout.Center;
+            discordButton.FlatAppearance.BorderColor = Color.DimGray;
+            discordButton.FlatStyle = FlatStyle.Flat;
+            discordButton.Font = new Font("Font 90 Icons", 14.25F);
+            discordButton.ForeColor = Color.White;
+            discordButton.Location = new Point(51, 475);
+            discordButton.Name = "discordButton";
+            discordButton.Padding = new Padding(2, 0, 0, 0);
+            discordButton.Size = new Size(32, 32);
+            discordButton.TabIndex = 38;
+            discordButton.TextAlign = ContentAlignment.BottomCenter;
+            discordButton.UseVisualStyleBackColor = true;
+            discordButton.Click += discordButton_Click;
+            // 
+            // trackerPanel1
+            // 
+            trackerPanel1.BorderStyle = BorderStyle.FixedSingle;
+            trackerPanel1.Controls.Add(button3);
+            trackerPanel1.Controls.Add(button2);
+            trackerPanel1.Controls.Add(aevionLabel4);
+            trackerPanel1.Controls.Add(aevionLabel3);
+            trackerPanel1.Controls.Add(comboBox2);
+            trackerPanel1.Controls.Add(aevionLabel2);
+            trackerPanel1.Controls.Add(comboBox1);
+            trackerPanel1.Controls.Add(textBox1);
+            trackerPanel1.Location = new Point(51, 266);
+            trackerPanel1.Name = "trackerPanel1";
+            trackerPanel1.Size = new Size(305, 192);
+            trackerPanel1.TabIndex = 38;
+            trackerPanel1.Visible = false;
+            // 
+            // button3
+            // 
+            button3.BackgroundImage = Properties.Resources.tracker;
+            button3.BackgroundImageLayout = ImageLayout.Center;
+            button3.FlatAppearance.BorderColor = Color.DimGray;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Font = new Font("Font 90 Icons", 14.25F);
+            button3.ForeColor = Color.White;
+            button3.Location = new Point(241, 141);
+            button3.Name = "button3";
+            button3.Padding = new Padding(2, 0, 0, 0);
+            button3.Size = new Size(32, 32);
+            button3.TabIndex = 41;
+            button3.TextAlign = ContentAlignment.BottomCenter;
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.BackgroundImage = Properties.Resources.instruments;
+            button2.BackgroundImageLayout = ImageLayout.Center;
+            button2.FlatAppearance.BorderColor = Color.DimGray;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Font 90 Icons", 14.25F);
+            button2.ForeColor = Color.White;
+            button2.Location = new Point(203, 141);
+            button2.Name = "button2";
+            button2.Padding = new Padding(2, 0, 0, 0);
+            button2.Size = new Size(32, 32);
+            button2.TabIndex = 40;
+            button2.TextAlign = ContentAlignment.BottomCenter;
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // aevionLabel4
+            // 
+            aevionLabel4.AutoSize = true;
+            aevionLabel4.BackColor = Color.Transparent;
+            aevionLabel4.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            aevionLabel4.ForeColor = Color.White;
+            aevionLabel4.Location = new Point(3, 124);
+            aevionLabel4.Name = "aevionLabel4";
+            aevionLabel4.Size = new Size(140, 14);
+            aevionLabel4.TabIndex = 5;
+            aevionLabel4.Text = "Tracker / Mod Style";
+            // 
+            // aevionLabel3
+            // 
+            aevionLabel3.AutoSize = true;
+            aevionLabel3.BackColor = Color.Transparent;
+            aevionLabel3.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            aevionLabel3.ForeColor = Color.White;
+            aevionLabel3.Location = new Point(7, 65);
+            aevionLabel3.Name = "aevionLabel3";
+            aevionLabel3.Size = new Size(140, 14);
+            aevionLabel3.TabIndex = 4;
+            aevionLabel3.Text = "Tracker / Mod Style";
+            // 
+            // comboBox2
+            // 
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Items.AddRange(new object[] { "MOD (ProTracker) - 4 Channels" });
+            comboBox2.Location = new Point(7, 82);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(270, 22);
+            comboBox2.TabIndex = 3;
+            comboBox2.Text = "MOD (ProTracker) - 4 Channels";
+            // 
+            // aevionLabel2
+            // 
+            aevionLabel2.AutoSize = true;
+            aevionLabel2.BackColor = Color.Transparent;
+            aevionLabel2.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            aevionLabel2.ForeColor = Color.White;
+            aevionLabel2.Location = new Point(7, 14);
+            aevionLabel2.Name = "aevionLabel2";
+            aevionLabel2.Size = new Size(98, 14);
+            aevionLabel2.TabIndex = 2;
+            aevionLabel2.Text = "Interpolation";
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "Default (Polyphase)" });
+            comboBox1.Location = new Point(7, 31);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(168, 22);
+            comboBox1.TabIndex = 1;
+            comboBox1.Text = "Default (Polyphase)";
+            // 
+            // textBox1
+            // 
+            textBox1.BackColor = Color.FromArgb(64, 64, 64);
+            textBox1.BorderStyle = BorderStyle.FixedSingle;
+            textBox1.ForeColor = Color.White;
+            textBox1.Location = new Point(7, 141);
+            textBox1.Name = "textBox1";
+            textBox1.PlaceholderText = "Stream URL ...";
+            textBox1.Size = new Size(107, 22);
+            textBox1.TabIndex = 0;
+            textBox1.Text = "125 BPM";
+            // 
+            // trackerPanel2
+            // 
+            trackerPanel2.BorderStyle = BorderStyle.FixedSingle;
+            trackerPanel2.Controls.Add(aevionLabel1);
+            trackerPanel2.Location = new Point(51, 242);
+            trackerPanel2.Name = "trackerPanel2";
+            trackerPanel2.Size = new Size(200, 25);
+            trackerPanel2.TabIndex = 39;
+            trackerPanel2.Visible = false;
+            // 
+            // aevionLabel1
+            // 
+            aevionLabel1.AutoSize = true;
+            aevionLabel1.BackColor = Color.Transparent;
+            aevionLabel1.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            aevionLabel1.ForeColor = Color.White;
+            aevionLabel1.Location = new Point(3, 5);
+            aevionLabel1.Name = "aevionLabel1";
+            aevionLabel1.Size = new Size(168, 14);
+            aevionLabel1.TabIndex = 0;
+            aevionLabel1.Text = "Tracker Module Settings";
+            // 
+            // button4
+            // 
+            button4.BackgroundImageLayout = ImageLayout.Center;
+            button4.FlatAppearance.BorderColor = Color.DimGray;
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.Font = new Font("Font 90 Icons", 14.25F);
+            button4.ForeColor = Color.White;
+            button4.Location = new Point(324, 474);
+            button4.Name = "button4";
+            button4.Padding = new Padding(2, 0, 0, 0);
+            button4.Size = new Size(32, 32);
+            button4.TabIndex = 42;
+            button4.Text = "x";
+            button4.TextAlign = ContentAlignment.BottomCenter;
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
+            // webRadioPanel2
+            // 
+            webRadioPanel2.BorderStyle = BorderStyle.FixedSingle;
+            webRadioPanel2.Controls.Add(aevionLabel5);
+            webRadioPanel2.Location = new Point(89, 384);
+            webRadioPanel2.Name = "webRadioPanel2";
+            webRadioPanel2.Size = new Size(200, 25);
+            webRadioPanel2.TabIndex = 40;
+            webRadioPanel2.Visible = false;
+            // 
+            // aevionLabel5
+            // 
+            aevionLabel5.AutoSize = true;
+            aevionLabel5.BackColor = Color.Transparent;
+            aevionLabel5.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            aevionLabel5.ForeColor = Color.White;
+            aevionLabel5.Location = new Point(1, 5);
+            aevionLabel5.Name = "aevionLabel5";
+            aevionLabel5.Size = new Size(105, 14);
+            aevionLabel5.TabIndex = 0;
+            aevionLabel5.Text = "Internet Radio";
+            // 
+            // button5
+            // 
+            button5.BackgroundImage = Properties.Resources.instruments;
+            button5.BackgroundImageLayout = ImageLayout.Center;
+            button5.FlatAppearance.BorderColor = Color.DimGray;
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.Font = new Font("Font 90 Icons", 14.25F);
+            button5.ForeColor = Color.White;
+            button5.Location = new Point(286, 474);
+            button5.Name = "button5";
+            button5.Padding = new Padding(2, 0, 0, 0);
+            button5.Size = new Size(32, 32);
+            button5.TabIndex = 42;
+            button5.TextAlign = ContentAlignment.BottomCenter;
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
+            // trackBar1
+            // 
+            trackBar1.Location = new Point(15, 781);
+            trackBar1.Name = "trackBar1";
+            trackBar1.Size = new Size(469, 45);
+            trackBar1.TabIndex = 0;
+            trackBar1.TickStyle = TickStyle.None;
+            trackBar1.Visible = false;
             // 
             // player
             // 
             AutoScaleDimensions = new SizeF(7F, 14F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(485, 805);
+            ClientSize = new Size(485, 520);
+            Controls.Add(button5);
+            Controls.Add(webRadioPanel2);
+            Controls.Add(button4);
+            Controls.Add(trackerPanel2);
+            Controls.Add(trackerPanel1);
+            Controls.Add(discordButton);
+            Controls.Add(webRadioPanel);
             Controls.Add(lblMediaAdd);
             Controls.Add(label8);
             Controls.Add(label12);
@@ -746,14 +742,12 @@
             Controls.Add(aevionCheckBox1);
             Controls.Add(aevionProgressBar1);
             Controls.Add(volumeSlider1);
-            Controls.Add(linkLabel1);
             Controls.Add(btnSettings);
             Controls.Add(btnStream);
+            Controls.Add(trackBar1);
             Controls.Add(btnEject);
-            Controls.Add(label6);
             Controls.Add(panel4);
             Controls.Add(panel3);
-            Controls.Add(groupBox1);
             Controls.Add(btnLoadFolder);
             Controls.Add(btnPause);
             Controls.Add(panel2);
@@ -770,30 +764,28 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "j0rpiPlayer :: alpha 0.1";
             Load += player_Load;
-            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel2.ResumeLayout(false);
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            panelVolume.ResumeLayout(false);
-            panelVolume.PerformLayout();
-            panelProgress.ResumeLayout(false);
-            panelProgress.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
+            webRadioPanel.ResumeLayout(false);
+            webRadioPanel.PerformLayout();
+            trackerPanel1.ResumeLayout(false);
+            trackerPanel1.PerformLayout();
+            trackerPanel2.ResumeLayout(false);
+            trackerPanel2.PerformLayout();
+            webRadioPanel2.ResumeLayout(false);
+            webRadioPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private TrackBar trackBar1;
         private Button btnPlay;
         private Button btnStop;
         private Button btnPrev;
@@ -804,33 +796,15 @@
         private Button btnPause;
         private Button btnLoadFolder;
         private OpenFileDialog openFileDialog1;
-        private Label lblTotal;
-        private GroupBox groupBox1;
-        private Label txtAlbum;
-        private Label txtTitle;
-        private Label txtArtist;
         private Label lblBitrate;
         private Panel panel3;
         private Panel panel4;
         private Label lblChannels;
         private Panel panelVisualizer;
-        private CheckBox checkBox1;
-        private Panel panelProgress;
-        private Panel panelVolume;
-        private Label label3;
-        private Label label1;
-        private Label label5;
-        private Label label4;
-        private Label label6;
         private Button btnEject;
         private Button btnStream;
         private Button btnSettings;
-        private LinkLabel linkLabel1;
-        private PictureBox pictureBox1;
         private PictureBox pictureBox2;
-        private PictureBox pictureBox3;
-        private Label txtBitrate;
-        private Label txtFreq;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer scrollingTitle;
         private System.Windows.Forms.Timer waitScroll;
@@ -838,16 +812,31 @@
         private Aevion_r2.AevionProgressBar aevionProgressBar1;
         private Aevion_r2.AevionCheckBox aevionCheckBox1;
         private Aevion_r2.AevionCheckBox aevionCheckBox2;
-        private NAudio.Gui.VolumeMeter volumeMeter1;
-        private NAudio.Gui.VolumeMeter volumeMeter2;
-        private Label label9;
-        private Label label10;
         private NAudio.Gui.PanSlider2 panSlider1;
         private Label label8;
         private Label lblMediaAdd;
         private ListView listView1;
         private Label label12;
         private Label lblElapsed;
-        private Label label7;
+        private Panel webRadioPanel;
+        private Button button1;
+        private TextBox webURL;
+        private Button discordButton;
+        private Panel trackerPanel1;
+        private TextBox textBox1;
+        private Panel trackerPanel2;
+        private Aevion_r2.AevionLabel aevionLabel1;
+        private Aevion_r2.AevionLabel aevionLabel3;
+        private ComboBox comboBox2;
+        private Aevion_r2.AevionLabel aevionLabel2;
+        private ComboBox comboBox1;
+        private Aevion_r2.AevionLabel aevionLabel4;
+        private Button button2;
+        private Button button3;
+        private Button button4;
+        private Panel webRadioPanel2;
+        private Aevion_r2.AevionLabel aevionLabel5;
+        private Button button5;
+        private TrackBar trackBar1;
     }
 }

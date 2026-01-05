@@ -88,7 +88,7 @@ namespace NAudio.Gui
             if (pan == 0.0)
             {
               
-                panValue = "Center";
+                panValue = "Pan";
             }
             else if (pan > 0)
             {

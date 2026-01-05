@@ -78,6 +78,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "startupForm";
             Text = "j0rpiPlayer :: First Startup";
+            Load += startupForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
