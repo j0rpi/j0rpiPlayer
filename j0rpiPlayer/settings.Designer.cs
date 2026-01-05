@@ -30,9 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(settings));
             groupBox1 = new GroupBox();
-            aevionCheckBox2 = new Aevion_r2.AevionCheckBox();
             aevionLabel1 = new Aevion_r2.AevionLabel();
-            aevionCheckBox1 = new Aevion_r2.AevionCheckBox();
             comboBox1 = new ComboBox();
             groupBox2 = new GroupBox();
             aevionCheckBox4 = new Aevion_r2.AevionCheckBox();
@@ -44,6 +42,7 @@
             linkLabel1 = new LinkLabel();
             label6 = new Label();
             aevionLabel3 = new Aevion_r2.AevionLabel();
+            aevionLabel4 = new Aevion_r2.AevionLabel();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -52,27 +51,15 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(aevionCheckBox2);
             groupBox1.Controls.Add(aevionLabel1);
-            groupBox1.Controls.Add(aevionCheckBox1);
             groupBox1.Controls.Add(comboBox1);
             groupBox1.ForeColor = Color.White;
             groupBox1.Location = new Point(14, 14);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(157, 133);
+            groupBox1.Size = new Size(157, 72);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Appearance";
-            // 
-            // aevionCheckBox2
-            // 
-            aevionCheckBox2.Checked = false;
-            aevionCheckBox2.Font = new Font("Consolas", 9F);
-            aevionCheckBox2.Location = new Point(7, 108);
-            aevionCheckBox2.Name = "aevionCheckBox2";
-            aevionCheckBox2.Size = new Size(144, 16);
-            aevionCheckBox2.TabIndex = 3;
-            aevionCheckBox2.Text = "Allow Custom Fonts";
             // 
             // aevionLabel1
             // 
@@ -80,26 +67,19 @@
             aevionLabel1.BackColor = Color.Transparent;
             aevionLabel1.Font = new Font("Consolas", 9F);
             aevionLabel1.ForeColor = Color.White;
-            aevionLabel1.Location = new Point(7, 27);
+            aevionLabel1.Location = new Point(6, 24);
             aevionLabel1.Name = "aevionLabel1";
             aevionLabel1.Size = new Size(42, 14);
             aevionLabel1.TabIndex = 2;
             aevionLabel1.Text = "Theme";
             // 
-            // aevionCheckBox1
-            // 
-            aevionCheckBox1.Checked = false;
-            aevionCheckBox1.Font = new Font("Consolas", 9F);
-            aevionCheckBox1.Location = new Point(7, 88);
-            aevionCheckBox1.Name = "aevionCheckBox1";
-            aevionCheckBox1.Size = new Size(120, 16);
-            aevionCheckBox1.TabIndex = 1;
-            aevionCheckBox1.Text = "Enable VU Meters";
-            // 
             // comboBox1
             // 
+            comboBox1.BackColor = Color.FromArgb(64, 64, 64);
+            comboBox1.FlatStyle = FlatStyle.Flat;
+            comboBox1.ForeColor = Color.White;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(7, 44);
+            comboBox1.Location = new Point(6, 41);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(121, 22);
             comboBox1.TabIndex = 0;
@@ -141,9 +121,9 @@
             // 
             groupBox3.Controls.Add(aevionCheckBox5);
             groupBox3.ForeColor = Color.White;
-            groupBox3.Location = new Point(177, 91);
+            groupBox3.Location = new Point(14, 91);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(262, 56);
+            groupBox3.Size = new Size(425, 56);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
             groupBox3.Text = "Updates";
@@ -162,9 +142,9 @@
             // 
             groupBox4.Controls.Add(aevionLabel2);
             groupBox4.ForeColor = Color.White;
-            groupBox4.Location = new Point(17, 154);
+            groupBox4.Location = new Point(14, 154);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(422, 250);
+            groupBox4.Size = new Size(425, 250);
             groupBox4.TabIndex = 3;
             groupBox4.TabStop = false;
             groupBox4.Text = "Plugins / Scripts";
@@ -209,11 +189,23 @@
             aevionLabel3.BackColor = Color.Transparent;
             aevionLabel3.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             aevionLabel3.ForeColor = Color.White;
-            aevionLabel3.Location = new Point(26, 407);
+            aevionLabel3.Location = new Point(33, 407);
             aevionLabel3.Name = "aevionLabel3";
-            aevionLabel3.Size = new Size(399, 14);
+            aevionLabel3.Size = new Size(385, 14);
             aevionLabel3.TabIndex = 26;
-            aevionLabel3.Text = "Uses NAudio for Playback, libOpenMPT for tracker modules";
+            aevionLabel3.Text = "Uses NAudio for Playback, BASS.NET for tracker modules";
+            // 
+            // aevionLabel4
+            // 
+            aevionLabel4.AutoSize = true;
+            aevionLabel4.BackColor = Color.Transparent;
+            aevionLabel4.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            aevionLabel4.ForeColor = Color.White;
+            aevionLabel4.Location = new Point(362, 457);
+            aevionLabel4.Name = "aevionLabel4";
+            aevionLabel4.Size = new Size(77, 14);
+            aevionLabel4.TabIndex = 27;
+            aevionLabel4.Text = "ver: 0.811";
             // 
             // settings
             // 
@@ -221,6 +213,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(451, 484);
+            Controls.Add(aevionLabel4);
             Controls.Add(aevionLabel3);
             Controls.Add(linkLabel1);
             Controls.Add(label6);
@@ -229,10 +222,14 @@
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "settings";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "j0rpiPlayer :: Settings";
+            Load += settings_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
@@ -247,9 +244,7 @@
 
         private GroupBox groupBox1;
         private Aevion_r2.AevionLabel aevionLabel1;
-        private Aevion_r2.AevionCheckBox aevionCheckBox1;
         private ComboBox comboBox1;
-        private Aevion_r2.AevionCheckBox aevionCheckBox2;
         private GroupBox groupBox2;
         private Aevion_r2.AevionCheckBox aevionCheckBox4;
         private Aevion_r2.AevionCheckBox aevionCheckBox3;
@@ -260,5 +255,6 @@
         private LinkLabel linkLabel1;
         private Label label6;
         private Aevion_r2.AevionLabel aevionLabel3;
+        private Aevion_r2.AevionLabel aevionLabel4;
     }
 }

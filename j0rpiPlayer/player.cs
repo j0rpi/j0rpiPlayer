@@ -132,7 +132,7 @@ namespace j0rpiPlayer
             panSlider1.Scroll += panSlider1_Scroll;
 
             btnPlay.Click += (s, e) => PlaySelected();
-            btnPause.Click += (s, e) => waveOut?.Pause();
+            btnPause.Click += (s, e) => PauseTrack();
             btnStop.Click += (s, e) => Stop();
             btnNext.Click += (s, e) => NextTrack();
             btnPrev.Click += (s, e) => PrevTrack();
@@ -240,7 +240,6 @@ namespace j0rpiPlayer
         }
         private async void LoadFolder(string folderPath)
         {
-
             IniFile ini = new IniFile();
             listView1.Items.Clear();
             lblMediaAdd.Visible = false;
@@ -298,17 +297,16 @@ namespace j0rpiPlayer
 
                             list.Add(item);
                             index++;
+                            currentPlayingIndex = listView1.SelectedIndices[0];
                         }
                         catch
                         {
-                            // skip bad file, do not abort
                         }
                     }
 
                     return list;
                 });
 
-                // 🔑 UI THREAD ONLY BELOW
                 listView1.BeginUpdate();
                 listView1.Items.AddRange(items.ToArray());
                 listView1.EndUpdate();
@@ -331,6 +329,8 @@ namespace j0rpiPlayer
 
         private async void PlaySelected()
         {
+            
+
             if (listView1.SelectedItems.Count == 0)
                 return;
 
@@ -420,6 +420,7 @@ namespace j0rpiPlayer
 
             progressTimer.Start();
             listView1.Invalidate();
+            this.Text = (tagFile.Tag.FirstPerformer ?? "Unknown") + " - " + (tagFile.Tag.Title ?? "Unknown");
             currentPlayingIndex = listView1.SelectedIndices[0];
 
         }
@@ -476,6 +477,8 @@ namespace j0rpiPlayer
             });
 
             isBassPlaying = true;
+            listView1.Invalidate();
+            this.Text = Path.GetFileName(filePath);
             currentPlayingIndex = listView1.SelectedIndices[0];
         }
 
@@ -636,15 +639,6 @@ namespace j0rpiPlayer
             lblElapsed.Text = currentTime.ToString(@"mm\:ss");
             aevionProgressBar1.Text = $"{lblElapsed.Text} / {totalTime.ToString(@"mm\:ss")} ({percent:0.0}%)";
         }
-
-
-
-
-
-
-
-
-
         private void trackBarProgress_Scroll(object sender, EventArgs e)
         {
             if (audioFileReader != null)
@@ -654,21 +648,65 @@ namespace j0rpiPlayer
             }
         }
 
+        private void PauseTrack()
+        {
+            var state = ManagedBass.Bass.ChannelIsActive(bassMusic);
+            if (state == ManagedBass.PlaybackState.Playing)
+            {
+               ManagedBass.Bass.ChannelPause(bassMusic);
+            }
+            else
+            {
+               ManagedBass.Bass.ChannelPlay(bassMusic, false);
+            }
+
+            if(waveOut == null) return;
+
+            if(waveOut.PlaybackState == NAudio.Wave.PlaybackState.Playing)
+            {
+                waveOut.Pause();
+            }
+            else
+            {
+                waveOut.Play();
+            }
+        }
+        
         private void NextTrack()
         {
-            if (mp3Files == null || mp3Files.Length == 0) return;
-            currentTrackIndex = (currentTrackIndex + 1) % mp3Files.Length;
-            PlayTrack(mp3Files[currentTrackIndex]);
-            listView1.Items[currentTrackIndex].Selected = true;
+            if (listView1.Items.Count == 0) return;
+
+            currentTrackIndex++;
+            if (currentTrackIndex >= listView1.Items.Count)
+                currentTrackIndex = 0;
+
+            var item = listView1.Items[currentTrackIndex];
+            listView1.SelectedItems.Clear();
+            item.Selected = true;
+            item.EnsureVisible();
+
+            string path = (string)item.Tag;
+            PlaySelected();
         }
+
 
         private void PrevTrack()
         {
-            if (mp3Files == null || mp3Files.Length == 0) return;
-            currentTrackIndex = (currentTrackIndex - 1 + mp3Files.Length) % mp3Files.Length;
-            PlayTrack(mp3Files[currentTrackIndex]);
-            listView1.Items[currentTrackIndex].Selected = true;
+            if (listView1.Items.Count == 0) return;
+
+            currentTrackIndex--;
+            if (currentTrackIndex < 0)
+                currentTrackIndex = listView1.Items.Count - 1;
+
+            var item = listView1.Items[currentTrackIndex];
+            listView1.SelectedItems.Clear();
+            item.Selected = true;
+            item.EnsureVisible();
+
+            string path = (string)item.Tag;
+            PlaySelected();
         }
+
 
         private void ListView1_SelectedIndexChanged(object sender, EventArgs e)
         {

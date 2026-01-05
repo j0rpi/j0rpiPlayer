@@ -67,6 +67,7 @@
             webURL = new TextBox();
             discordButton = new Button();
             trackerPanel1 = new Panel();
+            aevionLabel6 = new Aevion_r2.AevionLabel();
             button3 = new Button();
             button2 = new Button();
             aevionLabel4 = new Aevion_r2.AevionLabel();
@@ -80,7 +81,6 @@
             button4 = new Button();
             webRadioPanel2 = new Panel();
             aevionLabel5 = new Aevion_r2.AevionLabel();
-            button5 = new Button();
             trackBar1 = new TrackBar();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -217,7 +217,7 @@
             label2.Name = "label2";
             label2.Size = new Size(273, 15);
             label2.TabIndex = 0;
-            label2.Text = "welcome :) ";
+            label2.Text = "j0rpiPlayer 0.811";
             // 
             // btnPause
             // 
@@ -519,6 +519,7 @@
             // trackerPanel1
             // 
             trackerPanel1.BorderStyle = BorderStyle.FixedSingle;
+            trackerPanel1.Controls.Add(aevionLabel6);
             trackerPanel1.Controls.Add(button3);
             trackerPanel1.Controls.Add(button2);
             trackerPanel1.Controls.Add(aevionLabel4);
@@ -533,6 +534,18 @@
             trackerPanel1.TabIndex = 38;
             trackerPanel1.Visible = false;
             // 
+            // aevionLabel6
+            // 
+            aevionLabel6.AutoSize = true;
+            aevionLabel6.BackColor = Color.Transparent;
+            aevionLabel6.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            aevionLabel6.ForeColor = Color.IndianRed;
+            aevionLabel6.Location = new Point(181, 3);
+            aevionLabel6.Name = "aevionLabel6";
+            aevionLabel6.Size = new Size(119, 14);
+            aevionLabel6.TabIndex = 42;
+            aevionLabel6.Text = "Not Implemented ";
+            // 
             // button3
             // 
             button3.BackgroundImage = Properties.Resources.tracker;
@@ -541,7 +554,7 @@
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Font 90 Icons", 14.25F);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(241, 141);
+            button3.Location = new Point(259, 141);
             button3.Name = "button3";
             button3.Padding = new Padding(2, 0, 0, 0);
             button3.Size = new Size(32, 32);
@@ -557,7 +570,7 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Font 90 Icons", 14.25F);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(203, 141);
+            button2.Location = new Point(221, 141);
             button2.Name = "button2";
             button2.Padding = new Padding(2, 0, 0, 0);
             button2.Size = new Size(32, 32);
@@ -591,6 +604,9 @@
             // 
             // comboBox2
             // 
+            comboBox2.BackColor = Color.FromArgb(64, 64, 64);
+            comboBox2.FlatStyle = FlatStyle.Flat;
+            comboBox2.ForeColor = Color.White;
             comboBox2.FormattingEnabled = true;
             comboBox2.Items.AddRange(new object[] { "MOD (ProTracker) - 4 Channels" });
             comboBox2.Location = new Point(7, 82);
@@ -613,6 +629,9 @@
             // 
             // comboBox1
             // 
+            comboBox1.BackColor = Color.FromArgb(64, 64, 64);
+            comboBox1.FlatStyle = FlatStyle.Flat;
+            comboBox1.ForeColor = Color.White;
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "Default (Polyphase)" });
             comboBox1.Location = new Point(7, 31);
@@ -694,23 +713,6 @@
             aevionLabel5.TabIndex = 0;
             aevionLabel5.Text = "Internet Radio";
             // 
-            // button5
-            // 
-            button5.BackgroundImage = Properties.Resources.instruments;
-            button5.BackgroundImageLayout = ImageLayout.Center;
-            button5.FlatAppearance.BorderColor = Color.DimGray;
-            button5.FlatStyle = FlatStyle.Flat;
-            button5.Font = new Font("Font 90 Icons", 14.25F);
-            button5.ForeColor = Color.White;
-            button5.Location = new Point(286, 474);
-            button5.Name = "button5";
-            button5.Padding = new Padding(2, 0, 0, 0);
-            button5.Size = new Size(32, 32);
-            button5.TabIndex = 42;
-            button5.TextAlign = ContentAlignment.BottomCenter;
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += button5_Click;
-            // 
             // trackBar1
             // 
             trackBar1.Location = new Point(15, 781);
@@ -726,7 +728,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(485, 520);
-            Controls.Add(button5);
             Controls.Add(webRadioPanel2);
             Controls.Add(button4);
             Controls.Add(trackerPanel2);
@@ -762,7 +763,7 @@
             MaximizeBox = false;
             Name = "player";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "j0rpiPlayer :: alpha 0.1";
+            Text = "j0rpiPlayer :: I'm Not Whippin' The Llamas Ass!";
             Load += player_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -836,7 +837,7 @@
         private Button button4;
         private Panel webRadioPanel2;
         private Aevion_r2.AevionLabel aevionLabel5;
-        private Button button5;
         private TrackBar trackBar1;
+        private Aevion_r2.AevionLabel aevionLabel6;
     }
 }

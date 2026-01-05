@@ -16,5 +16,10 @@ namespace j0rpiPlayer
         {
             InitializeComponent();
         }
+
+        private void settings_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
