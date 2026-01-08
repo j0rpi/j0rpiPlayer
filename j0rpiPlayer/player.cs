@@ -15,10 +15,11 @@
 
 using DiscordRPC;
 using DiscordRPC.Logging;
+using INI;
 using j0rpiPlayer.Properties;
+using ManagedBass;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
-using ManagedBass;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,6 +30,7 @@ using System.Formats.Tar;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -36,7 +38,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TagLib;
 using TagLib.Mpeg;
-using INI;
 using static j0rpiPlayer.player;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -69,6 +70,8 @@ namespace j0rpiPlayer
         private bool isBassPlaying = false;
         private bool useFractions;
         private bool useDiscordRPC;
+        private bool isMuted = false;
+
 
         private static readonly HashSet<string> TrackerExtensions = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
@@ -100,6 +103,7 @@ namespace j0rpiPlayer
 
             listView1.Visible = false;
             aevionProgressBar1.Text = "00:00 / 00:00";
+            displayPlaybackIcon.BackgroundImage = null;
             label2.AutoSize = true;
             scrollingTitle.Interval = 1500;
             scrollingTitle.Start();
@@ -350,11 +354,15 @@ namespace j0rpiPlayer
         private async void PlaySelected()
         {
             if (listView1.SelectedItems.Count == 0)
+            {
                 return;
+            }
 
             string filePath = listView1.SelectedItems[0].Tag as string;
             if (string.IsNullOrEmpty(filePath))
+            {
                 return;
+            }
 
             string ext = Path.GetExtension(filePath);
 
@@ -419,6 +427,7 @@ namespace j0rpiPlayer
             }
 
             progressTimer.Start();
+            displayPlaybackIcon.BackgroundImage = Resources.icon_play16;
             listView1.Invalidate();
 
             if (tagFile.Tag.FirstPerformer == null && tagFile.Tag.Title == null)
@@ -451,7 +460,9 @@ namespace j0rpiPlayer
 
             lblBitrate.Text = tagFile.Properties.AudioBitrate + " kbps";
             currentPlayingIndex = listView1.SelectedIndices[0];
-
+            isPaused = false;
+            displayPlaybackIcon.BackgroundImage = Resources.icon_play16;
+            displayPlaybackIcon.Visible = true;
         }
         private void PlayTrackerFile(string filePath)
         {
@@ -497,6 +508,9 @@ namespace j0rpiPlayer
             isBassPlaying = true;
             listView1.Invalidate();
             this.Text = Path.GetFileName(filePath);
+            isPaused = false;
+            displayPlaybackIcon.BackgroundImage = Resources.icon_play16;
+            displayPlaybackIcon.Visible = true;
             currentPlayingIndex = listView1.SelectedIndices[0];
         }
 
@@ -533,7 +547,7 @@ namespace j0rpiPlayer
                 },
                 Timestamps = Timestamps.Now
             });
-
+            displayPlaybackIcon.Visible = true;
         }
         private void Stop()
         {
@@ -554,6 +568,7 @@ namespace j0rpiPlayer
 
             trackBar1.Value = 0;
             lblElapsed.Text = "00:00";
+            displayPlaybackIcon.BackgroundImage = null;
         }
 
         private void volumeSlider1_VolumeChanged(object sender, EventArgs e)
@@ -567,6 +582,18 @@ namespace j0rpiPlayer
             {
                 Bass.ChannelSetAttribute(bassMusic, ChannelAttribute.Volume, volumeSlider1.Volume);
             }
+
+            if(volumeSlider1.Volume > 0.0)
+            {
+                volumeButton.Image = Resources.icon_volume24;
+                volumeButton.BackColor = Color.Black;
+            }
+            else
+            {
+                volumeButton.Image = Resources.icon_muted24;
+                volumeButton.BackColor = Color.Maroon;
+            }
+            previousVolume = volumeSlider1.Volume;
         }
         private void panSlider1_Scroll(object sender, EventArgs e)
         {
@@ -665,14 +692,19 @@ namespace j0rpiPlayer
 
         private void PauseTrack()
         {
+            pauseIconTimer.Start();
             var state = ManagedBass.Bass.ChannelIsActive(bassMusic);
             if (state == ManagedBass.PlaybackState.Playing)
             {
                 ManagedBass.Bass.ChannelPause(bassMusic);
+                displayPlaybackIcon.BackgroundImage = Resources.icon_pause16;
+                isPaused = true;
             }
             else
             {
                 ManagedBass.Bass.ChannelPlay(bassMusic, false);
+                displayPlaybackIcon.BackgroundImage = Resources.icon_play16;
+                isPaused = false;
             }
 
             if (waveOut == null) return;
@@ -680,10 +712,14 @@ namespace j0rpiPlayer
             if (waveOut.PlaybackState == NAudio.Wave.PlaybackState.Playing)
             {
                 waveOut.Pause();
+                displayPlaybackIcon.BackgroundImage = Resources.icon_pause16;
+                isPaused = true;
             }
             else
             {
                 waveOut.Play();
+                displayPlaybackIcon.BackgroundImage = Resources.icon_play16;
+                isPaused = false;
             }
         }
 
@@ -703,6 +739,7 @@ namespace j0rpiPlayer
 
             string path = (string)item.Tag;
             PlaySelected();
+            isPaused = false;
         }
 
         private void PrevTrack()
@@ -722,6 +759,7 @@ namespace j0rpiPlayer
 
             string path = (string)item.Tag;
             PlaySelected();
+            isPaused = false;
         }
 
         private void ListView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -901,21 +939,6 @@ namespace j0rpiPlayer
                 listView1.TopItem = listView1.Items[e.NewValue];
             }
         }
-        private void label12_Click(object sender, EventArgs e)
-        {
-            if (label12.Text == "Z")
-            {
-                previousVolume = volumeSlider1.Volume;
-                volumeSlider1.Volume = 0;
-                label12.Text = "-";
-            }
-            else
-            {
-                label12.Text = "Z";
-                volumeSlider1.Volume = previousVolume;
-            }
-
-        }
 
         private void listView1_MouseDoubleClick_1(object sender, MouseEventArgs e)
         {
@@ -1064,6 +1087,71 @@ namespace j0rpiPlayer
             foreach (ListViewItem eachItem in listView1.SelectedItems)
             {
                 listView1.Items.Remove(eachItem);
+            }
+        }
+
+        private void volumeButton_Click(object sender, EventArgs e)
+        {
+            if (!isMuted)
+            {
+                previousVolume = volumeSlider1.Volume;
+                volumeSlider1.Volume = 0;
+                volumeButton.Image = Resources.icon_muted24;
+                volumeButton.BackColor = Color.Maroon;
+                isMuted = true;
+            }
+            else
+            {
+                volumeSlider1.Volume = previousVolume;
+                volumeButton.Image = Resources.icon_volume24;
+                volumeButton.BackColor = Color.Black;
+                isMuted = false;
+            }
+        }
+
+        private void pauseIconTimer_Tick(object sender, EventArgs e)
+        {
+            if (isPaused)
+            {
+                if (displayPlaybackIcon.Visible == true)
+                {
+                    displayPlaybackIcon.Visible = false;
+                }
+                else
+                {
+                    displayPlaybackIcon.Visible = true;
+                }
+            }
+            else
+            {
+                isPaused = false;
+                pauseIconTimer.Stop();
+            }
+
+
+        }
+
+        private void aevionCheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (aevionCheckBox1.Checked == true)
+            {
+                displayShuffleIcon.Visible = true;
+            }
+            else
+            {
+                displayShuffleIcon.Visible = false;
+            }
+        }
+
+        private void aevionCheckBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (aevionCheckBox2.Checked == true)
+            {
+                displayRepeatIcon.Visible = true;
+            }
+            else
+            {
+                displayRepeatIcon.Visible = false;
             }
         }
     }

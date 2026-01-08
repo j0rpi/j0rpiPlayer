@@ -22,7 +22,7 @@ namespace j0rpiPlayer.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace j0rpiPlayer.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("j0rpiPlayer.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace j0rpiPlayer.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,9 +63,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap add242 {
+        public static System.Drawing.Bitmap icon_addfolder24 {
             get {
-                object obj = ResourceManager.GetObject("add242", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_addfolder24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap add42 {
+        public static System.Drawing.Bitmap icon_closeremove16 {
             get {
-                object obj = ResourceManager.GetObject("add42", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_closeremove16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap btn_next {
+        public static System.Drawing.Bitmap icon_discord {
             get {
-                object obj = ResourceManager.GetObject("btn_next", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_discord", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap btn_open {
+        public static System.Drawing.Bitmap icon_eject24 {
             get {
-                object obj = ResourceManager.GetObject("btn_open", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_eject24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap btn_pause {
+        public static System.Drawing.Bitmap icon_exit16 {
             get {
-                object obj = ResourceManager.GetObject("btn_pause", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_exit16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap btn_play {
+        public static System.Drawing.Bitmap icon_folder16 {
             get {
-                object obj = ResourceManager.GetObject("btn_play", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_folder16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap btn_previous {
+        public static System.Drawing.Bitmap icon_info16 {
             get {
-                object obj = ResourceManager.GetObject("btn_previous", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_info16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +133,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap btn_remove {
+        public static System.Drawing.Bitmap icon_mnote16 {
             get {
-                object obj = ResourceManager.GetObject("btn_remove", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_mnote16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,9 +143,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap btn_settings {
+        public static System.Drawing.Bitmap icon_modsettings24 {
             get {
-                object obj = ResourceManager.GetObject("btn_settings", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_modsettings24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +153,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap btn_stop {
+        public static System.Drawing.Bitmap icon_muted24 {
             get {
-                object obj = ResourceManager.GetObject("btn_stop", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_muted24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,9 +163,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap btn_stream {
+        public static System.Drawing.Bitmap icon_next16 {
             get {
-                object obj = ResourceManager.GetObject("btn_stream", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_next16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,9 +173,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap closeremove16 {
+        public static System.Drawing.Bitmap icon_next24 {
             get {
-                object obj = ResourceManager.GetObject("closeremove16", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_next24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -183,9 +183,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cog16 {
+        public static System.Drawing.Bitmap icon_pause16 {
             get {
-                object obj = ResourceManager.GetObject("cog16", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_pause16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,9 +193,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cog42 {
+        public static System.Drawing.Bitmap icon_pause24 {
             get {
-                object obj = ResourceManager.GetObject("cog42", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_pause24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -203,9 +203,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap discord_white_icon {
+        public static System.Drawing.Bitmap icon_play16 {
             get {
-                object obj = ResourceManager.GetObject("discord-white-icon", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_play16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -213,9 +213,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap discord_white_icon1 {
+        public static System.Drawing.Bitmap icon_play24 {
             get {
-                object obj = ResourceManager.GetObject("discord-white-icon1", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_play24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -223,9 +223,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap displaytest {
+        public static System.Drawing.Bitmap icon_previous16 {
             get {
-                object obj = ResourceManager.GetObject("displaytest", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_previous16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -233,9 +233,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap eject42 {
+        public static System.Drawing.Bitmap icon_previous24 {
             get {
-                object obj = ResourceManager.GetObject("eject42", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_previous24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -243,9 +243,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap exit16 {
+        public static System.Drawing.Bitmap icon_repeat16 {
             get {
-                object obj = ResourceManager.GetObject("exit16", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_repeat16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -253,79 +253,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap folder16 {
+        public static System.Drawing.Bitmap icon_settings16 {
             get {
-                object obj = ResourceManager.GetObject("folder16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] font_a {
-            get {
-                object obj = ResourceManager.GetObject("font_a", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] font_b {
-            get {
-                object obj = ResourceManager.GetObject("font_b", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] font_c {
-            get {
-                object obj = ResourceManager.GetObject("font_c", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] font_d {
-            get {
-                object obj = ResourceManager.GetObject("font_d", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] font_e {
-            get {
-                object obj = ResourceManager.GetObject("font_e", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] font_f {
-            get {
-                object obj = ResourceManager.GetObject("font_f", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap info16 {
-            get {
-                object obj = ResourceManager.GetObject("info16", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_settings16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -333,7 +263,57 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap instruments {
+        public static System.Drawing.Bitmap icon_settings24 {
+            get {
+                object obj = ResourceManager.GetObject("icon_settings24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icon_shuffle16 {
+            get {
+                object obj = ResourceManager.GetObject("icon_shuffle16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icon_stop24 {
+            get {
+                object obj = ResourceManager.GetObject("icon_stop24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icon_volume24 {
+            get {
+                object obj = ResourceManager.GetObject("icon_volume24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icon_webradio24 {
+            get {
+                object obj = ResourceManager.GetObject("icon_webradio24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap instruments {
             get {
                 object obj = ResourceManager.GetObject("instruments", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -343,17 +323,7 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap loading {
-            get {
-                object obj = ResourceManager.GetObject("loading", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap loading_loader {
+        public static System.Drawing.Bitmap loading_loader {
             get {
                 object obj = ResourceManager.GetObject("loading-loader", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -363,7 +333,7 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap loading2 {
+        public static System.Drawing.Bitmap loading2 {
             get {
                 object obj = ResourceManager.GetObject("loading2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -373,7 +343,7 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap loading3 {
+        public static System.Drawing.Bitmap loading3 {
             get {
                 object obj = ResourceManager.GetObject("loading3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -383,47 +353,7 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap mnote16 {
-            get {
-                object obj = ResourceManager.GetObject("mnote16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap mod42 {
-            get {
-                object obj = ResourceManager.GetObject("mod42", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap next16 {
-            get {
-                object obj = ResourceManager.GetObject("next16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap next42 {
-            get {
-                object obj = ResourceManager.GetObject("next42", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap nodisc {
+        public static System.Drawing.Bitmap nodisc {
             get {
                 object obj = ResourceManager.GetObject("nodisc", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -433,7 +363,7 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap nodiscsmall {
+        public static System.Drawing.Bitmap nodiscsmall {
             get {
                 object obj = ResourceManager.GetObject("nodiscsmall", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -443,159 +373,9 @@ namespace j0rpiPlayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap panbars {
-            get {
-                object obj = ResourceManager.GetObject("panbars", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap panbars2 {
-            get {
-                object obj = ResourceManager.GetObject("panbars2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap panbars3 {
+        public static System.Drawing.Bitmap panbars3 {
             get {
                 object obj = ResourceManager.GetObject("panbars3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pause16 {
-            get {
-                object obj = ResourceManager.GetObject("pause16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pause42 {
-            get {
-                object obj = ResourceManager.GetObject("pause42", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap PikPng_com_gorditas_png_3315155 {
-            get {
-                object obj = ResourceManager.GetObject("PikPng.com_gorditas-png_3315155", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap play16 {
-            get {
-                object obj = ResourceManager.GetObject("play16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap play24 {
-            get {
-                object obj = ResourceManager.GetObject("play24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap play42 {
-            get {
-                object obj = ResourceManager.GetObject("play42", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ply {
-            get {
-                object obj = ResourceManager.GetObject("ply", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap prev16 {
-            get {
-                object obj = ResourceManager.GetObject("prev16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap prev42 {
-            get {
-                object obj = ResourceManager.GetObject("prev42", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap stop42 {
-            get {
-                object obj = ResourceManager.GetObject("stop42", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap tracker {
-            get {
-                object obj = ResourceManager.GetObject("tracker", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap web242 {
-            get {
-                object obj = ResourceManager.GetObject("web242", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap web42 {
-            get {
-                object obj = ResourceManager.GetObject("web42", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

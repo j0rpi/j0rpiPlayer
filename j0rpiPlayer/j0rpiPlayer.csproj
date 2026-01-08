@@ -22,11 +22,6 @@
 
   <ItemGroup>
     <None Remove="Resources\digital-7.ttf" />
-    <None Remove="Resources\DS-DIGI.TTF" />
-    <None Remove="Resources\DS-DIGIB.TTF" />
-    <None Remove="Resources\DS-DIGII.TTF" />
-    <None Remove="Resources\DS-DIGIT.TTF" />
-    <None Remove="Resources\Font 90 Icons.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,11 +32,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\digital-7.ttf" />
-    <EmbeddedResource Include="Resources\DS-DIGI.TTF" />
-    <EmbeddedResource Include="Resources\DS-DIGIB.TTF" />
-    <EmbeddedResource Include="Resources\DS-DIGII.TTF" />
-    <EmbeddedResource Include="Resources\DS-DIGIT.TTF" />
-    <EmbeddedResource Include="Resources\Font 90 Icons.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -81,7 +71,7 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

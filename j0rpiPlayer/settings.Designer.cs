@@ -251,7 +251,7 @@
             aevionLabel4.Name = "aevionLabel4";
             aevionLabel4.Size = new Size(77, 14);
             aevionLabel4.TabIndex = 27;
-            aevionLabel4.Text = "ver: 0.814";
+            aevionLabel4.Text = "ver: 0.815";
             // 
             // settings
             // 

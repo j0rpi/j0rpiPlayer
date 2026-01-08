@@ -38,6 +38,9 @@
             lblElapsed = new Label();
             pictureBox2 = new PictureBox();
             panelVisualizer = new Panel();
+            displayShuffleIcon = new PictureBox();
+            displayRepeatIcon = new PictureBox();
+            displayPlaybackIcon = new PictureBox();
             panel2 = new Panel();
             label2 = new Label();
             btnPause = new Button();
@@ -61,7 +64,6 @@
             aevionCheckBox2 = new Aevion_r2.AevionCheckBox();
             panSlider1 = new NAudio.Gui.PanSlider2();
             listView1 = new ListView();
-            label12 = new Label();
             webRadioPanel = new Panel();
             button1 = new Button();
             webURL = new TextBox();
@@ -76,13 +78,13 @@
             aevionLabel2 = new Aevion_r2.AevionLabel();
             comboBox1 = new ComboBox();
             textBox1 = new TextBox();
+            animLoading = new PictureBox();
             trackerPanel2 = new Panel();
             aevionLabel1 = new Aevion_r2.AevionLabel();
             button4 = new Button();
             webRadioPanel2 = new Panel();
             aevionLabel5 = new Aevion_r2.AevionLabel();
             trackBar1 = new TrackBar();
-            animLoading = new PictureBox();
             searchPanel1 = new Panel();
             searchBox = new TextBox();
             searchPanelTitle = new Aevion_r2.AevionLabel();
@@ -100,84 +102,95 @@
             settingsToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator3 = new ToolStripSeparator();
             exitToolStripMenuItem = new ToolStripMenuItem();
+            volumeButton = new PictureBox();
+            pauseIconTimer = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            panelVisualizer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)displayShuffleIcon).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)displayRepeatIcon).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)displayPlaybackIcon).BeginInit();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
             webRadioPanel.SuspendLayout();
             trackerPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)animLoading).BeginInit();
             trackerPanel2.SuspendLayout();
             webRadioPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)animLoading).BeginInit();
             searchPanel1.SuspendLayout();
             searchPanel2.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)volumeButton).BeginInit();
             SuspendLayout();
             // 
             // btnPlay
             // 
-            btnPlay.BackgroundImage = Properties.Resources.play42;
-            btnPlay.BackgroundImageLayout = ImageLayout.Stretch;
+            btnPlay.BackColor = Color.FromArgb(48, 48, 48);
+            btnPlay.BackgroundImage = Properties.Resources.icon_play24;
+            btnPlay.BackgroundImageLayout = ImageLayout.Center;
             btnPlay.FlatAppearance.BorderColor = Color.DimGray;
             btnPlay.FlatStyle = FlatStyle.Flat;
             btnPlay.Font = new Font("Consolas", 9F);
             btnPlay.ForeColor = Color.White;
-            btnPlay.Location = new Point(13, 87);
+            btnPlay.Location = new Point(13, 95);
             btnPlay.Name = "btnPlay";
             btnPlay.Padding = new Padding(2, 0, 0, 0);
             btnPlay.Size = new Size(32, 32);
             btnPlay.TabIndex = 3;
-            btnPlay.UseVisualStyleBackColor = true;
+            btnPlay.UseVisualStyleBackColor = false;
             btnPlay.Click += btnPlay_Click;
             // 
             // btnStop
             // 
-            btnStop.BackgroundImage = Properties.Resources.stop42;
-            btnStop.BackgroundImageLayout = ImageLayout.Stretch;
+            btnStop.BackColor = Color.FromArgb(48, 48, 48);
+            btnStop.BackgroundImage = Properties.Resources.icon_stop24;
+            btnStop.BackgroundImageLayout = ImageLayout.Center;
             btnStop.FlatAppearance.BorderColor = Color.DimGray;
             btnStop.FlatStyle = FlatStyle.Flat;
             btnStop.Font = new Font("Consolas", 9F);
             btnStop.ForeColor = Color.White;
-            btnStop.Location = new Point(89, 87);
+            btnStop.Location = new Point(89, 95);
             btnStop.Name = "btnStop";
             btnStop.Padding = new Padding(2, 0, 0, 0);
             btnStop.Size = new Size(32, 32);
             btnStop.TabIndex = 4;
-            btnStop.UseVisualStyleBackColor = true;
+            btnStop.UseVisualStyleBackColor = false;
             // 
             // btnPrev
             // 
             btnPrev.AccessibleDescription = "btnPrev";
-            btnPrev.BackgroundImage = Properties.Resources.prev42;
-            btnPrev.BackgroundImageLayout = ImageLayout.Stretch;
+            btnPrev.BackColor = Color.FromArgb(48, 48, 48);
+            btnPrev.BackgroundImage = Properties.Resources.icon_previous24;
+            btnPrev.BackgroundImageLayout = ImageLayout.Center;
             btnPrev.FlatAppearance.BorderColor = Color.DimGray;
             btnPrev.FlatStyle = FlatStyle.Flat;
             btnPrev.Font = new Font("Consolas", 9F);
             btnPrev.ForeColor = Color.White;
-            btnPrev.Location = new Point(127, 87);
+            btnPrev.Location = new Point(127, 95);
             btnPrev.Name = "btnPrev";
             btnPrev.Padding = new Padding(2, 0, 0, 0);
             btnPrev.Size = new Size(32, 32);
             btnPrev.TabIndex = 5;
-            btnPrev.UseVisualStyleBackColor = true;
+            btnPrev.UseVisualStyleBackColor = false;
             // 
             // btnNext
             // 
             btnNext.AccessibleDescription = "btnNext";
-            btnNext.BackgroundImage = Properties.Resources.next42;
-            btnNext.BackgroundImageLayout = ImageLayout.Stretch;
+            btnNext.BackColor = Color.FromArgb(48, 48, 48);
+            btnNext.BackgroundImage = Properties.Resources.icon_next24;
+            btnNext.BackgroundImageLayout = ImageLayout.Center;
             btnNext.FlatAppearance.BorderColor = Color.DimGray;
             btnNext.FlatStyle = FlatStyle.Flat;
             btnNext.Font = new Font("Consolas", 9F);
             btnNext.ForeColor = Color.White;
-            btnNext.Location = new Point(166, 87);
+            btnNext.Location = new Point(166, 95);
             btnNext.Name = "btnNext";
             btnNext.Padding = new Padding(2, 0, 0, 0);
             btnNext.Size = new Size(32, 32);
             btnNext.TabIndex = 6;
-            btnNext.UseVisualStyleBackColor = true;
+            btnNext.UseVisualStyleBackColor = false;
             // 
             // panel1
             // 
@@ -197,11 +210,11 @@
             lblElapsed.AutoSize = true;
             lblElapsed.BackColor = Color.Transparent;
             lblElapsed.FlatStyle = FlatStyle.Flat;
-            lblElapsed.Font = new Font("DS-Digital", 30F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblElapsed.Font = new Font("Digital-7", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblElapsed.ForeColor = Color.White;
-            lblElapsed.Location = new Point(60, 4);
+            lblElapsed.Location = new Point(74, 4);
             lblElapsed.Name = "lblElapsed";
-            lblElapsed.Size = new Size(106, 40);
+            lblElapsed.Size = new Size(91, 38);
             lblElapsed.TabIndex = 0;
             lblElapsed.Text = "00:00";
             // 
@@ -217,10 +230,48 @@
             // 
             // panelVisualizer
             // 
+            panelVisualizer.Controls.Add(displayShuffleIcon);
+            panelVisualizer.Controls.Add(displayRepeatIcon);
+            panelVisualizer.Controls.Add(displayPlaybackIcon);
             panelVisualizer.Location = new Point(48, 0);
             panelVisualizer.Name = "panelVisualizer";
-            panelVisualizer.Size = new Size(10, 48);
+            panelVisualizer.Size = new Size(23, 48);
             panelVisualizer.TabIndex = 16;
+            // 
+            // displayShuffleIcon
+            // 
+            displayShuffleIcon.BackColor = Color.Transparent;
+            displayShuffleIcon.BackgroundImage = Properties.Resources.icon_shuffle16;
+            displayShuffleIcon.BackgroundImageLayout = ImageLayout.Center;
+            displayShuffleIcon.Location = new Point(3, 31);
+            displayShuffleIcon.Name = "displayShuffleIcon";
+            displayShuffleIcon.Size = new Size(16, 16);
+            displayShuffleIcon.TabIndex = 46;
+            displayShuffleIcon.TabStop = false;
+            displayShuffleIcon.Visible = false;
+            // 
+            // displayRepeatIcon
+            // 
+            displayRepeatIcon.BackColor = Color.Transparent;
+            displayRepeatIcon.BackgroundImage = Properties.Resources.icon_repeat16;
+            displayRepeatIcon.BackgroundImageLayout = ImageLayout.Center;
+            displayRepeatIcon.Location = new Point(3, 0);
+            displayRepeatIcon.Name = "displayRepeatIcon";
+            displayRepeatIcon.Size = new Size(16, 16);
+            displayRepeatIcon.TabIndex = 45;
+            displayRepeatIcon.TabStop = false;
+            displayRepeatIcon.Visible = false;
+            // 
+            // displayPlaybackIcon
+            // 
+            displayPlaybackIcon.BackColor = Color.Transparent;
+            displayPlaybackIcon.BackgroundImage = Properties.Resources.icon_play16;
+            displayPlaybackIcon.BackgroundImageLayout = ImageLayout.Center;
+            displayPlaybackIcon.Location = new Point(3, 16);
+            displayPlaybackIcon.Name = "displayPlaybackIcon";
+            displayPlaybackIcon.Size = new Size(16, 16);
+            displayPlaybackIcon.TabIndex = 44;
+            displayPlaybackIcon.TabStop = false;
             // 
             // panel2
             // 
@@ -229,7 +280,7 @@
             panel2.Controls.Add(label2);
             panel2.Location = new Point(191, 11);
             panel2.Name = "panel2";
-            panel2.Size = new Size(282, 21);
+            panel2.Size = new Size(279, 21);
             panel2.TabIndex = 8;
             // 
             // label2
@@ -237,32 +288,34 @@
             label2.BackColor = Color.Black;
             label2.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(6, 2);
+            label2.Location = new Point(3, 2);
             label2.Name = "label2";
-            label2.Size = new Size(273, 15);
+            label2.Size = new Size(271, 15);
             label2.TabIndex = 0;
-            label2.Text = "j0rpiPlayer 0.814";
+            label2.Text = "j0rpiPlayer 0.815";
             // 
             // btnPause
             // 
-            btnPause.BackgroundImage = Properties.Resources.pause42;
-            btnPause.BackgroundImageLayout = ImageLayout.Stretch;
+            btnPause.BackColor = Color.FromArgb(48, 48, 48);
+            btnPause.BackgroundImage = Properties.Resources.icon_pause24;
+            btnPause.BackgroundImageLayout = ImageLayout.Center;
             btnPause.FlatAppearance.BorderColor = Color.DimGray;
             btnPause.FlatStyle = FlatStyle.Flat;
             btnPause.Font = new Font("Consolas", 9F);
             btnPause.ForeColor = Color.White;
-            btnPause.Location = new Point(51, 87);
+            btnPause.Location = new Point(51, 95);
             btnPause.Name = "btnPause";
             btnPause.Padding = new Padding(2, 0, 0, 0);
             btnPause.Size = new Size(32, 32);
             btnPause.TabIndex = 9;
             btnPause.Tag = "";
-            btnPause.UseVisualStyleBackColor = true;
+            btnPause.UseVisualStyleBackColor = false;
             // 
             // btnLoadFolder
             // 
-            btnLoadFolder.BackgroundImage = Properties.Resources.add242;
-            btnLoadFolder.BackgroundImageLayout = ImageLayout.Stretch;
+            btnLoadFolder.BackColor = Color.FromArgb(48, 48, 48);
+            btnLoadFolder.BackgroundImage = Properties.Resources.icon_addfolder24;
+            btnLoadFolder.BackgroundImageLayout = ImageLayout.Center;
             btnLoadFolder.FlatAppearance.BorderColor = Color.DimGray;
             btnLoadFolder.FlatStyle = FlatStyle.Flat;
             btnLoadFolder.Font = new Font("Font 90 Icons", 14.25F);
@@ -272,7 +325,7 @@
             btnLoadFolder.Padding = new Padding(3, 0, 0, 0);
             btnLoadFolder.Size = new Size(32, 32);
             btnLoadFolder.TabIndex = 10;
-            btnLoadFolder.UseVisualStyleBackColor = true;
+            btnLoadFolder.UseVisualStyleBackColor = false;
             // 
             // openFileDialog1
             // 
@@ -347,8 +400,9 @@
             // 
             // btnEject
             // 
-            btnEject.BackgroundImage = Properties.Resources.eject42;
-            btnEject.BackgroundImageLayout = ImageLayout.Stretch;
+            btnEject.BackColor = Color.FromArgb(48, 48, 48);
+            btnEject.BackgroundImage = Properties.Resources.icon_eject24;
+            btnEject.BackgroundImageLayout = ImageLayout.Center;
             btnEject.FlatAppearance.BorderColor = Color.DimGray;
             btnEject.FlatStyle = FlatStyle.Flat;
             btnEject.Font = new Font("Font 90 Icons", 14.25F);
@@ -359,12 +413,13 @@
             btnEject.Size = new Size(32, 32);
             btnEject.TabIndex = 18;
             btnEject.TextAlign = ContentAlignment.BottomCenter;
-            btnEject.UseVisualStyleBackColor = true;
+            btnEject.UseVisualStyleBackColor = false;
             // 
             // btnStream
             // 
-            btnStream.BackgroundImage = Properties.Resources.web242;
-            btnStream.BackgroundImageLayout = ImageLayout.Stretch;
+            btnStream.BackColor = Color.FromArgb(48, 48, 48);
+            btnStream.BackgroundImage = Properties.Resources.icon_webradio24;
+            btnStream.BackgroundImageLayout = ImageLayout.Center;
             btnStream.FlatAppearance.BorderColor = Color.DimGray;
             btnStream.FlatStyle = FlatStyle.Flat;
             btnStream.Font = new Font("Font 90 Icons", 14.25F);
@@ -375,13 +430,14 @@
             btnStream.Size = new Size(32, 32);
             btnStream.TabIndex = 19;
             btnStream.TextAlign = ContentAlignment.BottomCenter;
-            btnStream.UseVisualStyleBackColor = true;
+            btnStream.UseVisualStyleBackColor = false;
             btnStream.Click += btnStream_Click;
             // 
             // btnSettings
             // 
-            btnSettings.BackgroundImage = Properties.Resources.cog42;
-            btnSettings.BackgroundImageLayout = ImageLayout.Stretch;
+            btnSettings.BackColor = Color.FromArgb(48, 48, 48);
+            btnSettings.BackgroundImage = Properties.Resources.icon_settings24;
+            btnSettings.BackgroundImageLayout = ImageLayout.Center;
             btnSettings.FlatAppearance.BorderColor = Color.DimGray;
             btnSettings.FlatStyle = FlatStyle.Flat;
             btnSettings.Font = new Font("Font 90 Icons", 14.25F);
@@ -392,7 +448,7 @@
             btnSettings.Size = new Size(32, 32);
             btnSettings.TabIndex = 22;
             btnSettings.TextAlign = ContentAlignment.BottomCenter;
-            btnSettings.UseVisualStyleBackColor = true;
+            btnSettings.UseVisualStyleBackColor = false;
             btnSettings.Click += btnSettings_Click;
             // 
             // scrollingTitle
@@ -410,7 +466,7 @@
             volumeSlider1.BorderStyle = BorderStyle.FixedSingle;
             volumeSlider1.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             volumeSlider1.ForeColor = Color.White;
-            volumeSlider1.Location = new Point(362, 91);
+            volumeSlider1.Location = new Point(362, 99);
             volumeSlider1.Name = "volumeSlider1";
             volumeSlider1.Padding = new Padding(0, 2, 0, 0);
             volumeSlider1.Size = new Size(108, 24);
@@ -427,7 +483,7 @@
             aevionProgressBar1.Minimum = 0;
             aevionProgressBar1.Name = "aevionProgressBar1";
             aevionProgressBar1.ShowText = true;
-            aevionProgressBar1.Size = new Size(457, 15);
+            aevionProgressBar1.Size = new Size(457, 19);
             aevionProgressBar1.TabIndex = 27;
             aevionProgressBar1.Text = "Track";
             aevionProgressBar1.Value = 0;
@@ -442,6 +498,7 @@
             aevionCheckBox1.Size = new Size(75, 16);
             aevionCheckBox1.TabIndex = 28;
             aevionCheckBox1.Text = "shuffle";
+            aevionCheckBox1.CheckedChanged += aevionCheckBox1_CheckedChanged;
             // 
             // aevionCheckBox2
             // 
@@ -452,13 +509,14 @@
             aevionCheckBox2.Size = new Size(75, 16);
             aevionCheckBox2.TabIndex = 29;
             aevionCheckBox2.Text = "repeat";
+            aevionCheckBox2.CheckedChanged += aevionCheckBox2_CheckedChanged;
             // 
             // panSlider1
             // 
             panSlider1.BackColor = Color.Black;
             panSlider1.BorderStyle = BorderStyle.FixedSingle;
             panSlider1.ForeColor = Color.White;
-            panSlider1.Location = new Point(215, 91);
+            panSlider1.Location = new Point(215, 99);
             panSlider1.Name = "panSlider1";
             panSlider1.Pan = 0F;
             panSlider1.Size = new Size(108, 24);
@@ -482,19 +540,6 @@
             listView1.DrawColumnHeader += listView1_DrawColumnHeader;
             listView1.MouseClick += listView1_MouseClick;
             listView1.MouseDoubleClick += listView1_MouseDoubleClick_1;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.BackColor = Color.Transparent;
-            label12.Font = new Font("Font 90 Icons", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label12.ForeColor = Color.White;
-            label12.Location = new Point(333, 93);
-            label12.Name = "label12";
-            label12.Size = new Size(28, 20);
-            label12.TabIndex = 36;
-            label12.Text = "Z";
-            label12.Click += label12_Click;
             // 
             // webRadioPanel
             // 
@@ -534,7 +579,8 @@
             // 
             // discordButton
             // 
-            discordButton.BackgroundImage = Properties.Resources.discord_white_icon1;
+            discordButton.BackColor = Color.FromArgb(48, 48, 48);
+            discordButton.BackgroundImage = Properties.Resources.icon_discord;
             discordButton.BackgroundImageLayout = ImageLayout.Center;
             discordButton.FlatAppearance.BorderColor = Color.DimGray;
             discordButton.FlatStyle = FlatStyle.Flat;
@@ -546,7 +592,7 @@
             discordButton.Size = new Size(32, 32);
             discordButton.TabIndex = 38;
             discordButton.TextAlign = ContentAlignment.BottomCenter;
-            discordButton.UseVisualStyleBackColor = true;
+            discordButton.UseVisualStyleBackColor = false;
             discordButton.Click += discordButton_Click;
             // 
             // trackerPanel1
@@ -581,7 +627,7 @@
             // 
             // button3
             // 
-            button3.BackgroundImage = Properties.Resources.tracker;
+            button3.BackgroundImage = Properties.Resources.icon_modsettings24;
             button3.BackgroundImageLayout = ImageLayout.Center;
             button3.FlatAppearance.BorderColor = Color.DimGray;
             button3.FlatStyle = FlatStyle.Flat;
@@ -685,6 +731,18 @@
             textBox1.TabIndex = 0;
             textBox1.Text = "125 BPM";
             // 
+            // animLoading
+            // 
+            animLoading.BackgroundImageLayout = ImageLayout.Stretch;
+            animLoading.Image = Properties.Resources.loading3;
+            animLoading.Location = new Point(180, 246);
+            animLoading.Name = "animLoading";
+            animLoading.Size = new Size(125, 129);
+            animLoading.SizeMode = PictureBoxSizeMode.StretchImage;
+            animLoading.TabIndex = 43;
+            animLoading.TabStop = false;
+            animLoading.Visible = false;
+            // 
             // trackerPanel2
             // 
             trackerPanel2.BorderStyle = BorderStyle.FixedSingle;
@@ -709,8 +767,9 @@
             // 
             // button4
             // 
-            button4.BackgroundImage = Properties.Resources.mod42;
-            button4.BackgroundImageLayout = ImageLayout.Stretch;
+            button4.BackColor = Color.FromArgb(48, 48, 48);
+            button4.BackgroundImage = Properties.Resources.icon_modsettings24;
+            button4.BackgroundImageLayout = ImageLayout.Center;
             button4.FlatAppearance.BorderColor = Color.DimGray;
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Font 90 Icons", 14.25F);
@@ -721,7 +780,7 @@
             button4.Size = new Size(32, 32);
             button4.TabIndex = 42;
             button4.TextAlign = ContentAlignment.BottomCenter;
-            button4.UseVisualStyleBackColor = true;
+            button4.UseVisualStyleBackColor = false;
             button4.Click += button4_Click;
             // 
             // webRadioPanel2
@@ -754,18 +813,6 @@
             trackBar1.TabIndex = 0;
             trackBar1.TickStyle = TickStyle.None;
             trackBar1.Visible = false;
-            // 
-            // animLoading
-            // 
-            animLoading.BackgroundImageLayout = ImageLayout.Stretch;
-            animLoading.Image = Properties.Resources.loading2;
-            animLoading.Location = new Point(187, 205);
-            animLoading.Name = "animLoading";
-            animLoading.Size = new Size(111, 110);
-            animLoading.SizeMode = PictureBoxSizeMode.StretchImage;
-            animLoading.TabIndex = 43;
-            animLoading.TabStop = false;
-            animLoading.Visible = false;
             // 
             // searchPanel1
             // 
@@ -824,7 +871,7 @@
             // 
             openFileInExplorerToolStripMenuItem1.Font = new Font("Consolas", 9F);
             openFileInExplorerToolStripMenuItem1.ForeColor = Color.White;
-            openFileInExplorerToolStripMenuItem1.Image = Properties.Resources.folder16;
+            openFileInExplorerToolStripMenuItem1.Image = Properties.Resources.icon_folder16;
             openFileInExplorerToolStripMenuItem1.Name = "openFileInExplorerToolStripMenuItem1";
             openFileInExplorerToolStripMenuItem1.Size = new Size(221, 22);
             openFileInExplorerToolStripMenuItem1.Text = "Open File In Explorer";
@@ -834,16 +881,17 @@
             // 
             propertiesToolStripMenuItem1.Font = new Font("Consolas", 9F);
             propertiesToolStripMenuItem1.ForeColor = Color.White;
-            propertiesToolStripMenuItem1.Image = Properties.Resources.info16;
+            propertiesToolStripMenuItem1.Image = Properties.Resources.icon_info16;
             propertiesToolStripMenuItem1.Name = "propertiesToolStripMenuItem1";
             propertiesToolStripMenuItem1.Size = new Size(221, 22);
             propertiesToolStripMenuItem1.Text = "Properties";
             // 
             // removeFromPlaylistToolStripMenuItem1
             // 
+            removeFromPlaylistToolStripMenuItem1.BackgroundImageLayout = ImageLayout.None;
             removeFromPlaylistToolStripMenuItem1.Font = new Font("Consolas", 9F);
             removeFromPlaylistToolStripMenuItem1.ForeColor = Color.White;
-            removeFromPlaylistToolStripMenuItem1.Image = Properties.Resources.closeremove16;
+            removeFromPlaylistToolStripMenuItem1.Image = Properties.Resources.icon_closeremove16;
             removeFromPlaylistToolStripMenuItem1.Name = "removeFromPlaylistToolStripMenuItem1";
             removeFromPlaylistToolStripMenuItem1.Size = new Size(221, 22);
             removeFromPlaylistToolStripMenuItem1.Text = "Remove From Playlist";
@@ -859,7 +907,7 @@
             playToolStripMenuItem.BackColor = Color.FromArgb(64, 64, 64);
             playToolStripMenuItem.Font = new Font("Consolas", 9F);
             playToolStripMenuItem.ForeColor = Color.White;
-            playToolStripMenuItem.Image = Properties.Resources.play16;
+            playToolStripMenuItem.Image = Properties.Resources.icon_play16;
             playToolStripMenuItem.Name = "playToolStripMenuItem";
             playToolStripMenuItem.Size = new Size(221, 22);
             playToolStripMenuItem.Text = "Play";
@@ -870,7 +918,7 @@
             pauseToolStripMenuItem.BackColor = Color.FromArgb(64, 64, 64);
             pauseToolStripMenuItem.Font = new Font("Consolas", 9F);
             pauseToolStripMenuItem.ForeColor = Color.White;
-            pauseToolStripMenuItem.Image = Properties.Resources.pause16;
+            pauseToolStripMenuItem.Image = Properties.Resources.icon_pause16;
             pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
             pauseToolStripMenuItem.Size = new Size(221, 22);
             pauseToolStripMenuItem.Text = "Pause";
@@ -881,7 +929,7 @@
             previousTrackToolStripMenuItem.BackColor = Color.FromArgb(64, 64, 64);
             previousTrackToolStripMenuItem.Font = new Font("Consolas", 9F);
             previousTrackToolStripMenuItem.ForeColor = Color.White;
-            previousTrackToolStripMenuItem.Image = Properties.Resources.prev16;
+            previousTrackToolStripMenuItem.Image = Properties.Resources.icon_previous16;
             previousTrackToolStripMenuItem.Name = "previousTrackToolStripMenuItem";
             previousTrackToolStripMenuItem.Size = new Size(221, 22);
             previousTrackToolStripMenuItem.Text = "Previous Track";
@@ -892,7 +940,7 @@
             nextTrackToolStripMenuItem.BackColor = Color.FromArgb(64, 64, 64);
             nextTrackToolStripMenuItem.Font = new Font("Consolas", 9F);
             nextTrackToolStripMenuItem.ForeColor = Color.White;
-            nextTrackToolStripMenuItem.Image = Properties.Resources.next16;
+            nextTrackToolStripMenuItem.Image = Properties.Resources.icon_next16;
             nextTrackToolStripMenuItem.Name = "nextTrackToolStripMenuItem";
             nextTrackToolStripMenuItem.Size = new Size(221, 22);
             nextTrackToolStripMenuItem.Text = "Next Track";
@@ -908,7 +956,7 @@
             settingsToolStripMenuItem.BackColor = Color.FromArgb(64, 64, 64);
             settingsToolStripMenuItem.Font = new Font("Consolas", 9F);
             settingsToolStripMenuItem.ForeColor = Color.White;
-            settingsToolStripMenuItem.Image = Properties.Resources.cog16;
+            settingsToolStripMenuItem.Image = Properties.Resources.icon_settings16;
             settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             settingsToolStripMenuItem.Size = new Size(221, 22);
             settingsToolStripMenuItem.Text = "Settings";
@@ -924,11 +972,31 @@
             exitToolStripMenuItem.BackColor = Color.FromArgb(64, 64, 64);
             exitToolStripMenuItem.Font = new Font("Consolas", 9F);
             exitToolStripMenuItem.ForeColor = Color.White;
-            exitToolStripMenuItem.Image = Properties.Resources.exit16;
+            exitToolStripMenuItem.Image = Properties.Resources.icon_exit16;
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             exitToolStripMenuItem.Size = new Size(221, 22);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            // 
+            // volumeButton
+            // 
+            volumeButton.BackColor = Color.Black;
+            volumeButton.BackgroundImageLayout = ImageLayout.Zoom;
+            volumeButton.BorderStyle = BorderStyle.FixedSingle;
+            volumeButton.Image = Properties.Resources.icon_volume24;
+            volumeButton.InitialImage = null;
+            volumeButton.Location = new Point(332, 99);
+            volumeButton.Name = "volumeButton";
+            volumeButton.Size = new Size(24, 24);
+            volumeButton.SizeMode = PictureBoxSizeMode.StretchImage;
+            volumeButton.TabIndex = 44;
+            volumeButton.TabStop = false;
+            volumeButton.Click += volumeButton_Click;
+            // 
+            // pauseIconTimer
+            // 
+            pauseIconTimer.Interval = 500;
+            pauseIconTimer.Tick += pauseIconTimer_Tick;
             // 
             // player
             // 
@@ -936,6 +1004,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(485, 520);
+            Controls.Add(volumeButton);
             Controls.Add(searchPanel2);
             Controls.Add(searchPanel1);
             Controls.Add(animLoading);
@@ -947,7 +1016,6 @@
             Controls.Add(webRadioPanel);
             Controls.Add(lblMediaAdd);
             Controls.Add(label8);
-            Controls.Add(label12);
             Controls.Add(listView1);
             Controls.Add(panSlider1);
             Controls.Add(aevionCheckBox2);
@@ -981,6 +1049,10 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            panelVisualizer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)displayShuffleIcon).EndInit();
+            ((System.ComponentModel.ISupportInitialize)displayRepeatIcon).EndInit();
+            ((System.ComponentModel.ISupportInitialize)displayPlaybackIcon).EndInit();
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
@@ -990,17 +1062,18 @@
             webRadioPanel.PerformLayout();
             trackerPanel1.ResumeLayout(false);
             trackerPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)animLoading).EndInit();
             trackerPanel2.ResumeLayout(false);
             trackerPanel2.PerformLayout();
             webRadioPanel2.ResumeLayout(false);
             webRadioPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)animLoading).EndInit();
             searchPanel1.ResumeLayout(false);
             searchPanel1.PerformLayout();
             searchPanel2.ResumeLayout(false);
             searchPanel2.PerformLayout();
             contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)volumeButton).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1036,7 +1109,6 @@
         private Label label8;
         private Label lblMediaAdd;
         private ListView listView1;
-        private Label label12;
         private Label lblElapsed;
         private Panel webRadioPanel;
         private Button button1;
@@ -1051,8 +1123,6 @@
         private Aevion_r2.AevionLabel aevionLabel2;
         private ComboBox comboBox1;
         private Aevion_r2.AevionLabel aevionLabel4;
-        private Button button2;
-        private Button button3;
         private Button button4;
         private Panel webRadioPanel2;
         private Aevion_r2.AevionLabel aevionLabel5;
@@ -1076,5 +1146,12 @@
         private ToolStripMenuItem openFileInExplorerToolStripMenuItem1;
         private ToolStripMenuItem removeFromPlaylistToolStripMenuItem1;
         private ToolStripMenuItem propertiesToolStripMenuItem1;
+        private PictureBox displayPlaybackIcon;
+        private Button button3;
+        private Button button2;
+        private PictureBox volumeButton;
+        private System.Windows.Forms.Timer pauseIconTimer;
+        private PictureBox displayShuffleIcon;
+        private PictureBox displayRepeatIcon;
     }
 }
