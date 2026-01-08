@@ -22,7 +22,7 @@ Simple music player using NAudio, TagLibSharp and BASS.NET
 - [x] Implement support for internet radio
 - [x] Implement playlist filter search (needs work)
 - [ ] Implement internet radio stations in playlist like a search engine
-- [ ] Implement skin supoort
+- [ ] Implement skin support
 - [ ] Implement tracker module realtime modification 
 - [ ] Make j0rpiPlayer main player and playlist seperate/snap like Winamp
 
