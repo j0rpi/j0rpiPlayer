@@ -515,21 +515,25 @@ namespace Aevion_r2
         {
             base.OnPaint(e);
             var g = e.Graphics;
-            var l = new LinearGradientBrush(new Point(0, 0), new Point(Width + Value + 50, Height), Color.Purple, Color.Purple);
+
+            var l = new LinearGradientBrush(new Point(0, 0), new Point(Width + Value + 50, Height), Color.FromArgb(48, 48, 48), Color.FromArgb(48, 48, 48));
 
             g.SmoothingMode = SmoothingMode.HighQuality;
-            g.Clear(Color.FromArgb(64, 0, 64));
+            g.Clear(Color.FromArgb(0, 0, 0));
 
-            g.FillRectangle(l, new Rectangle(0, 0, (int)(Helper.ValueToPercentage(Value, Maximum, Minimum) * Width), Height));
-
-            Helper.RoundRect(g, 0, 0, Width - 1, Height - 1, 3, Color.FromArgb(38, 38, 38));
+            g.FillRectangle(l, new Rectangle( 0, 0, (int)(Helper.ValueToPercentage(Value, Maximum, Minimum) * Width), Height));
+            using (var pen = new Pen(Color.DimGray))
+            {
+                g.DrawRectangle(pen, 0, 0, Width - 1, Height - 1);
+            }
 
             if (ShowText)
                 Helper.CenterString(g, Text, Font, Color.White, new Rectangle(0, 0, Width, Height));
 
             Helper.MultiDispose(l);
-
         }
+
+
 
     }
 

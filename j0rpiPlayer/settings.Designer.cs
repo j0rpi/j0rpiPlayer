@@ -30,13 +30,16 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(settings));
             groupBox1 = new GroupBox();
+            aevionLabel5 = new Aevion_r2.AevionLabel();
+            comboBox2 = new ComboBox();
             aevionLabel1 = new Aevion_r2.AevionLabel();
             comboBox1 = new ComboBox();
             groupBox2 = new GroupBox();
-            aevionCheckBox4 = new Aevion_r2.AevionCheckBox();
-            aevionCheckBox3 = new Aevion_r2.AevionCheckBox();
+            useFractions = new Aevion_r2.AevionCheckBox();
+            shuffle = new Aevion_r2.AevionCheckBox();
+            useDiscordRPC = new Aevion_r2.AevionCheckBox();
             groupBox3 = new GroupBox();
-            aevionCheckBox5 = new Aevion_r2.AevionCheckBox();
+            autoCheckUpdates = new Aevion_r2.AevionCheckBox();
             groupBox4 = new GroupBox();
             aevionLabel2 = new Aevion_r2.AevionLabel();
             linkLabel1 = new LinkLabel();
@@ -51,15 +54,42 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(aevionLabel5);
+            groupBox1.Controls.Add(comboBox2);
             groupBox1.Controls.Add(aevionLabel1);
             groupBox1.Controls.Add(comboBox1);
             groupBox1.ForeColor = Color.White;
             groupBox1.Location = new Point(14, 14);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(157, 72);
+            groupBox1.Size = new Size(157, 115);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Appearance";
+            // 
+            // aevionLabel5
+            // 
+            aevionLabel5.AutoSize = true;
+            aevionLabel5.BackColor = Color.Transparent;
+            aevionLabel5.Font = new Font("Consolas", 9F);
+            aevionLabel5.ForeColor = Color.White;
+            aevionLabel5.Location = new Point(6, 63);
+            aevionLabel5.Name = "aevionLabel5";
+            aevionLabel5.Size = new Size(42, 14);
+            aevionLabel5.TabIndex = 4;
+            aevionLabel5.Text = "Theme";
+            // 
+            // comboBox2
+            // 
+            comboBox2.BackColor = Color.FromArgb(64, 64, 64);
+            comboBox2.Enabled = false;
+            comboBox2.FlatStyle = FlatStyle.Flat;
+            comboBox2.ForeColor = Color.White;
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(6, 80);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(121, 22);
+            comboBox2.TabIndex = 3;
+            comboBox2.Text = "Default";
             // 
             // aevionLabel1
             // 
@@ -67,7 +97,7 @@
             aevionLabel1.BackColor = Color.Transparent;
             aevionLabel1.Font = new Font("Consolas", 9F);
             aevionLabel1.ForeColor = Color.White;
-            aevionLabel1.Location = new Point(6, 24);
+            aevionLabel1.Location = new Point(6, 18);
             aevionLabel1.Name = "aevionLabel1";
             aevionLabel1.Size = new Size(42, 14);
             aevionLabel1.TabIndex = 2;
@@ -76,10 +106,11 @@
             // comboBox1
             // 
             comboBox1.BackColor = Color.FromArgb(64, 64, 64);
+            comboBox1.Enabled = false;
             comboBox1.FlatStyle = FlatStyle.Flat;
             comboBox1.ForeColor = Color.White;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(6, 41);
+            comboBox1.Location = new Point(6, 35);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(121, 22);
             comboBox1.TabIndex = 0;
@@ -87,64 +118,79 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(aevionCheckBox4);
-            groupBox2.Controls.Add(aevionCheckBox3);
+            groupBox2.Controls.Add(useFractions);
+            groupBox2.Controls.Add(shuffle);
+            groupBox2.Controls.Add(useDiscordRPC);
             groupBox2.ForeColor = Color.White;
             groupBox2.Location = new Point(177, 14);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(262, 72);
+            groupBox2.Size = new Size(262, 115);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Playback";
             // 
-            // aevionCheckBox4
+            // useFractions
             // 
-            aevionCheckBox4.Checked = false;
-            aevionCheckBox4.Font = new Font("Consolas", 9F);
-            aevionCheckBox4.Location = new Point(11, 24);
-            aevionCheckBox4.Name = "aevionCheckBox4";
-            aevionCheckBox4.Size = new Size(104, 16);
-            aevionCheckBox4.TabIndex = 1;
-            aevionCheckBox4.Text = "Shuffle Playlist";
+            useFractions.Checked = false;
+            useFractions.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            useFractions.Location = new Point(11, 70);
+            useFractions.Name = "useFractions";
+            useFractions.Size = new Size(243, 16);
+            useFractions.TabIndex = 2;
+            useFractions.Text = "Show Elapsed In Percentage";
+            useFractions.CheckedChanged += useFractions_CheckedChanged;
             // 
-            // aevionCheckBox3
+            // shuffle
             // 
-            aevionCheckBox3.Checked = false;
-            aevionCheckBox3.Font = new Font("Consolas", 9F);
-            aevionCheckBox3.Location = new Point(11, 48);
-            aevionCheckBox3.Name = "aevionCheckBox3";
-            aevionCheckBox3.Size = new Size(245, 16);
-            aevionCheckBox3.TabIndex = 0;
-            aevionCheckBox3.Text = "Enable Discord Rich Presence";
+            shuffle.Checked = false;
+            shuffle.Font = new Font("Consolas", 9F);
+            shuffle.Location = new Point(11, 24);
+            shuffle.Name = "shuffle";
+            shuffle.Size = new Size(104, 16);
+            shuffle.TabIndex = 1;
+            shuffle.Text = "Shuffle Playlist";
+            shuffle.CheckedChanged += shuffle_CheckedChanged;
+            // 
+            // useDiscordRPC
+            // 
+            useDiscordRPC.Checked = false;
+            useDiscordRPC.Font = new Font("Consolas", 9F);
+            useDiscordRPC.Location = new Point(11, 48);
+            useDiscordRPC.Name = "useDiscordRPC";
+            useDiscordRPC.Size = new Size(245, 16);
+            useDiscordRPC.TabIndex = 0;
+            useDiscordRPC.Text = "Enable Discord Rich Presence";
+            useDiscordRPC.CheckedChanged += useDiscordRPC_CheckedChanged;
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(aevionCheckBox5);
+            groupBox3.Controls.Add(autoCheckUpdates);
             groupBox3.ForeColor = Color.White;
-            groupBox3.Location = new Point(14, 91);
+            groupBox3.Location = new Point(14, 135);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(425, 56);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
             groupBox3.Text = "Updates";
             // 
-            // aevionCheckBox5
+            // autoCheckUpdates
             // 
-            aevionCheckBox5.Checked = false;
-            aevionCheckBox5.Font = new Font("Consolas", 9F);
-            aevionCheckBox5.Location = new Point(13, 24);
-            aevionCheckBox5.Name = "aevionCheckBox5";
-            aevionCheckBox5.Size = new Size(200, 16);
-            aevionCheckBox5.TabIndex = 0;
-            aevionCheckBox5.Text = "Always Check For Updates";
+            autoCheckUpdates.Checked = false;
+            autoCheckUpdates.Font = new Font("Consolas", 9F);
+            autoCheckUpdates.Location = new Point(13, 24);
+            autoCheckUpdates.Name = "autoCheckUpdates";
+            autoCheckUpdates.Size = new Size(200, 16);
+            autoCheckUpdates.TabIndex = 0;
+            autoCheckUpdates.Text = "Always Check For Updates";
+            autoCheckUpdates.CheckedChanged += autoCheckUpdates_CheckedChanged;
             // 
             // groupBox4
             // 
             groupBox4.Controls.Add(aevionLabel2);
             groupBox4.ForeColor = Color.White;
-            groupBox4.Location = new Point(14, 154);
+            groupBox4.Location = new Point(14, 197);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(425, 250);
+            groupBox4.Size = new Size(425, 207);
             groupBox4.TabIndex = 3;
             groupBox4.TabStop = false;
             groupBox4.Text = "Plugins / Scripts";
@@ -205,7 +251,7 @@
             aevionLabel4.Name = "aevionLabel4";
             aevionLabel4.Size = new Size(77, 14);
             aevionLabel4.TabIndex = 27;
-            aevionLabel4.Text = "ver: 0.811";
+            aevionLabel4.Text = "ver: 0.814";
             // 
             // settings
             // 
@@ -246,15 +292,18 @@
         private Aevion_r2.AevionLabel aevionLabel1;
         private ComboBox comboBox1;
         private GroupBox groupBox2;
-        private Aevion_r2.AevionCheckBox aevionCheckBox4;
-        private Aevion_r2.AevionCheckBox aevionCheckBox3;
+        private Aevion_r2.AevionCheckBox shuffle;
+        private Aevion_r2.AevionCheckBox useDiscordRPC;
         private GroupBox groupBox3;
-        private Aevion_r2.AevionCheckBox aevionCheckBox5;
+        private Aevion_r2.AevionCheckBox autoCheckUpdates;
         private GroupBox groupBox4;
         private Aevion_r2.AevionLabel aevionLabel2;
         private LinkLabel linkLabel1;
         private Label label6;
         private Aevion_r2.AevionLabel aevionLabel3;
         private Aevion_r2.AevionLabel aevionLabel4;
+        private Aevion_r2.AevionCheckBox useFractions;
+        private Aevion_r2.AevionLabel aevionLabel5;
+        private ComboBox comboBox2;
     }
 }

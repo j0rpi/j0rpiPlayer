@@ -75,16 +75,19 @@ namespace NAudio.Gui
             format.LineAlignment = StringAlignment.Center;
             format.Alignment = StringAlignment.Center;
 
-            using (Pen borderPen = new Pen(Color.FromArgb(255, 50, 50, 50)))
+            using (Pen borderPen = new Pen(Color.FromArgb(0, 0, 0)))
             {
                 pe.Graphics.DrawRectangle(borderPen, 0, 0, this.Width - 1, this.Height - 1);
             }
+            
+            //BRUSHHHHH
+            SolidBrush brushBro = new SolidBrush(Color.FromArgb(48, 48, 48));
 
             // Calculate the percentage (0.0 to 1.0)
             float percent = Volume;
 
             // Calculate the width of the fill bar based on the percentage
-            pe.Graphics.FillRectangle(Brushes.Purple, 1, 1, (int)((this.Width - 2) * percent), this.Height - 2);
+            pe.Graphics.FillRectangle(brushBro, 1, 1, (int)((this.Width - 2) * percent), this.Height - 2);
 
             // Format the text to display percentage
             string percentValue = String.Format("{0:F0}%", percent * 100);

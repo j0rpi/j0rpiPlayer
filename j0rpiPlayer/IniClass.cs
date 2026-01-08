@@ -1,109 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.DirectoryServices.ActiveDirectory;
-using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace j0rpiPlayer
+namespace INI
 {
     public class IniFile
     {
-        private string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "settings.ini");
-        private readonly Dictionary<string, Dictionary<string, string>> data;
+        public string path;
 
-        public IniFile()
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern bool WritePrivateProfileString(
+    string section, string key, string value, string filePath);
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
+        private static extern int GetPrivateProfileString(
+            string section, string key, string defaultValue,
+            StringBuilder retVal, int size, string filePath);
+        StringBuilder temp = new StringBuilder(1024);
+
+        public IniFile(string INIPath)
         {
-            data = new Dictionary<string, Dictionary<string, string>>(StringComparer.OrdinalIgnoreCase);
-
-            if (File.Exists(filePath))
-            {
-                Load();
-            }
+            path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, INIPath);
         }
-
-        private void Load()
+        public void IniWriteValue(string Section, string Key, string Value)
         {
-            string? currentSection = null;
-
-            foreach (var line in File.ReadAllLines(filePath))
-            {
-                var trimmed = line.Trim();
-
-                if (string.IsNullOrEmpty(trimmed) || trimmed.StartsWith(";"))
-                    continue;
-
-                // Section
-                if (trimmed.StartsWith("[") && trimmed.EndsWith("]"))
-                {
-                    currentSection = trimmed.Substring(1, trimmed.Length - 2).Trim();
-                    if (!data.ContainsKey(currentSection))
-                        data[currentSection] = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-                }
-                else if (currentSection != null)
-                {
-                    int idx = trimmed.IndexOf('=');
-                    if (idx > 0)
-                    {
-                        string key = trimmed.Substring(0, idx).Trim();
-                        string value = trimmed.Substring(idx + 1).Trim();
-
-                        data[currentSection][key] = value;
-                    }
-                }
-            }
+            WritePrivateProfileString(Section, Key, Value, this.path);
         }
-
-        public string? GetValue(string section, string key, string? defaultValue = null)
+        public string IniReadValue(string Section, string Key)
         {
-            if (data.TryGetValue(section, out var sectionData) &&
-                sectionData.TryGetValue(key, out var value))
-            {
-                return value;
-            }
-            return defaultValue;
+            StringBuilder temp = new StringBuilder(1024);
+            int i = GetPrivateProfileString(Section, Key, "", temp,
+                                            255, this.path);
+            return temp.ToString();
+
         }
-
-        public int GetInt(string section, string key, int defaultValue = 0)
+        public void Flush()
         {
-            var val = GetValue(section, key);
-            return int.TryParse(val, out int result) ? result : defaultValue;
-        }
-
-        public float GetFloat(string section, string key, float defaultValue = 0f)
-        {
-            var val = GetValue(section, key);
-            return float.TryParse(val, out float result) ? result : defaultValue;
-        }
-
-        public bool GetBool(string section, string key, bool defaultValue = false)
-        {
-            var val = GetValue(section, key);
-            return bool.TryParse(val, out bool result) ? result : defaultValue;
-        }
-
-        public void SetValue(string section, string key, string value)
-        {
-            if (!data.ContainsKey(section))
-                data[section] = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-
-            data[section][key] = value;
-        }
-
-        public void Save()
-        {
-            using (var writer = new StreamWriter(filePath))
-            {
-                foreach (var section in data)
-                {
-                    writer.WriteLine($"[{section.Key}]");
-                    foreach (var kv in section.Value)
-                    {
-                        writer.WriteLine($"{kv.Key}={kv.Value}");
-                    }
-                    writer.WriteLine();
-                }
-            }
+            WritePrivateProfileString(null, null, null, path);
         }
     }
 }

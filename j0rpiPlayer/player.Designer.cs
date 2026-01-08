@@ -82,6 +82,24 @@
             webRadioPanel2 = new Panel();
             aevionLabel5 = new Aevion_r2.AevionLabel();
             trackBar1 = new TrackBar();
+            animLoading = new PictureBox();
+            searchPanel1 = new Panel();
+            searchBox = new TextBox();
+            searchPanelTitle = new Aevion_r2.AevionLabel();
+            searchPanel2 = new Panel();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            openFileInExplorerToolStripMenuItem1 = new ToolStripMenuItem();
+            propertiesToolStripMenuItem1 = new ToolStripMenuItem();
+            removeFromPlaylistToolStripMenuItem1 = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            playToolStripMenuItem = new ToolStripMenuItem();
+            pauseToolStripMenuItem = new ToolStripMenuItem();
+            previousTrackToolStripMenuItem = new ToolStripMenuItem();
+            nextTrackToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator2 = new ToolStripSeparator();
+            settingsToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator3 = new ToolStripSeparator();
+            exitToolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel2.SuspendLayout();
@@ -92,74 +110,79 @@
             trackerPanel2.SuspendLayout();
             webRadioPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)animLoading).BeginInit();
+            searchPanel1.SuspendLayout();
+            searchPanel2.SuspendLayout();
+            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // btnPlay
             // 
+            btnPlay.BackgroundImage = Properties.Resources.play42;
             btnPlay.BackgroundImageLayout = ImageLayout.Stretch;
             btnPlay.FlatAppearance.BorderColor = Color.DimGray;
             btnPlay.FlatStyle = FlatStyle.Flat;
-            btnPlay.Font = new Font("Font 90 Icons", 14.25F);
+            btnPlay.Font = new Font("Consolas", 9F);
             btnPlay.ForeColor = Color.White;
             btnPlay.Location = new Point(13, 87);
             btnPlay.Name = "btnPlay";
             btnPlay.Padding = new Padding(2, 0, 0, 0);
             btnPlay.Size = new Size(32, 32);
             btnPlay.TabIndex = 3;
-            btnPlay.Text = "D";
             btnPlay.UseVisualStyleBackColor = true;
             btnPlay.Click += btnPlay_Click;
             // 
             // btnStop
             // 
-            btnStop.BackgroundImageLayout = ImageLayout.None;
+            btnStop.BackgroundImage = Properties.Resources.stop42;
+            btnStop.BackgroundImageLayout = ImageLayout.Stretch;
             btnStop.FlatAppearance.BorderColor = Color.DimGray;
             btnStop.FlatStyle = FlatStyle.Flat;
-            btnStop.Font = new Font("Font 90 Icons", 14.25F);
+            btnStop.Font = new Font("Consolas", 9F);
             btnStop.ForeColor = Color.White;
             btnStop.Location = new Point(89, 87);
             btnStop.Name = "btnStop";
             btnStop.Padding = new Padding(2, 0, 0, 0);
             btnStop.Size = new Size(32, 32);
             btnStop.TabIndex = 4;
-            btnStop.Text = "F";
             btnStop.UseVisualStyleBackColor = true;
             // 
             // btnPrev
             // 
             btnPrev.AccessibleDescription = "btnPrev";
+            btnPrev.BackgroundImage = Properties.Resources.prev42;
             btnPrev.BackgroundImageLayout = ImageLayout.Stretch;
             btnPrev.FlatAppearance.BorderColor = Color.DimGray;
             btnPrev.FlatStyle = FlatStyle.Flat;
-            btnPrev.Font = new Font("Font 90 Icons", 14.25F);
+            btnPrev.Font = new Font("Consolas", 9F);
             btnPrev.ForeColor = Color.White;
             btnPrev.Location = new Point(127, 87);
             btnPrev.Name = "btnPrev";
             btnPrev.Padding = new Padding(2, 0, 0, 0);
             btnPrev.Size = new Size(32, 32);
             btnPrev.TabIndex = 5;
-            btnPrev.Text = "G";
             btnPrev.UseVisualStyleBackColor = true;
             // 
             // btnNext
             // 
             btnNext.AccessibleDescription = "btnNext";
+            btnNext.BackgroundImage = Properties.Resources.next42;
             btnNext.BackgroundImageLayout = ImageLayout.Stretch;
             btnNext.FlatAppearance.BorderColor = Color.DimGray;
             btnNext.FlatStyle = FlatStyle.Flat;
-            btnNext.Font = new Font("Font 90 Icons", 14.25F);
+            btnNext.Font = new Font("Consolas", 9F);
             btnNext.ForeColor = Color.White;
             btnNext.Location = new Point(166, 87);
             btnNext.Name = "btnNext";
             btnNext.Padding = new Padding(2, 0, 0, 0);
             btnNext.Size = new Size(32, 32);
             btnNext.TabIndex = 6;
-            btnNext.Text = "B";
             btnNext.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
             panel1.BackColor = Color.Black;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(lblElapsed);
             panel1.Controls.Add(pictureBox2);
             panel1.Controls.Add(panelVisualizer);
@@ -202,6 +225,7 @@
             // panel2
             // 
             panel2.BackColor = Color.Black;
+            panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.Controls.Add(label2);
             panel2.Location = new Point(191, 11);
             panel2.Name = "panel2";
@@ -213,18 +237,19 @@
             label2.BackColor = Color.Black;
             label2.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(6, 3);
+            label2.Location = new Point(6, 2);
             label2.Name = "label2";
             label2.Size = new Size(273, 15);
             label2.TabIndex = 0;
-            label2.Text = "j0rpiPlayer 0.811";
+            label2.Text = "j0rpiPlayer 0.814";
             // 
             // btnPause
             // 
+            btnPause.BackgroundImage = Properties.Resources.pause42;
             btnPause.BackgroundImageLayout = ImageLayout.Stretch;
             btnPause.FlatAppearance.BorderColor = Color.DimGray;
             btnPause.FlatStyle = FlatStyle.Flat;
-            btnPause.Font = new Font("Font 90 Icons", 14.25F);
+            btnPause.Font = new Font("Consolas", 9F);
             btnPause.ForeColor = Color.White;
             btnPause.Location = new Point(51, 87);
             btnPause.Name = "btnPause";
@@ -232,11 +257,12 @@
             btnPause.Size = new Size(32, 32);
             btnPause.TabIndex = 9;
             btnPause.Tag = "";
-            btnPause.Text = "C";
             btnPause.UseVisualStyleBackColor = true;
             // 
             // btnLoadFolder
             // 
+            btnLoadFolder.BackgroundImage = Properties.Resources.add242;
+            btnLoadFolder.BackgroundImageLayout = ImageLayout.Stretch;
             btnLoadFolder.FlatAppearance.BorderColor = Color.DimGray;
             btnLoadFolder.FlatStyle = FlatStyle.Flat;
             btnLoadFolder.Font = new Font("Font 90 Icons", 14.25F);
@@ -246,7 +272,6 @@
             btnLoadFolder.Padding = new Padding(3, 0, 0, 0);
             btnLoadFolder.Size = new Size(32, 32);
             btnLoadFolder.TabIndex = 10;
-            btnLoadFolder.Text = ";";
             btnLoadFolder.UseVisualStyleBackColor = true;
             // 
             // openFileDialog1
@@ -281,7 +306,7 @@
             // 
             lblBitrate.AutoSize = true;
             lblBitrate.ForeColor = Color.White;
-            lblBitrate.Location = new Point(6, 4);
+            lblBitrate.Location = new Point(6, 3);
             lblBitrate.Name = "lblBitrate";
             lblBitrate.Size = new Size(28, 14);
             lblBitrate.TabIndex = 13;
@@ -290,6 +315,7 @@
             // panel3
             // 
             panel3.BackColor = Color.Black;
+            panel3.BorderStyle = BorderStyle.FixedSingle;
             panel3.Controls.Add(lblBitrate);
             panel3.Font = new Font("Consolas", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             panel3.Location = new Point(192, 38);
@@ -300,6 +326,7 @@
             // panel4
             // 
             panel4.BackColor = Color.Black;
+            panel4.BorderStyle = BorderStyle.FixedSingle;
             panel4.Controls.Add(lblChannels);
             panel4.Font = new Font("Consolas", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             panel4.Location = new Point(273, 38);
@@ -312,7 +339,7 @@
             lblChannels.AutoSize = true;
             lblChannels.BackColor = Color.Black;
             lblChannels.ForeColor = Color.White;
-            lblChannels.Location = new Point(6, 4);
+            lblChannels.Location = new Point(6, 3);
             lblChannels.Name = "lblChannels";
             lblChannels.Size = new Size(28, 14);
             lblChannels.TabIndex = 13;
@@ -320,6 +347,8 @@
             // 
             // btnEject
             // 
+            btnEject.BackgroundImage = Properties.Resources.eject42;
+            btnEject.BackgroundImageLayout = ImageLayout.Stretch;
             btnEject.FlatAppearance.BorderColor = Color.DimGray;
             btnEject.FlatStyle = FlatStyle.Flat;
             btnEject.Font = new Font("Font 90 Icons", 14.25F);
@@ -329,12 +358,13 @@
             btnEject.Padding = new Padding(2, 0, 0, 0);
             btnEject.Size = new Size(32, 32);
             btnEject.TabIndex = 18;
-            btnEject.Text = "J";
             btnEject.TextAlign = ContentAlignment.BottomCenter;
             btnEject.UseVisualStyleBackColor = true;
             // 
             // btnStream
             // 
+            btnStream.BackgroundImage = Properties.Resources.web242;
+            btnStream.BackgroundImageLayout = ImageLayout.Stretch;
             btnStream.FlatAppearance.BorderColor = Color.DimGray;
             btnStream.FlatStyle = FlatStyle.Flat;
             btnStream.Font = new Font("Font 90 Icons", 14.25F);
@@ -344,13 +374,14 @@
             btnStream.Padding = new Padding(2, 0, 0, 0);
             btnStream.Size = new Size(32, 32);
             btnStream.TabIndex = 19;
-            btnStream.Text = "O";
             btnStream.TextAlign = ContentAlignment.BottomCenter;
             btnStream.UseVisualStyleBackColor = true;
             btnStream.Click += btnStream_Click;
             // 
             // btnSettings
             // 
+            btnSettings.BackgroundImage = Properties.Resources.cog42;
+            btnSettings.BackgroundImageLayout = ImageLayout.Stretch;
             btnSettings.FlatAppearance.BorderColor = Color.DimGray;
             btnSettings.FlatStyle = FlatStyle.Flat;
             btnSettings.Font = new Font("Font 90 Icons", 14.25F);
@@ -360,7 +391,6 @@
             btnSettings.Padding = new Padding(2, 0, 0, 0);
             btnSettings.Size = new Size(32, 32);
             btnSettings.TabIndex = 22;
-            btnSettings.Text = "w";
             btnSettings.TextAlign = ContentAlignment.BottomCenter;
             btnSettings.UseVisualStyleBackColor = true;
             btnSettings.Click += btnSettings_Click;
@@ -376,7 +406,8 @@
             // 
             // volumeSlider1
             // 
-            volumeSlider1.BackColor = Color.FromArgb(64, 0, 64);
+            volumeSlider1.BackColor = Color.Black;
+            volumeSlider1.BorderStyle = BorderStyle.FixedSingle;
             volumeSlider1.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             volumeSlider1.ForeColor = Color.White;
             volumeSlider1.Location = new Point(362, 91);
@@ -388,7 +419,7 @@
             // 
             // aevionProgressBar1
             // 
-            aevionProgressBar1.BackColor = Color.FromArgb(64, 0, 64);
+            aevionProgressBar1.BackColor = Color.DimGray;
             aevionProgressBar1.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             aevionProgressBar1.ForeColor = Color.White;
             aevionProgressBar1.Location = new Point(13, 66);
@@ -396,7 +427,7 @@
             aevionProgressBar1.Minimum = 0;
             aevionProgressBar1.Name = "aevionProgressBar1";
             aevionProgressBar1.ShowText = true;
-            aevionProgressBar1.Size = new Size(460, 15);
+            aevionProgressBar1.Size = new Size(457, 15);
             aevionProgressBar1.TabIndex = 27;
             aevionProgressBar1.Text = "Track";
             aevionProgressBar1.Value = 0;
@@ -424,7 +455,8 @@
             // 
             // panSlider1
             // 
-            panSlider1.BackColor = Color.FromArgb(64, 0, 64);
+            panSlider1.BackColor = Color.Black;
+            panSlider1.BorderStyle = BorderStyle.FixedSingle;
             panSlider1.ForeColor = Color.White;
             panSlider1.Location = new Point(215, 91);
             panSlider1.Name = "panSlider1";
@@ -448,6 +480,7 @@
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
             listView1.DrawColumnHeader += listView1_DrawColumnHeader;
+            listView1.MouseClick += listView1_MouseClick;
             listView1.MouseDoubleClick += listView1_MouseDoubleClick_1;
             // 
             // label12
@@ -456,7 +489,7 @@
             label12.BackColor = Color.Transparent;
             label12.Font = new Font("Font 90 Icons", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label12.ForeColor = Color.White;
-            label12.Location = new Point(335, 93);
+            label12.Location = new Point(333, 93);
             label12.Name = "label12";
             label12.Size = new Size(28, 20);
             label12.TabIndex = 36;
@@ -584,11 +617,11 @@
             aevionLabel4.BackColor = Color.Transparent;
             aevionLabel4.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             aevionLabel4.ForeColor = Color.White;
-            aevionLabel4.Location = new Point(3, 124);
+            aevionLabel4.Location = new Point(9, 124);
             aevionLabel4.Name = "aevionLabel4";
-            aevionLabel4.Size = new Size(140, 14);
+            aevionLabel4.Size = new Size(91, 14);
             aevionLabel4.TabIndex = 5;
-            aevionLabel4.Text = "Tracker / Mod Style";
+            aevionLabel4.Text = "Module Speed";
             // 
             // aevionLabel3
             // 
@@ -676,7 +709,8 @@
             // 
             // button4
             // 
-            button4.BackgroundImageLayout = ImageLayout.Center;
+            button4.BackgroundImage = Properties.Resources.mod42;
+            button4.BackgroundImageLayout = ImageLayout.Stretch;
             button4.FlatAppearance.BorderColor = Color.DimGray;
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Font 90 Icons", 14.25F);
@@ -686,7 +720,6 @@
             button4.Padding = new Padding(2, 0, 0, 0);
             button4.Size = new Size(32, 32);
             button4.TabIndex = 42;
-            button4.Text = "x";
             button4.TextAlign = ContentAlignment.BottomCenter;
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
@@ -722,12 +755,190 @@
             trackBar1.TickStyle = TickStyle.None;
             trackBar1.Visible = false;
             // 
+            // animLoading
+            // 
+            animLoading.BackgroundImageLayout = ImageLayout.Stretch;
+            animLoading.Image = Properties.Resources.loading2;
+            animLoading.Location = new Point(187, 205);
+            animLoading.Name = "animLoading";
+            animLoading.Size = new Size(111, 110);
+            animLoading.SizeMode = PictureBoxSizeMode.StretchImage;
+            animLoading.TabIndex = 43;
+            animLoading.TabStop = false;
+            animLoading.Visible = false;
+            // 
+            // searchPanel1
+            // 
+            searchPanel1.BorderStyle = BorderStyle.FixedSingle;
+            searchPanel1.Controls.Add(searchBox);
+            searchPanel1.Location = new Point(142, 406);
+            searchPanel1.Name = "searchPanel1";
+            searchPanel1.Size = new Size(305, 50);
+            searchPanel1.TabIndex = 38;
+            searchPanel1.Visible = false;
+            // 
+            // searchBox
+            // 
+            searchBox.BackColor = Color.FromArgb(64, 64, 64);
+            searchBox.BorderStyle = BorderStyle.FixedSingle;
+            searchBox.ForeColor = Color.White;
+            searchBox.Location = new Point(9, 14);
+            searchBox.Name = "searchBox";
+            searchBox.PlaceholderText = "Keyword ...";
+            searchBox.Size = new Size(286, 22);
+            searchBox.TabIndex = 0;
+            searchBox.TextChanged += searchBox_TextChanged;
+            // 
+            // searchPanelTitle
+            // 
+            searchPanelTitle.AutoSize = true;
+            searchPanelTitle.BackColor = Color.Transparent;
+            searchPanelTitle.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            searchPanelTitle.ForeColor = Color.White;
+            searchPanelTitle.Location = new Point(4, 6);
+            searchPanelTitle.Name = "searchPanelTitle";
+            searchPanelTitle.Size = new Size(112, 14);
+            searchPanelTitle.TabIndex = 0;
+            searchPanelTitle.Text = "Filter Playlist";
+            // 
+            // searchPanel2
+            // 
+            searchPanel2.BorderStyle = BorderStyle.FixedSingle;
+            searchPanel2.Controls.Add(searchPanelTitle);
+            searchPanel2.Location = new Point(142, 382);
+            searchPanel2.Name = "searchPanel2";
+            searchPanel2.Size = new Size(200, 25);
+            searchPanel2.TabIndex = 40;
+            searchPanel2.Visible = false;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.BackColor = Color.FromArgb(64, 64, 64);
+            contextMenuStrip1.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { openFileInExplorerToolStripMenuItem1, propertiesToolStripMenuItem1, removeFromPlaylistToolStripMenuItem1, toolStripSeparator1, playToolStripMenuItem, pauseToolStripMenuItem, previousTrackToolStripMenuItem, nextTrackToolStripMenuItem, toolStripSeparator2, settingsToolStripMenuItem, toolStripSeparator3, exitToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.RenderMode = ToolStripRenderMode.System;
+            contextMenuStrip1.Size = new Size(222, 220);
+            // 
+            // openFileInExplorerToolStripMenuItem1
+            // 
+            openFileInExplorerToolStripMenuItem1.Font = new Font("Consolas", 9F);
+            openFileInExplorerToolStripMenuItem1.ForeColor = Color.White;
+            openFileInExplorerToolStripMenuItem1.Image = Properties.Resources.folder16;
+            openFileInExplorerToolStripMenuItem1.Name = "openFileInExplorerToolStripMenuItem1";
+            openFileInExplorerToolStripMenuItem1.Size = new Size(221, 22);
+            openFileInExplorerToolStripMenuItem1.Text = "Open File In Explorer";
+            openFileInExplorerToolStripMenuItem1.Click += openFileInExplorerToolStripMenuItem1_Click;
+            // 
+            // propertiesToolStripMenuItem1
+            // 
+            propertiesToolStripMenuItem1.Font = new Font("Consolas", 9F);
+            propertiesToolStripMenuItem1.ForeColor = Color.White;
+            propertiesToolStripMenuItem1.Image = Properties.Resources.info16;
+            propertiesToolStripMenuItem1.Name = "propertiesToolStripMenuItem1";
+            propertiesToolStripMenuItem1.Size = new Size(221, 22);
+            propertiesToolStripMenuItem1.Text = "Properties";
+            // 
+            // removeFromPlaylistToolStripMenuItem1
+            // 
+            removeFromPlaylistToolStripMenuItem1.Font = new Font("Consolas", 9F);
+            removeFromPlaylistToolStripMenuItem1.ForeColor = Color.White;
+            removeFromPlaylistToolStripMenuItem1.Image = Properties.Resources.closeremove16;
+            removeFromPlaylistToolStripMenuItem1.Name = "removeFromPlaylistToolStripMenuItem1";
+            removeFromPlaylistToolStripMenuItem1.Size = new Size(221, 22);
+            removeFromPlaylistToolStripMenuItem1.Text = "Remove From Playlist";
+            removeFromPlaylistToolStripMenuItem1.Click += removeFromPlaylistToolStripMenuItem1_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(218, 6);
+            // 
+            // playToolStripMenuItem
+            // 
+            playToolStripMenuItem.BackColor = Color.FromArgb(64, 64, 64);
+            playToolStripMenuItem.Font = new Font("Consolas", 9F);
+            playToolStripMenuItem.ForeColor = Color.White;
+            playToolStripMenuItem.Image = Properties.Resources.play16;
+            playToolStripMenuItem.Name = "playToolStripMenuItem";
+            playToolStripMenuItem.Size = new Size(221, 22);
+            playToolStripMenuItem.Text = "Play";
+            playToolStripMenuItem.Click += playToolStripMenuItem_Click;
+            // 
+            // pauseToolStripMenuItem
+            // 
+            pauseToolStripMenuItem.BackColor = Color.FromArgb(64, 64, 64);
+            pauseToolStripMenuItem.Font = new Font("Consolas", 9F);
+            pauseToolStripMenuItem.ForeColor = Color.White;
+            pauseToolStripMenuItem.Image = Properties.Resources.pause16;
+            pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
+            pauseToolStripMenuItem.Size = new Size(221, 22);
+            pauseToolStripMenuItem.Text = "Pause";
+            pauseToolStripMenuItem.Click += pauseToolStripMenuItem_Click;
+            // 
+            // previousTrackToolStripMenuItem
+            // 
+            previousTrackToolStripMenuItem.BackColor = Color.FromArgb(64, 64, 64);
+            previousTrackToolStripMenuItem.Font = new Font("Consolas", 9F);
+            previousTrackToolStripMenuItem.ForeColor = Color.White;
+            previousTrackToolStripMenuItem.Image = Properties.Resources.prev16;
+            previousTrackToolStripMenuItem.Name = "previousTrackToolStripMenuItem";
+            previousTrackToolStripMenuItem.Size = new Size(221, 22);
+            previousTrackToolStripMenuItem.Text = "Previous Track";
+            previousTrackToolStripMenuItem.Click += previousTrackToolStripMenuItem_Click;
+            // 
+            // nextTrackToolStripMenuItem
+            // 
+            nextTrackToolStripMenuItem.BackColor = Color.FromArgb(64, 64, 64);
+            nextTrackToolStripMenuItem.Font = new Font("Consolas", 9F);
+            nextTrackToolStripMenuItem.ForeColor = Color.White;
+            nextTrackToolStripMenuItem.Image = Properties.Resources.next16;
+            nextTrackToolStripMenuItem.Name = "nextTrackToolStripMenuItem";
+            nextTrackToolStripMenuItem.Size = new Size(221, 22);
+            nextTrackToolStripMenuItem.Text = "Next Track";
+            nextTrackToolStripMenuItem.Click += nextTrackToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(218, 6);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            settingsToolStripMenuItem.BackColor = Color.FromArgb(64, 64, 64);
+            settingsToolStripMenuItem.Font = new Font("Consolas", 9F);
+            settingsToolStripMenuItem.ForeColor = Color.White;
+            settingsToolStripMenuItem.Image = Properties.Resources.cog16;
+            settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            settingsToolStripMenuItem.Size = new Size(221, 22);
+            settingsToolStripMenuItem.Text = "Settings";
+            settingsToolStripMenuItem.Click += settingsToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(218, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            exitToolStripMenuItem.BackColor = Color.FromArgb(64, 64, 64);
+            exitToolStripMenuItem.Font = new Font("Consolas", 9F);
+            exitToolStripMenuItem.ForeColor = Color.White;
+            exitToolStripMenuItem.Image = Properties.Resources.exit16;
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            exitToolStripMenuItem.Size = new Size(221, 22);
+            exitToolStripMenuItem.Text = "Exit";
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            // 
             // player
             // 
             AutoScaleDimensions = new SizeF(7F, 14F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(485, 520);
+            Controls.Add(searchPanel2);
+            Controls.Add(searchPanel1);
+            Controls.Add(animLoading);
             Controls.Add(webRadioPanel2);
             Controls.Add(button4);
             Controls.Add(trackerPanel2);
@@ -760,11 +971,13 @@
             Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            KeyPreview = true;
             MaximizeBox = false;
             Name = "player";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "j0rpiPlayer :: I'm Not Whippin' The Llamas Ass!";
             Load += player_Load;
+            KeyDown += player_KeyDown;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
@@ -782,6 +995,12 @@
             webRadioPanel2.ResumeLayout(false);
             webRadioPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)animLoading).EndInit();
+            searchPanel1.ResumeLayout(false);
+            searchPanel1.PerformLayout();
+            searchPanel2.ResumeLayout(false);
+            searchPanel2.PerformLayout();
+            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -839,5 +1058,23 @@
         private Aevion_r2.AevionLabel aevionLabel5;
         private TrackBar trackBar1;
         private Aevion_r2.AevionLabel aevionLabel6;
+        private PictureBox animLoading;
+        private Panel searchPanel1;
+        private TextBox searchBox;
+        private Aevion_r2.AevionLabel searchPanelTitle;
+        private Panel searchPanel2;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem playToolStripMenuItem;
+        private ToolStripMenuItem pauseToolStripMenuItem;
+        private ToolStripMenuItem previousTrackToolStripMenuItem;
+        private ToolStripMenuItem nextTrackToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripMenuItem settingsToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripMenuItem exitToolStripMenuItem;
+        private ToolStripMenuItem openFileInExplorerToolStripMenuItem1;
+        private ToolStripMenuItem removeFromPlaylistToolStripMenuItem1;
+        private ToolStripMenuItem propertiesToolStripMenuItem1;
     }
 }

@@ -68,6 +68,7 @@ namespace NAudio.Gui
         /// <see cref="Control.OnPaint"/>
         protected override void OnPaint(PaintEventArgs pe)
         {
+			SolidBrush brobrush = new SolidBrush(Color.FromArgb(48, 48, 48));
             pe.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 
             StringFormat format = new StringFormat
@@ -92,14 +93,14 @@ namespace NAudio.Gui
             }
             else if (pan > 0)
             {
-                pe.Graphics.FillRectangle(Brushes.Purple,
+                pe.Graphics.FillRectangle(brobrush,
                     (this.Width / 2), 1,
                     (int)((this.Width / 2) * pan), this.Height - 2);
                 panValue = string.Format("{0:F0}% Right", pan * 100);
             }
             else
             {
-                pe.Graphics.FillRectangle(Brushes.Purple,
+                pe.Graphics.FillRectangle(brobrush,
                     (int)((this.Width / 2) * (pan + 1)), 1,
                     (int)((this.Width / 2) * (0 - pan)), this.Height - 2);
                 panValue = string.Format("{0:F0}% Left", pan * -100);
@@ -112,7 +113,7 @@ namespace NAudio.Gui
                 new Rectangle(0, 11, this.Width, 12));
 
             // Border
-            using (Pen borderPen = new Pen(Color.FromArgb(255, 50, 50, 50)))
+            using (Pen borderPen = new Pen(Color.FromArgb(0, 0, 0, 255)))
             {
                 pe.Graphics.DrawRectangle(borderPen, 0, 0, this.Width - 1, this.Height - 1);
             }
